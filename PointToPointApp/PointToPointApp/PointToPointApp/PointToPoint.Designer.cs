@@ -32,14 +32,14 @@
             tblMain = new TableLayoutPanel();
             tblGameBoard = new TableLayoutPanel();
             tblPointCards = new TableLayoutPanel();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
-            button7 = new Button();
-            button8 = new Button();
+            btnPoint1 = new Button();
+            btnPoint2 = new Button();
+            btnPoint3 = new Button();
+            btnPoint4 = new Button();
+            btnPoint5 = new Button();
+            btnPoint6 = new Button();
+            btnPoint7 = new Button();
+            btnPoint8 = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             button9 = new Button();
             button10 = new Button();
@@ -49,11 +49,11 @@
             button14 = new Button();
             button15 = new Button();
             button16 = new Button();
+            label1 = new Label();
             tblMap = new TableLayoutPanel();
             btnReset = new Button();
             pnlMapImage = new Panel();
             tblDestination = new TableLayoutPanel();
-            label1 = new Label();
             tblMain.SuspendLayout();
             tblGameBoard.SuspendLayout();
             tblPointCards.SuspendLayout();
@@ -110,14 +110,14 @@
             tblPointCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tblPointCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tblPointCards.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tblPointCards.Controls.Add(button1, 0, 0);
-            tblPointCards.Controls.Add(button2, 1, 0);
-            tblPointCards.Controls.Add(button3, 2, 0);
-            tblPointCards.Controls.Add(button4, 3, 0);
-            tblPointCards.Controls.Add(button5, 0, 1);
-            tblPointCards.Controls.Add(button6, 1, 1);
-            tblPointCards.Controls.Add(button7, 2, 1);
-            tblPointCards.Controls.Add(button8, 3, 1);
+            tblPointCards.Controls.Add(btnPoint1, 0, 0);
+            tblPointCards.Controls.Add(btnPoint2, 1, 0);
+            tblPointCards.Controls.Add(btnPoint3, 2, 0);
+            tblPointCards.Controls.Add(btnPoint4, 3, 0);
+            tblPointCards.Controls.Add(btnPoint5, 0, 1);
+            tblPointCards.Controls.Add(btnPoint6, 1, 1);
+            tblPointCards.Controls.Add(btnPoint7, 2, 1);
+            tblPointCards.Controls.Add(btnPoint8, 3, 1);
             tblPointCards.Dock = DockStyle.Fill;
             tblPointCards.Location = new Point(3, 74);
             tblPointCards.Name = "tblPointCards";
@@ -127,101 +127,101 @@
             tblPointCards.Size = new Size(773, 354);
             tblPointCards.TabIndex = 0;
             // 
-            // button1
+            // btnPoint1
             // 
-            button1.BackColor = Color.LightSkyBlue;
-            button1.Dock = DockStyle.Fill;
-            button1.Location = new Point(6, 6);
-            button1.Margin = new Padding(6);
-            button1.Name = "button1";
-            button1.Size = new Size(181, 165);
-            button1.TabIndex = 0;
-            button1.Text = " ";
-            button1.UseVisualStyleBackColor = false;
+            btnPoint1.BackColor = Color.LightSkyBlue;
+            btnPoint1.Dock = DockStyle.Fill;
+            btnPoint1.Location = new Point(6, 6);
+            btnPoint1.Margin = new Padding(6);
+            btnPoint1.Name = "btnPoint1";
+            btnPoint1.Size = new Size(181, 165);
+            btnPoint1.TabIndex = 0;
+            btnPoint1.Text = " ";
+            btnPoint1.UseVisualStyleBackColor = false;
             // 
-            // button2
+            // btnPoint2
             // 
-            button2.BackColor = Color.LightSkyBlue;
-            button2.Dock = DockStyle.Fill;
-            button2.Location = new Point(199, 6);
-            button2.Margin = new Padding(6);
-            button2.Name = "button2";
-            button2.Size = new Size(181, 165);
-            button2.TabIndex = 1;
-            button2.Text = " ";
-            button2.UseVisualStyleBackColor = false;
+            btnPoint2.BackColor = Color.LightSkyBlue;
+            btnPoint2.Dock = DockStyle.Fill;
+            btnPoint2.Location = new Point(199, 6);
+            btnPoint2.Margin = new Padding(6);
+            btnPoint2.Name = "btnPoint2";
+            btnPoint2.Size = new Size(181, 165);
+            btnPoint2.TabIndex = 1;
+            btnPoint2.Text = " ";
+            btnPoint2.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnPoint3
             // 
-            button3.BackColor = Color.LightSkyBlue;
-            button3.Dock = DockStyle.Fill;
-            button3.Location = new Point(392, 6);
-            button3.Margin = new Padding(6);
-            button3.Name = "button3";
-            button3.Size = new Size(181, 165);
-            button3.TabIndex = 2;
-            button3.Text = "  ";
-            button3.UseVisualStyleBackColor = false;
+            btnPoint3.BackColor = Color.LightSkyBlue;
+            btnPoint3.Dock = DockStyle.Fill;
+            btnPoint3.Location = new Point(392, 6);
+            btnPoint3.Margin = new Padding(6);
+            btnPoint3.Name = "btnPoint3";
+            btnPoint3.Size = new Size(181, 165);
+            btnPoint3.TabIndex = 2;
+            btnPoint3.Text = "  ";
+            btnPoint3.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnPoint4
             // 
-            button4.BackColor = Color.LightSkyBlue;
-            button4.Dock = DockStyle.Fill;
-            button4.Location = new Point(585, 6);
-            button4.Margin = new Padding(6);
-            button4.Name = "button4";
-            button4.Size = new Size(182, 165);
-            button4.TabIndex = 3;
-            button4.Text = "  ";
-            button4.UseVisualStyleBackColor = false;
+            btnPoint4.BackColor = Color.LightSkyBlue;
+            btnPoint4.Dock = DockStyle.Fill;
+            btnPoint4.Location = new Point(585, 6);
+            btnPoint4.Margin = new Padding(6);
+            btnPoint4.Name = "btnPoint4";
+            btnPoint4.Size = new Size(182, 165);
+            btnPoint4.TabIndex = 3;
+            btnPoint4.Text = "  ";
+            btnPoint4.UseVisualStyleBackColor = false;
             // 
-            // button5
+            // btnPoint5
             // 
-            button5.BackColor = Color.LightSkyBlue;
-            button5.Dock = DockStyle.Fill;
-            button5.Location = new Point(6, 183);
-            button5.Margin = new Padding(6);
-            button5.Name = "button5";
-            button5.Size = new Size(181, 165);
-            button5.TabIndex = 4;
-            button5.Text = "  ";
-            button5.UseVisualStyleBackColor = false;
+            btnPoint5.BackColor = Color.LightSkyBlue;
+            btnPoint5.Dock = DockStyle.Fill;
+            btnPoint5.Location = new Point(6, 183);
+            btnPoint5.Margin = new Padding(6);
+            btnPoint5.Name = "btnPoint5";
+            btnPoint5.Size = new Size(181, 165);
+            btnPoint5.TabIndex = 4;
+            btnPoint5.Text = "  ";
+            btnPoint5.UseVisualStyleBackColor = false;
             // 
-            // button6
+            // btnPoint6
             // 
-            button6.BackColor = Color.LightSkyBlue;
-            button6.Dock = DockStyle.Fill;
-            button6.Location = new Point(199, 183);
-            button6.Margin = new Padding(6);
-            button6.Name = "button6";
-            button6.Size = new Size(181, 165);
-            button6.TabIndex = 5;
-            button6.Text = "  ";
-            button6.UseVisualStyleBackColor = false;
+            btnPoint6.BackColor = Color.LightSkyBlue;
+            btnPoint6.Dock = DockStyle.Fill;
+            btnPoint6.Location = new Point(199, 183);
+            btnPoint6.Margin = new Padding(6);
+            btnPoint6.Name = "btnPoint6";
+            btnPoint6.Size = new Size(181, 165);
+            btnPoint6.TabIndex = 5;
+            btnPoint6.Text = "  ";
+            btnPoint6.UseVisualStyleBackColor = false;
             // 
-            // button7
+            // btnPoint7
             // 
-            button7.BackColor = Color.LightSkyBlue;
-            button7.Dock = DockStyle.Fill;
-            button7.Location = new Point(392, 183);
-            button7.Margin = new Padding(6);
-            button7.Name = "button7";
-            button7.Size = new Size(181, 165);
-            button7.TabIndex = 6;
-            button7.Text = "  ";
-            button7.UseVisualStyleBackColor = false;
+            btnPoint7.BackColor = Color.LightSkyBlue;
+            btnPoint7.Dock = DockStyle.Fill;
+            btnPoint7.Location = new Point(392, 183);
+            btnPoint7.Margin = new Padding(6);
+            btnPoint7.Name = "btnPoint7";
+            btnPoint7.Size = new Size(181, 165);
+            btnPoint7.TabIndex = 6;
+            btnPoint7.Text = "  ";
+            btnPoint7.UseVisualStyleBackColor = false;
             // 
-            // button8
+            // btnPoint8
             // 
-            button8.BackColor = Color.LightSkyBlue;
-            button8.Dock = DockStyle.Fill;
-            button8.Location = new Point(585, 183);
-            button8.Margin = new Padding(6);
-            button8.Name = "button8";
-            button8.Size = new Size(182, 165);
-            button8.TabIndex = 7;
-            button8.Text = "  ";
-            button8.UseVisualStyleBackColor = false;
+            btnPoint8.BackColor = Color.LightSkyBlue;
+            btnPoint8.Dock = DockStyle.Fill;
+            btnPoint8.Location = new Point(585, 183);
+            btnPoint8.Margin = new Padding(6);
+            btnPoint8.Name = "btnPoint8";
+            btnPoint8.Size = new Size(182, 165);
+            btnPoint8.TabIndex = 7;
+            btnPoint8.Text = "  ";
+            btnPoint8.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel1
             // 
@@ -345,6 +345,18 @@
             button16.Text = "  ";
             button16.UseVisualStyleBackColor = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Dock = DockStyle.Fill;
+            label1.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(3, 11);
+            label1.Name = "label1";
+            label1.Size = new Size(773, 60);
+            label1.TabIndex = 2;
+            label1.Text = "Click any card to begin";
+            label1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // tblMap
             // 
             tblMap.BackColor = Color.White;
@@ -400,18 +412,6 @@
             tblDestination.Size = new Size(371, 739);
             tblDestination.TabIndex = 0;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Dock = DockStyle.Fill;
-            label1.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(3, 11);
-            label1.Name = "label1";
-            label1.Size = new Size(773, 60);
-            label1.TabIndex = 2;
-            label1.Text = "Click any card to begin";
-            label1.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // frmPointToPoint
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -440,14 +440,14 @@
         private TableLayoutPanel tblDestination;
         private TableLayoutPanel tblPointCards;
         private TableLayoutPanel tableLayoutPanel1;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
-        private Button button7;
-        private Button button8;
+        private Button btnPoint1;
+        private Button btnPoint2;
+        private Button btnPoint3;
+        private Button btnPoint4;
+        private Button btnPoint5;
+        private Button btnPoint6;
+        private Button btnPoint7;
+        private Button btnPoint8;
         private Button button9;
         private Button button10;
         private Button button11;
