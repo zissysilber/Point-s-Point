@@ -41,14 +41,14 @@
             btnPoint7 = new Button();
             btnPoint8 = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
-            button9 = new Button();
-            button10 = new Button();
-            button11 = new Button();
-            button12 = new Button();
-            button13 = new Button();
-            button14 = new Button();
-            button15 = new Button();
-            button16 = new Button();
+            btnPoint9 = new Button();
+            btnPoint10 = new Button();
+            btnPoint11 = new Button();
+            btnPoint12 = new Button();
+            btnPoint13 = new Button();
+            btnPoint14 = new Button();
+            btnPoint15 = new Button();
+            btnPoint16 = new Button();
             label1 = new Label();
             tblMap = new TableLayoutPanel();
             btnReset = new Button();
@@ -131,6 +131,7 @@
             // 
             btnPoint1.BackColor = Color.LightSkyBlue;
             btnPoint1.Dock = DockStyle.Fill;
+            btnPoint1.Image = Properties.Resources.blankpoint;
             btnPoint1.Location = new Point(6, 6);
             btnPoint1.Margin = new Padding(6);
             btnPoint1.Name = "btnPoint1";
@@ -143,6 +144,7 @@
             // 
             btnPoint2.BackColor = Color.LightSkyBlue;
             btnPoint2.Dock = DockStyle.Fill;
+            btnPoint2.Image = Properties.Resources.blankpoint;
             btnPoint2.Location = new Point(199, 6);
             btnPoint2.Margin = new Padding(6);
             btnPoint2.Name = "btnPoint2";
@@ -155,6 +157,7 @@
             // 
             btnPoint3.BackColor = Color.LightSkyBlue;
             btnPoint3.Dock = DockStyle.Fill;
+            btnPoint3.Image = Properties.Resources.blankpoint;
             btnPoint3.Location = new Point(392, 6);
             btnPoint3.Margin = new Padding(6);
             btnPoint3.Name = "btnPoint3";
@@ -167,6 +170,7 @@
             // 
             btnPoint4.BackColor = Color.LightSkyBlue;
             btnPoint4.Dock = DockStyle.Fill;
+            btnPoint4.Image = Properties.Resources.blankpoint;
             btnPoint4.Location = new Point(585, 6);
             btnPoint4.Margin = new Padding(6);
             btnPoint4.Name = "btnPoint4";
@@ -179,6 +183,7 @@
             // 
             btnPoint5.BackColor = Color.LightSkyBlue;
             btnPoint5.Dock = DockStyle.Fill;
+            btnPoint5.Image = Properties.Resources.blankpoint;
             btnPoint5.Location = new Point(6, 183);
             btnPoint5.Margin = new Padding(6);
             btnPoint5.Name = "btnPoint5";
@@ -191,6 +196,7 @@
             // 
             btnPoint6.BackColor = Color.LightSkyBlue;
             btnPoint6.Dock = DockStyle.Fill;
+            btnPoint6.Image = Properties.Resources.blankpoint;
             btnPoint6.Location = new Point(199, 183);
             btnPoint6.Margin = new Padding(6);
             btnPoint6.Name = "btnPoint6";
@@ -203,6 +209,7 @@
             // 
             btnPoint7.BackColor = Color.LightSkyBlue;
             btnPoint7.Dock = DockStyle.Fill;
+            btnPoint7.Image = Properties.Resources.blankpoint;
             btnPoint7.Location = new Point(392, 183);
             btnPoint7.Margin = new Padding(6);
             btnPoint7.Name = "btnPoint7";
@@ -215,6 +222,7 @@
             // 
             btnPoint8.BackColor = Color.LightSkyBlue;
             btnPoint8.Dock = DockStyle.Fill;
+            btnPoint8.Image = Properties.Resources.blankpoint;
             btnPoint8.Location = new Point(585, 183);
             btnPoint8.Margin = new Padding(6);
             btnPoint8.Name = "btnPoint8";
@@ -230,14 +238,14 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 25F));
-            tableLayoutPanel1.Controls.Add(button9, 0, 0);
-            tableLayoutPanel1.Controls.Add(button10, 1, 0);
-            tableLayoutPanel1.Controls.Add(button11, 2, 0);
-            tableLayoutPanel1.Controls.Add(button12, 3, 0);
-            tableLayoutPanel1.Controls.Add(button13, 0, 1);
-            tableLayoutPanel1.Controls.Add(button14, 1, 1);
-            tableLayoutPanel1.Controls.Add(button15, 2, 1);
-            tableLayoutPanel1.Controls.Add(button16, 3, 1);
+            tableLayoutPanel1.Controls.Add(btnPoint9, 0, 0);
+            tableLayoutPanel1.Controls.Add(btnPoint10, 1, 0);
+            tableLayoutPanel1.Controls.Add(btnPoint11, 2, 0);
+            tableLayoutPanel1.Controls.Add(btnPoint12, 3, 0);
+            tableLayoutPanel1.Controls.Add(btnPoint13, 0, 1);
+            tableLayoutPanel1.Controls.Add(btnPoint14, 1, 1);
+            tableLayoutPanel1.Controls.Add(btnPoint15, 2, 1);
+            tableLayoutPanel1.Controls.Add(btnPoint16, 3, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 434);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -249,101 +257,109 @@
             tableLayoutPanel1.Size = new Size(773, 355);
             tableLayoutPanel1.TabIndex = 1;
             // 
-            // button9
+            // btnPoint9
             // 
-            button9.BackColor = Color.SteelBlue;
-            button9.Dock = DockStyle.Fill;
-            button9.Location = new Point(6, 6);
-            button9.Margin = new Padding(6);
-            button9.Name = "button9";
-            button9.Size = new Size(181, 165);
-            button9.TabIndex = 0;
-            button9.Text = "  ";
-            button9.UseVisualStyleBackColor = false;
+            btnPoint9.BackColor = Color.SteelBlue;
+            btnPoint9.Dock = DockStyle.Fill;
+            btnPoint9.Image = Properties.Resources.Blankname;
+            btnPoint9.Location = new Point(6, 6);
+            btnPoint9.Margin = new Padding(6);
+            btnPoint9.Name = "btnPoint9";
+            btnPoint9.Size = new Size(181, 165);
+            btnPoint9.TabIndex = 0;
+            btnPoint9.Text = "  ";
+            btnPoint9.UseVisualStyleBackColor = false;
             // 
-            // button10
+            // btnPoint10
             // 
-            button10.BackColor = Color.SteelBlue;
-            button10.Dock = DockStyle.Fill;
-            button10.Location = new Point(199, 6);
-            button10.Margin = new Padding(6);
-            button10.Name = "button10";
-            button10.Size = new Size(181, 165);
-            button10.TabIndex = 1;
-            button10.Text = "  ";
-            button10.UseVisualStyleBackColor = false;
+            btnPoint10.BackColor = Color.SteelBlue;
+            btnPoint10.Dock = DockStyle.Fill;
+            btnPoint10.Image = Properties.Resources.Blankname;
+            btnPoint10.Location = new Point(199, 6);
+            btnPoint10.Margin = new Padding(6);
+            btnPoint10.Name = "btnPoint10";
+            btnPoint10.Size = new Size(181, 165);
+            btnPoint10.TabIndex = 1;
+            btnPoint10.Text = "  ";
+            btnPoint10.UseVisualStyleBackColor = false;
             // 
-            // button11
+            // btnPoint11
             // 
-            button11.BackColor = Color.SteelBlue;
-            button11.Dock = DockStyle.Fill;
-            button11.Location = new Point(392, 6);
-            button11.Margin = new Padding(6);
-            button11.Name = "button11";
-            button11.Size = new Size(181, 165);
-            button11.TabIndex = 2;
-            button11.Text = "  ";
-            button11.UseVisualStyleBackColor = false;
+            btnPoint11.BackColor = Color.SteelBlue;
+            btnPoint11.Dock = DockStyle.Fill;
+            btnPoint11.Image = Properties.Resources.Blankname;
+            btnPoint11.Location = new Point(392, 6);
+            btnPoint11.Margin = new Padding(6);
+            btnPoint11.Name = "btnPoint11";
+            btnPoint11.Size = new Size(181, 165);
+            btnPoint11.TabIndex = 2;
+            btnPoint11.Text = "  ";
+            btnPoint11.UseVisualStyleBackColor = false;
             // 
-            // button12
+            // btnPoint12
             // 
-            button12.BackColor = Color.SteelBlue;
-            button12.Dock = DockStyle.Fill;
-            button12.Location = new Point(585, 6);
-            button12.Margin = new Padding(6);
-            button12.Name = "button12";
-            button12.Size = new Size(182, 165);
-            button12.TabIndex = 3;
-            button12.Text = "  ";
-            button12.UseVisualStyleBackColor = false;
+            btnPoint12.BackColor = Color.SteelBlue;
+            btnPoint12.Dock = DockStyle.Fill;
+            btnPoint12.Image = Properties.Resources.Blankname;
+            btnPoint12.Location = new Point(585, 6);
+            btnPoint12.Margin = new Padding(6);
+            btnPoint12.Name = "btnPoint12";
+            btnPoint12.Size = new Size(182, 165);
+            btnPoint12.TabIndex = 3;
+            btnPoint12.Text = "  ";
+            btnPoint12.UseVisualStyleBackColor = false;
             // 
-            // button13
+            // btnPoint13
             // 
-            button13.BackColor = Color.SteelBlue;
-            button13.Dock = DockStyle.Fill;
-            button13.Location = new Point(6, 183);
-            button13.Margin = new Padding(6);
-            button13.Name = "button13";
-            button13.Size = new Size(181, 166);
-            button13.TabIndex = 4;
-            button13.Text = "  ";
-            button13.UseVisualStyleBackColor = false;
+            btnPoint13.BackColor = Color.SteelBlue;
+            btnPoint13.Dock = DockStyle.Fill;
+            btnPoint13.Image = Properties.Resources.Blankname;
+            btnPoint13.Location = new Point(6, 183);
+            btnPoint13.Margin = new Padding(6);
+            btnPoint13.Name = "btnPoint13";
+            btnPoint13.Size = new Size(181, 166);
+            btnPoint13.TabIndex = 4;
+            btnPoint13.Text = "  ";
+            btnPoint13.UseVisualStyleBackColor = false;
             // 
-            // button14
+            // btnPoint14
             // 
-            button14.BackColor = Color.SteelBlue;
-            button14.Dock = DockStyle.Fill;
-            button14.Location = new Point(199, 183);
-            button14.Margin = new Padding(6);
-            button14.Name = "button14";
-            button14.Size = new Size(181, 166);
-            button14.TabIndex = 5;
-            button14.Text = "  ";
-            button14.UseVisualStyleBackColor = false;
+            btnPoint14.BackColor = Color.SteelBlue;
+            btnPoint14.Dock = DockStyle.Fill;
+            btnPoint14.Image = Properties.Resources.Blankname;
+            btnPoint14.Location = new Point(199, 183);
+            btnPoint14.Margin = new Padding(6);
+            btnPoint14.Name = "btnPoint14";
+            btnPoint14.Size = new Size(181, 166);
+            btnPoint14.TabIndex = 5;
+            btnPoint14.Text = "  ";
+            btnPoint14.UseVisualStyleBackColor = false;
             // 
-            // button15
+            // btnPoint15
             // 
-            button15.BackColor = Color.SteelBlue;
-            button15.Dock = DockStyle.Fill;
-            button15.Location = new Point(392, 183);
-            button15.Margin = new Padding(6);
-            button15.Name = "button15";
-            button15.Size = new Size(181, 166);
-            button15.TabIndex = 6;
-            button15.Text = "  ";
-            button15.UseVisualStyleBackColor = false;
+            btnPoint15.BackColor = Color.SteelBlue;
+            btnPoint15.Dock = DockStyle.Fill;
+            btnPoint15.Image = Properties.Resources.Blankname;
+            btnPoint15.Location = new Point(392, 183);
+            btnPoint15.Margin = new Padding(6);
+            btnPoint15.Name = "btnPoint15";
+            btnPoint15.Size = new Size(181, 166);
+            btnPoint15.TabIndex = 6;
+            btnPoint15.Text = "  ";
+            btnPoint15.UseVisualStyleBackColor = false;
             // 
-            // button16
+            // btnPoint16
             // 
-            button16.BackColor = Color.SteelBlue;
-            button16.Dock = DockStyle.Fill;
-            button16.Location = new Point(585, 183);
-            button16.Margin = new Padding(6);
-            button16.Name = "button16";
-            button16.Size = new Size(182, 166);
-            button16.TabIndex = 7;
-            button16.Text = "  ";
-            button16.UseVisualStyleBackColor = false;
+            btnPoint16.BackColor = Color.SteelBlue;
+            btnPoint16.Dock = DockStyle.Fill;
+            btnPoint16.Image = Properties.Resources.Blankname;
+            btnPoint16.Location = new Point(585, 183);
+            btnPoint16.Margin = new Padding(6);
+            btnPoint16.Name = "btnPoint16";
+            btnPoint16.Size = new Size(182, 166);
+            btnPoint16.TabIndex = 7;
+            btnPoint16.Text = "  ";
+            btnPoint16.UseVisualStyleBackColor = false;
             // 
             // label1
             // 
@@ -448,14 +464,14 @@
         private Button btnPoint6;
         private Button btnPoint7;
         private Button btnPoint8;
-        private Button button9;
-        private Button button10;
-        private Button button11;
-        private Button button12;
-        private Button button13;
-        private Button button14;
-        private Button button15;
-        private Button button16;
+        private Button btnPoint9;
+        private Button btnPoint10;
+        private Button btnPoint11;
+        private Button btnPoint12;
+        private Button btnPoint13;
+        private Button btnPoint14;
+        private Button btnPoint15;
+        private Button btnPoint16;
         private Label label1;
     }
 }

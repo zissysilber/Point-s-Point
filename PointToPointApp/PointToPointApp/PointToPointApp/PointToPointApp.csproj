@@ -10,13 +10,23 @@
 
   <ItemGroup>
     <None Remove="Images\Ari Hakadosh.jpg" />
+    <None Remove="Images\Ari Hakadoshwith name.jpg" />
+    <None Remove="Images\Blankname.jpg" />
+    <None Remove="Images\blankpoint.jpg" />
     <None Remove="Images\Churva.jpg" />
+    <None Remove="Images\Churvawithname.jpg" />
     <None Remove="Images\Colored Map of Israel.jpg" />
+    <None Remove="Images\Kever Rochel with name.jpg" />
     <None Remove="Images\Kever Rochel.jpg" />
+    <None Remove="Images\Kosel with name.jpg" />
     <None Remove="Images\kosel.jpg" />
+    <None Remove="Images\Mearas Hamechpela with name.jpg" />
     <None Remove="Images\Mearas Hamechpela.jpg" />
+    <None Remove="Images\Rabbi Meir Bal Haness with name.jpg" />
     <None Remove="Images\Rabbi Meir Bal Haness.jpg" />
+    <None Remove="Images\Rabi Shimon Bar Yochai with name.jpg" />
     <None Remove="Images\Rabi Shimon Bar Yochai.jpg" />
+    <None Remove="Images\Yam Hamelech with name.jpg" />
     <None Remove="Images\Yam Hamelech.jpg" />
   </ItemGroup>
 
@@ -24,25 +34,55 @@
     <Content Include="Images\Ari Hakadosh.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Ari Hakadoshwith name.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Blankname.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\blankpoint.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Churva.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Churvawithname.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Colored Map of Israel.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Kever Rochel with name.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Kever Rochel.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Kosel with name.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\kosel.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Mearas Hamechpela with name.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Mearas Hamechpela.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Rabbi Meir Bal Haness with name.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Rabbi Meir Bal Haness.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\Rabi Shimon Bar Yochai with name.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\Rabi Shimon Bar Yochai.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Yam Hamelech with name.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Yam Hamelech.jpg">

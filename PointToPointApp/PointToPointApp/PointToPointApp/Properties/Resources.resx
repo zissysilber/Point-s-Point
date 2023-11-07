@@ -121,4 +121,10 @@
   <data name="Ari Hakadosh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\Ari Hakadosh.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="blankpoint" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\blankpoint.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Blankname" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\Blankname.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>
