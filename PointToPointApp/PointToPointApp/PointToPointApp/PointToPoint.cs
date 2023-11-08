@@ -149,15 +149,15 @@ namespace PointToPointApp
                 if (n1 == n2)
                 {
                     matchedset = true;
-
-                    MessageBar(n1);
+                    matchingset = n1;
+                    MessageBar();
                     DelayTime(4);
                     btn1.Visible = false;
                     btn2.Visible = false;
                     HideCards();
                     matchedset = false;
-                    DelayTime(4);
-                    MessageBar();
+                    //DelayTime(4);
+                    //MessageBar();
 
                 }
                 if (n1 != n2)
@@ -188,50 +188,58 @@ namespace PointToPointApp
         }
 
 
-        private void MessageBar(int value = 10)
+        private void MessageBar()
         {
             String message = "";
 
             if (matchedset == true)
             {
-                switch (matchingset)
+                if (matchingset == 0)
                 {
-                    case 0:
-                        message = "Ari Hakadosh";
-                        lblAriHakadosh.Visible = true;
-                        picAriHakadosh.Visible = true;
-                        break;
-                    case 1:
-                        message = "Churva";
-                        lblChurva.Visible = true;
-                        picChurva.Visible = true;
-                        break;
-                    case 2:
-                        message = "Kever Rochel";
-                        break;
-                    case 3:
-                        message = "Kosel";
-                        break;
-                    case 4:
-                        message = "Mearas Hamachpela";
-                        break;
-                    case 5:
-                        message = "Rabbi Meir Bal Haness";
-                        break;
-                    case 6:
-                        message = "Rabi Shimon Bar Yochai";
-                        break;
-                    case 7:
-                        message = "Yam Hamelech";
-                        break;
-                    case 10:
-                        message = "Flip a Card to Continue";
-                        break;
-
+                    message = "Ari Hakadosh";
+                    lblAriHakadosh.Visible = true;
+                    picAriHakadosh.Visible = true;
                 }
 
-                lblMessageBar.Text = message;
 
+                //switch (matchingset)
+                //{
+                //    case 0:
+                //        message = "Ari Hakadosh";
+                //        lblAriHakadosh.Visible = true;
+                //        picAriHakadosh.Visible = true;
+                //        break;
+                //    case 1:
+                //        message = "Churva";
+                //        //lblChurva.Visible = true;
+                //        //picChurva.Visible = true;
+                //        break;
+                //    case 2:
+                //        message = "Kever Rochel";
+                //        break;
+                //    case 3:
+                //        message = "Kosel";
+                //        break;
+                //    case 4:
+                //        message = "Mearas Hamachpela";
+                //        break;
+                //    case 5:
+                //        message = "Rabbi Meir Bal Haness";
+                //        break;
+                //    case 6:
+                //        message = "Rabi Shimon Bar Yochai";
+                //        break;
+                //    case 7:
+                //        message = "Yam Hamelech";
+                //        break;
+                //    case 10:
+                //        message = "Flip a Card to Continue";
+                //        break;
+
+                //}
+
+                //lblMessageBar.Text = message;
+                lblMessageBar.Text = message;
             }
 
         }
