@@ -1,20 +1,23 @@
 ﻿using System.Data;
 
-
 namespace PointToPointApp
 {
     public partial class frmPointToPoint : Form
     {
         String path = Application.StartupPath + @"\Images\";
-        List<Button> lstpointbutton;
-        List<Button> lstpointpointbutton;
+        List<Button> lstimagebutton;
+        List<Button> lstnamebutton;
         List<Image> lstname;
         List<Image> lstimage;
-        bool pointcardflipped = false;
-        bool pointpointcardflipped = false;
+        bool imagecardflipped = false;
+        bool namecardflipped = false;
+        bool matchingset = false;
 
-        enum CardFlipped { point, pointpoint, none }
-        CardFlipped cardstatus = CardFlipped.none;
+
+        Button? btn1 = null;
+        Button? btn2 = null;
+        enum GameStatus { playing, notplaying }
+        GameStatus status = GameStatus.notplaying;
 
 
         Random rnd = new();
@@ -23,27 +26,27 @@ namespace PointToPointApp
         public frmPointToPoint()
         {
             InitializeComponent();
-            btnPoint1.Click += BtnPoint_Click;
-            btnPoint2.Click += BtnPoint_Click;
-            btnPoint3.Click += BtnPoint_Click;
-            btnPoint4.Click += BtnPoint_Click;
-            btnPoint5.Click += BtnPoint_Click;
-            btnPoint6.Click += BtnPoint_Click;
-            btnPoint7.Click += BtnPoint_Click;
-            btnPoint8.Click += BtnPoint_Click;
-            btnPoint9.Click += BtnPoint_Click;
-            btnPoint10.Click += BtnPoint_Click;
-            btnPoint11.Click += BtnPoint_Click;
-            btnPoint12.Click += BtnPoint_Click;
-            btnPoint13.Click += BtnPoint_Click;
-            btnPoint14.Click += BtnPoint_Click;
-            btnPoint15.Click += BtnPoint_Click;
-            btnPoint16.Click += BtnPoint_Click;
+            btnImage1.Click += BtnPoint_Click;
+            btnImage2.Click += BtnPoint_Click;
+            btnImage3.Click += BtnPoint_Click;
+            btnImage4.Click += BtnPoint_Click;
+            btnImage5.Click += BtnPoint_Click;
+            btnImage6.Click += BtnPoint_Click;
+            btnImage7.Click += BtnPoint_Click;
+            btnImage8.Click += BtnPoint_Click;
+            btnName9.Click += BtnPoint_Click;
+            btnName10.Click += BtnPoint_Click;
+            btnName11.Click += BtnPoint_Click;
+            btnName12.Click += BtnPoint_Click;
+            btnName13.Click += BtnPoint_Click;
+            btnName14.Click += BtnPoint_Click;
+            btnName15.Click += BtnPoint_Click;
+            btnName16.Click += BtnPoint_Click;
             btnReset.Click += BtnReset_Click;
 
 
-            lstpointbutton = new() { btnPoint1, btnPoint2, btnPoint3, btnPoint4, btnPoint5, btnPoint6, btnPoint7, btnPoint8 };
-            lstpointpointbutton = new() { btnPoint9, btnPoint10, btnPoint11, btnPoint12, btnPoint13, btnPoint14, btnPoint15, btnPoint16 };
+            lstimagebutton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8 };
+            lstnamebutton = new() { btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
             lstimage = new()
             {
 
@@ -69,12 +72,13 @@ namespace PointToPointApp
                 Image.FromFile(path + "Yam Hamelech with name.jpg")
             };
 
+
         }
 
         private void AssignValue()
         {
             List<Image> usedlist = new();
-            foreach (Button btn in lstpointbutton)
+            foreach (Button btn in lstimagebutton)
             {
                 while (btn.BackgroundImage == null)
                 {
@@ -88,7 +92,7 @@ namespace PointToPointApp
                     }
                 }
             }
-            foreach (Button btn in lstpointpointbutton)
+            foreach (Button btn in lstnamebutton)
             {
                 while (btn.BackgroundImage == null)
                 {
@@ -104,47 +108,118 @@ namespace PointToPointApp
             }
         }
 
+
+
         private void DoTurn(Button btn)
         {
-
-            if (cardstatus == CardFlipped.none || cardstatus == CardFlipped.pointpoint)
+            string btnName = btn.Name;
+            if (status == GameStatus.playing)
             {
-                //if button is part of point cards, cardstatus changes accordingly...
-                if (lstpointbutton.Where(b => b == btn).Count() == 0)
-                { cardstatus = CardFlipped.point; }
-                btn.Image = null;
+                if (imagecardflipped == false)
+                {
+                    if (btnName.Contains("Image"))
+                    {
+                        imagecardflipped = true;
+                        btn.Image = null;
+                    }
+                }
+                if (namecardflipped == false)
+                {
+                    if (btnName.Contains("Name"))
+                    {
+                        namecardflipped = true;
+                        btn.Image = null;
+                    }
+                }
+                CheckSet();
             }
-            if (cardstatus == CardFlipped.none || cardstatus == CardFlipped.point)
-                if (lstpointpointbutton.Where(b => b == btn).Count() == 0)
-                { cardstatus = CardFlipped.pointpoint; }
-                btn.Image = null;
-            pointcardflipped = false;
         }
 
+        private void CheckSet()
+        {
+            if (btn1 != null && btn2 != null)
+            {
+                Image image = btn1.BackgroundImage;
+                Image name = btn2.BackgroundImage;
 
-        private void HidePictures()
+                int n1 = lstimage.IndexOf(image);
+                int n2 = lstname.IndexOf(name);
+
+                if (n1 == n2)
+                {
+                    
+                    matchingset = true;
+                    lblMessageBar.Text = "That's a set!";
+                    DelayTime();
+                    btn1.Visible = false;
+                    btn2.Visible = false;
+                    HideCards();
+
+                }
+                if (n1 != n2)
+                {
+                    DelayTime();
+                    HideCards();
+                }
+            }
+        }
+        private void DelayTime()
         {
             DateTime starttime = DateTime.Now;
-            if (pointcardflipped == true)
-                //&& pointpointcardflipped == true)
 
-                while ((DateTime.Now - starttime).TotalSeconds <= 10)
-                {
-                    Application.DoEvents();
-                }
-            btnPoint1.BackgroundImage = null;
+            while ((DateTime.Now - starttime).TotalSeconds <= 2)
+            {
+                Application.DoEvents();
+            }
         }
 
+        private void HideCards()
+        {
+            btn1.Image = Image.FromFile(path + "blankpoint.jpg");
+            btn2.Image = Image.FromFile(path + "Blankname.jpg");
+            imagecardflipped = false;
+            namecardflipped = false;
+            btn1 = null;
+            btn2 = null;
+        }
+
+
+        private void MessageBar()
+        {
+
+        }
         private void BtnReset_Click(object? sender, EventArgs e)
         {
             AssignValue();
+            imagecardflipped = false;
+            namecardflipped = false;
+            btn1 = null;
+            btn2 = null;
+            status = GameStatus.playing;
 
         }
         private void BtnPoint_Click(object? sender, EventArgs e)
         {
-
             Button btn = (Button)sender;
+
+
+            if (lstimagebutton.Exists(b => b == btn))
+            {
+                if (btn1 == null)
+                {
+                    btn1 = btn;
+                }
+            }
+            else if (lstnamebutton.Exists(b => b == btn))
+                {
+                if (btn2 == null)
+                {
+                    btn2 = btn;
+                }
+            }
             DoTurn(btn);
+
         }
+
     }
 }
