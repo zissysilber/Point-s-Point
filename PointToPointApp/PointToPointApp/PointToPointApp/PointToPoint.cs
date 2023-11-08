@@ -11,7 +11,8 @@ namespace PointToPointApp
         List<Image> lstimage;
         bool imagecardflipped = false;
         bool namecardflipped = false;
-        bool matchingset = false;
+        bool matchedset = false;
+        int matchingset = 10;
 
 
         Button? btn1 = null;
@@ -147,13 +148,16 @@ namespace PointToPointApp
 
                 if (n1 == n2)
                 {
-                    
-                    matchingset = true;
-                    lblMessageBar.Text = "That's a set!";
-                    DelayTime();
+                    matchedset = true;
+
+                    MessageBar(n1);
+                    DelayTime(4);
                     btn1.Visible = false;
                     btn2.Visible = false;
                     HideCards();
+                    matchedset = false;
+                    DelayTime(4);
+                    MessageBar();
 
                 }
                 if (n1 != n2)
@@ -163,11 +167,11 @@ namespace PointToPointApp
                 }
             }
         }
-        private void DelayTime()
+        private void DelayTime(int value = 2)
         {
             DateTime starttime = DateTime.Now;
 
-            while ((DateTime.Now - starttime).TotalSeconds <= 2)
+            while ((DateTime.Now - starttime).TotalSeconds <= value)
             {
                 Application.DoEvents();
             }
@@ -184,8 +188,51 @@ namespace PointToPointApp
         }
 
 
-        private void MessageBar()
+        private void MessageBar(int value = 10)
         {
+            String message = "";
+
+            if (matchedset == true)
+            {
+                switch (matchingset)
+                {
+                    case 0:
+                        message = "Ari Hakadosh";
+                        lblAriHakadosh.Visible = true;
+                        picAriHakadosh.Visible = true;
+                        break;
+                    case 1:
+                        message = "Churva";
+                        lblChurva.Visible = true;
+                        picChurva.Visible = true;
+                        break;
+                    case 2:
+                        message = "Kever Rochel";
+                        break;
+                    case 3:
+                        message = "Kosel";
+                        break;
+                    case 4:
+                        message = "Mearas Hamachpela";
+                        break;
+                    case 5:
+                        message = "Rabbi Meir Bal Haness";
+                        break;
+                    case 6:
+                        message = "Rabi Shimon Bar Yochai";
+                        break;
+                    case 7:
+                        message = "Yam Hamelech";
+                        break;
+                    case 10:
+                        message = "Flip a Card to Continue";
+                        break;
+
+                }
+
+                lblMessageBar.Text = message;
+
+            }
 
         }
         private void BtnReset_Click(object? sender, EventArgs e)
@@ -211,7 +258,7 @@ namespace PointToPointApp
                 }
             }
             else if (lstnamebutton.Exists(b => b == btn))
-                {
+            {
                 if (btn2 == null)
                 {
                     btn2 = btn;
@@ -220,6 +267,7 @@ namespace PointToPointApp
             DoTurn(btn);
 
         }
+
 
     }
 }

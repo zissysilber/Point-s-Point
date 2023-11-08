@@ -89,5 +89,15 @@ namespace PointToPointApp.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap location_pin_navigation_destination_maps_icon_131239 {
+            get {
+                object obj = ResourceManager.GetObject("location_pin_navigation_destination_maps_icon_131239", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
