@@ -9,19 +9,19 @@ namespace PointToPointApp
         List<Button> lstnamebutton;
         List<Image> lstname;
         List<Image> lstimage;
+        List<PictureBox> lstmappic;
+        List<Label> lstmaplabel;
+
         bool imagecardflipped = false;
         bool namecardflipped = false;
         bool matchedset = false;
         int matchingset = 10;
-
+        Random rnd = new();
 
         Button? btn1 = null;
         Button? btn2 = null;
-        enum GameStatus { playing, notplaying }
-        GameStatus status = GameStatus.notplaying;
-
-
-        Random rnd = new();
+        enum GameStatusEnum { playing, notplaying, finishedplaying }
+        GameStatusEnum status = GameStatusEnum.notplaying;
 
 
         public frmPointToPoint()
@@ -50,7 +50,6 @@ namespace PointToPointApp
             lstnamebutton = new() { btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
             lstimage = new()
             {
-
                 Image.FromFile(path + "Ari Hakadosh.jpg"),
                 Image.FromFile(path + "Churva.jpg"),
                 Image.FromFile(path + "Kever Rochel.jpg"),
@@ -73,7 +72,30 @@ namespace PointToPointApp
                 Image.FromFile(path + "Yam Hamelech with name.jpg")
             };
 
+            lstmappic = new() 
+            { 
+                picAriHakadosh,
+                picChurva,
+                picKeverRochel,
+                picKosel,
+                picMearasHamachpela,
+                picRabbiMeir,
+                picRabiShimon,
+                picYamHamelech,
+                
+            };
 
+            lstmaplabel = new()
+            {
+                lblAriHakadosh,
+                lblChurva,
+                lblKeverRochel,
+                lblKosel,
+                lblMearasHamachpela,
+                lblRabbiMeirBalHaness,
+                lblRabiShimon,
+                lblYamHamelech
+            };
         }
 
         private void AssignValue()
@@ -114,7 +136,8 @@ namespace PointToPointApp
         private void DoTurn(Button btn)
         {
             string btnName = btn.Name;
-            if (status == GameStatus.playing)
+            if (status == GameStatusEnum.playing)
+                lblMessageBar.Text = "";
             {
                 if (imagecardflipped == false)
                 {
@@ -156,8 +179,7 @@ namespace PointToPointApp
                     btn2.Visible = false;
                     HideCards();
                     matchedset = false;
-                    //DelayTime(4);
-                    //MessageBar();
+                    CheckEndGame();
 
                 }
                 if (n1 != n2)
@@ -165,6 +187,14 @@ namespace PointToPointApp
                     DelayTime();
                     HideCards();
                 }
+            }
+        }
+
+        private void CheckEndGame()
+        {
+            if ((lstimagebutton.Count(i => i.Visible == false) == 8) && (lstnamebutton.Count(i => i.Visible == false) == 8))
+            {
+                status = GameStatusEnum.finishedplaying;
             }
         }
         private void DelayTime(int value = 2)
@@ -196,63 +226,94 @@ namespace PointToPointApp
             {
                 if (matchingset == 0)
                 {
-                    message = "Ari Hakadosh";
+                    message = "The Ari Hakadosh is buried in Tzfas.";
                     lblAriHakadosh.Visible = true;
                     picAriHakadosh.Visible = true;
                 }
+                else if (matchingset == 1)
+                {
+                    message = "The Churva is a shul in Yerushalayim.";
+                    lblChurva.Visible = true;
+                    picChurva.Visible = true;
+                }
+                else if (matchingset == 2)
+                {
+                    message = "Kever Rochel is in Beis Lechem.";
+                    lblKeverRochel.Visible = true;
+                    picKeverRochel.Visible = true;
+                }
+                else if (matchingset == 3)
+                {
+                    message = "The Kosel is in Yerushalayim.";
+                    lblKosel.Visible = true;
+                    picKosel.Visible = true;
+                }
+                else if (matchingset == 4)
+                {
+                    message = "Mearas Hamachpela is in Chevron.";
+                    lblMearasHamachpela.Visible = true;
+                    picMearasHamachpela.Visible = true;
+                }
+                else if (matchingset == 5)
+                {
+                    message = "The kever of Rabbi Meir Bal Haness is in Tiverya.";
+                    lblRabbiMeirBalHaness.Visible = true;
+                    picRabbiMeir.Visible = true;
+                }
+                else if (matchingset == 6)
+                {
+                    message = "The kever of Rabi Shimon Bar Yochai is in Meron.";
+                    lblRabiShimon.Visible = true;
+                    picRabiShimon.Visible = true;
+                }
+                else if (matchingset == 7)
+                {
+                    message = "The salt in Yam Hamelech makes everything float in the water.";
+                    lblYamHamelech.Visible = true;
+                    picYamHamelech.Visible = true;
+                }
 
+                if (status == GameStatusEnum.finishedplaying)
+                {
+                    message = "Congratulations!  You've matched all the pictures!";
+                }
 
-                //switch (matchingset)
-                //{
-                //    case 0:
-                //        message = "Ari Hakadosh";
-                //        lblAriHakadosh.Visible = true;
-                //        picAriHakadosh.Visible = true;
-                //        break;
-                //    case 1:
-                //        message = "Churva";
-                //        //lblChurva.Visible = true;
-                //        //picChurva.Visible = true;
-                //        break;
-                //    case 2:
-                //        message = "Kever Rochel";
-                //        break;
-                //    case 3:
-                //        message = "Kosel";
-                //        break;
-                //    case 4:
-                //        message = "Mearas Hamachpela";
-                //        break;
-                //    case 5:
-                //        message = "Rabbi Meir Bal Haness";
-                //        break;
-                //    case 6:
-                //        message = "Rabi Shimon Bar Yochai";
-                //        break;
-                //    case 7:
-                //        message = "Yam Hamelech";
-                //        break;
-                //    case 10:
-                //        message = "Flip a Card to Continue";
-                //        break;
-
-                //}
-
-                //lblMessageBar.Text = message;
                 lblMessageBar.Text = message;
+                
             }
 
         }
-        private void BtnReset_Click(object? sender, EventArgs e)
+        private void StartResetGame()
         {
+            status = GameStatusEnum.playing;
             AssignValue();
+            lblMessageBar.Text = "Click a Button!";
+            btnReset.Text = "Start Again!";
             imagecardflipped = false;
             namecardflipped = false;
             btn1 = null;
             btn2 = null;
-            status = GameStatus.playing;
-
+            
+            foreach (Button btn in lstimagebutton)
+            {
+                btn.Visible = true;
+            }
+            
+            foreach (Button b in lstnamebutton)
+                b.Visible = true;
+            
+            
+            foreach (PictureBox pic in lstmappic)
+            {
+                pic.Visible = false;
+            }
+            
+            foreach (Label lbl in lstmaplabel)
+            {
+                lbl.Visible = false;
+            }
         }
+
         private void BtnPoint_Click(object? sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -274,6 +335,10 @@ namespace PointToPointApp
             }
             DoTurn(btn);
 
+        }
+        private void BtnReset_Click(object? sender, EventArgs e)
+        {
+            StartResetGame();
         }
 
 

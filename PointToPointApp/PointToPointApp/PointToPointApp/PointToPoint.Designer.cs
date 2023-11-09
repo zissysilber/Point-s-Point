@@ -69,7 +69,7 @@
             lblYamHamelech = new Label();
             picAriHakadosh = new PictureBox();
             lblRabiShimon = new Label();
-            pictureBox1 = new PictureBox();
+            picRabiShimon = new PictureBox();
             tblMain.SuspendLayout();
             tblGameBoard.SuspendLayout();
             tblPointCards.SuspendLayout();
@@ -84,7 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)picMearasHamachpela).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picYamHamelech).BeginInit();
             ((System.ComponentModel.ISupportInitialize)picAriHakadosh).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)picRabiShimon).BeginInit();
             SuspendLayout();
             // 
             // tblMain
@@ -395,7 +395,7 @@
             lblMessageBar.Name = "lblMessageBar";
             lblMessageBar.Size = new Size(906, 60);
             lblMessageBar.TabIndex = 2;
-            lblMessageBar.Text = "Click any card to begin";
+            lblMessageBar.Text = "Click START to begin the game.";
             lblMessageBar.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tblMap
@@ -424,7 +424,7 @@
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(151, 34);
             btnReset.TabIndex = 0;
-            btnReset.Text = "Start Again!";
+            btnReset.Text = "START!";
             btnReset.UseVisualStyleBackColor = true;
             // 
             // pnlMapImage
@@ -482,7 +482,7 @@
             tblDestination.Controls.Add(lblYamHamelech, 16, 18);
             tblDestination.Controls.Add(picAriHakadosh, 14, 6);
             tblDestination.Controls.Add(lblRabiShimon, 14, 5);
-            tblDestination.Controls.Add(pictureBox1, 13, 5);
+            tblDestination.Controls.Add(picRabiShimon, 13, 5);
             tblDestination.Location = new Point(0, 0);
             tblDestination.Name = "tblDestination";
             tblDestination.RowCount = 42;
@@ -716,17 +716,17 @@
             lblRabiShimon.TextAlign = ContentAlignment.MiddleLeft;
             lblRabiShimon.Visible = false;
             // 
-            // pictureBox1
+            // picRabiShimon
             // 
-            pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Image = Properties.Resources.location_pin_navigation_destination_maps_icon_131239;
-            pictureBox1.Location = new Point(250, 93);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(13, 12);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 15;
-            pictureBox1.TabStop = false;
-            pictureBox1.Visible = false;
+            picRabiShimon.Dock = DockStyle.Fill;
+            picRabiShimon.Image = Properties.Resources.location_pin_navigation_destination_maps_icon_131239;
+            picRabiShimon.Location = new Point(250, 93);
+            picRabiShimon.Name = "picRabiShimon";
+            picRabiShimon.Size = new Size(13, 12);
+            picRabiShimon.SizeMode = PictureBoxSizeMode.Zoom;
+            picRabiShimon.TabIndex = 15;
+            picRabiShimon.TabStop = false;
+            picRabiShimon.Visible = false;
             // 
             // frmPointToPoint
             // 
@@ -752,7 +752,7 @@
             ((System.ComponentModel.ISupportInitialize)picMearasHamachpela).EndInit();
             ((System.ComponentModel.ISupportInitialize)picYamHamelech).EndInit();
             ((System.ComponentModel.ISupportInitialize)picAriHakadosh).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)picRabiShimon).EndInit();
             ResumeLayout(false);
         }
 
@@ -798,6 +798,6 @@
         private PictureBox picYamHamelech;
         private Label lblYamHamelech;
         private Label lblRabiShimon;
-        private PictureBox pictureBox1;
+        private PictureBox picRabiShimon;
     }
 }
