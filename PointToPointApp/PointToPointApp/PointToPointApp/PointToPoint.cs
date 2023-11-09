@@ -217,7 +217,6 @@ namespace PointToPointApp
             btn2 = null;
         }
 
-
         private void MessageBar()
         {
             String message = "";
@@ -279,7 +278,6 @@ namespace PointToPointApp
                 }
 
                 lblMessageBar.Text = message;
-                
             }
 
         }
@@ -334,7 +332,6 @@ namespace PointToPointApp
                 }
             }
             DoTurn(btn);
-
         }
         private void BtnReset_Click(object? sender, EventArgs e)
         {
