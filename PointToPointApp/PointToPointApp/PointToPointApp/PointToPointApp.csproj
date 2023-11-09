@@ -20,6 +20,7 @@
     <None Remove="Images\Kever Rochel.jpg" />
     <None Remove="Images\Kosel with name.jpg" />
     <None Remove="Images\kosel.jpg" />
+    <None Remove="Images\location_pin_navigation_destination_maps_icon_131239.png" />
     <None Remove="Images\Mearas Hamechpela with name.jpg" />
     <None Remove="Images\Mearas Hamechpela.jpg" />
     <None Remove="Images\Rabbi Meir Bal Haness with name.jpg" />
@@ -62,6 +63,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\kosel.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\location_pin_navigation_destination_maps_icon_131239.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Mearas Hamechpela with name.jpg">
