@@ -419,12 +419,12 @@
             // 
             // pnlMapImage
             // 
-            pnlMapImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlMapImage.BackColor = Color.White;
             pnlMapImage.BackgroundImage = (Image)resources.GetObject("pnlMapImage.BackgroundImage");
             pnlMapImage.BackgroundImageLayout = ImageLayout.Zoom;
             tblMap.SetColumnSpan(pnlMapImage, 3);
             pnlMapImage.Controls.Add(tblDestination);
+            pnlMapImage.Dock = DockStyle.Fill;
             pnlMapImage.Location = new Point(3, 43);
             pnlMapImage.Name = "pnlMapImage";
             pnlMapImage.Size = new Size(443, 776);
@@ -432,7 +432,6 @@
             // 
             // tblDestination
             // 
-            tblDestination.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tblDestination.BackColor = Color.Transparent;
             tblDestination.ColumnCount = 23;
             tblDestination.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 4.34782743F));
@@ -474,6 +473,7 @@
             tblDestination.Controls.Add(picAriHakadosh, 14, 6);
             tblDestination.Controls.Add(lblRabiShimon, 14, 5);
             tblDestination.Controls.Add(picRabiShimon, 13, 5);
+            tblDestination.Dock = DockStyle.Fill;
             tblDestination.Location = new Point(0, 0);
             tblDestination.Name = "tblDestination";
             tblDestination.RowCount = 42;
@@ -549,10 +549,11 @@
             // 
             // picRabbiMeir
             // 
+            picRabbiMeir.Dock = DockStyle.Fill;
             picRabbiMeir.Image = Properties.Resources.location_pin_navigation_destination_maps_icon_131239;
             picRabbiMeir.Location = new Point(288, 129);
             picRabbiMeir.Name = "picRabbiMeir";
-            picRabbiMeir.Size = new Size(11, 12);
+            picRabbiMeir.Size = new Size(13, 12);
             picRabbiMeir.SizeMode = PictureBoxSizeMode.Zoom;
             picRabbiMeir.TabIndex = 3;
             picRabbiMeir.TabStop = false;
@@ -684,7 +685,7 @@
             // 
             // picAriHakadosh
             // 
-            picAriHakadosh.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            picAriHakadosh.Dock = DockStyle.Fill;
             picAriHakadosh.Image = Properties.Resources.location_pin_navigation_destination_maps_icon_131239;
             picAriHakadosh.Location = new Point(269, 111);
             picAriHakadosh.Name = "picAriHakadosh";
