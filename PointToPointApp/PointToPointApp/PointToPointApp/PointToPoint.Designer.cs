@@ -51,7 +51,6 @@
             btnName16 = new Button();
             lblMessageBar = new Label();
             tblMap = new TableLayoutPanel();
-            btnReset = new Button();
             pnlMapImage = new Panel();
             tblDestination = new TableLayoutPanel();
             lblAriHakadosh = new Label();
@@ -70,6 +69,7 @@
             picAriHakadosh = new PictureBox();
             lblRabiShimon = new Label();
             picRabiShimon = new PictureBox();
+            btnReset = new Button();
             tblMain.SuspendLayout();
             tblGameBoard.SuspendLayout();
             tblPointCards.SuspendLayout();
@@ -402,11 +402,12 @@
             // 
             tblMap.BackColor = Color.White;
             tblMap.BackgroundImageLayout = ImageLayout.Zoom;
-            tblMap.ColumnCount = 1;
-            tblMap.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tblMap.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
-            tblMap.Controls.Add(btnReset, 0, 0);
+            tblMap.ColumnCount = 3;
+            tblMap.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tblMap.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
+            tblMap.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tblMap.Controls.Add(pnlMapImage, 0, 1);
+            tblMap.Controls.Add(btnReset, 2, 0);
             tblMap.Dock = DockStyle.Fill;
             tblMap.Location = new Point(921, 3);
             tblMap.Name = "tblMap";
@@ -416,23 +417,13 @@
             tblMap.Size = new Size(449, 822);
             tblMap.TabIndex = 1;
             // 
-            // btnReset
-            // 
-            btnReset.Dock = DockStyle.Right;
-            btnReset.Font = new Font("Century Gothic", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnReset.Location = new Point(295, 3);
-            btnReset.Name = "btnReset";
-            btnReset.Size = new Size(151, 34);
-            btnReset.TabIndex = 0;
-            btnReset.Text = "START!";
-            btnReset.UseVisualStyleBackColor = true;
-            // 
             // pnlMapImage
             // 
             pnlMapImage.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlMapImage.BackColor = Color.White;
             pnlMapImage.BackgroundImage = (Image)resources.GetObject("pnlMapImage.BackgroundImage");
             pnlMapImage.BackgroundImageLayout = ImageLayout.Zoom;
+            tblMap.SetColumnSpan(pnlMapImage, 3);
             pnlMapImage.Controls.Add(tblDestination);
             pnlMapImage.Location = new Point(3, 43);
             pnlMapImage.Name = "pnlMapImage";
@@ -728,6 +719,17 @@
             picRabiShimon.TabStop = false;
             picRabiShimon.Visible = false;
             // 
+            // btnReset
+            // 
+            btnReset.Dock = DockStyle.Fill;
+            btnReset.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnReset.Location = new Point(301, 3);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(145, 34);
+            btnReset.TabIndex = 2;
+            btnReset.Text = "START!";
+            btnReset.UseVisualStyleBackColor = true;
+            // 
             // frmPointToPoint
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -761,7 +763,6 @@
         private TableLayoutPanel tblMain;
         private TableLayoutPanel tblGameBoard;
         private TableLayoutPanel tblMap;
-        private Button btnReset;
         private Panel pnlMapImage;
         private TableLayoutPanel tblDestination;
         private TableLayoutPanel tblPointCards;
@@ -799,5 +800,6 @@
         private Label lblYamHamelech;
         private Label lblRabiShimon;
         private PictureBox picRabiShimon;
+        private Button btnReset;
     }
 }

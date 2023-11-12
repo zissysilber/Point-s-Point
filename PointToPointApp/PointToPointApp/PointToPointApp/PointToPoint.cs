@@ -72,8 +72,8 @@ namespace PointToPointApp
                 Image.FromFile(path + "Yam Hamelech with name.jpg")
             };
 
-            lstmappic = new() 
-            { 
+            lstmappic = new()
+            {
                 picAriHakadosh,
                 picChurva,
                 picKeverRochel,
@@ -82,7 +82,7 @@ namespace PointToPointApp
                 picRabbiMeir,
                 picRabiShimon,
                 picYamHamelech,
-                
+
             };
 
             lstmaplabel = new()
@@ -136,27 +136,27 @@ namespace PointToPointApp
         private void DoTurn(Button btn)
         {
             string btnName = btn.Name;
-            if (status == GameStatusEnum.playing)
-                lblMessageBar.Text = "";
+
+            lblMessageBar.Text = "";
+
+            if (imagecardflipped == false)
             {
-                if (imagecardflipped == false)
+                if (btnName.Contains("Image"))
                 {
-                    if (btnName.Contains("Image"))
-                    {
-                        imagecardflipped = true;
-                        btn.Image = null;
-                    }
+                    imagecardflipped = true;
+                    btn.Image = null;
                 }
-                if (namecardflipped == false)
-                {
-                    if (btnName.Contains("Name"))
-                    {
-                        namecardflipped = true;
-                        btn.Image = null;
-                    }
-                }
-                CheckSet();
             }
+            if (namecardflipped == false)
+            {
+                if (btnName.Contains("Name"))
+                {
+                    namecardflipped = true;
+                    btn.Image = null;
+                }
+            }
+            CheckSet();
+
         }
 
         private void CheckSet()
@@ -178,14 +178,16 @@ namespace PointToPointApp
                     btn1.Visible = false;
                     btn2.Visible = false;
                     HideCards();
-                    matchedset = false;
                     CheckEndGame();
+                    matchedset = false;
+
 
                 }
                 if (n1 != n2)
                 {
                     DelayTime();
                     HideCards();
+                    MessageBar();
                 }
             }
         }
@@ -194,7 +196,9 @@ namespace PointToPointApp
         {
             if ((lstimagebutton.Count(i => i.Visible == false) == 8) && (lstnamebutton.Count(i => i.Visible == false) == 8))
             {
+                lblMessageBar.Text = "";
                 status = GameStatusEnum.finishedplaying;
+                MessageBar();
             }
         }
         private void DelayTime(int value = 2)
@@ -276,10 +280,14 @@ namespace PointToPointApp
                 {
                     message = "Congratulations!  You've matched all the pictures!";
                 }
-
-                lblMessageBar.Text = message;
+            }
+            if (matchedset == false)
+            {
+                message = "Where will we travel next?";
             }
 
+
+            lblMessageBar.Text = message;
         }
         private void StartResetGame()
         {
@@ -291,21 +299,21 @@ namespace PointToPointApp
             namecardflipped = false;
             btn1 = null;
             btn2 = null;
-            
+
             foreach (Button btn in lstimagebutton)
             {
                 btn.Visible = true;
             }
-            
+
             foreach (Button b in lstnamebutton)
                 b.Visible = true;
-            
-            
+
+
             foreach (PictureBox pic in lstmappic)
             {
                 pic.Visible = false;
             }
-            
+
             foreach (Label lbl in lstmaplabel)
             {
                 lbl.Visible = false;
@@ -314,24 +322,27 @@ namespace PointToPointApp
 
         private void BtnPoint_Click(object? sender, EventArgs e)
         {
+
             Button btn = (Button)sender;
 
-
-            if (lstimagebutton.Exists(b => b == btn))
+            if (status == GameStatusEnum.playing)
             {
-                if (btn1 == null)
+                if (lstimagebutton.Exists(b => b == btn))
                 {
-                    btn1 = btn;
+                    if (btn1 == null)
+                    {
+                        btn1 = btn;
+                    }
                 }
-            }
-            else if (lstnamebutton.Exists(b => b == btn))
-            {
-                if (btn2 == null)
+                else if (lstnamebutton.Exists(b => b == btn))
                 {
-                    btn2 = btn;
+                    if (btn2 == null)
+                    {
+                        btn2 = btn;
+                    }
                 }
+                DoTurn(btn);
             }
-            DoTurn(btn);
         }
         private void BtnReset_Click(object? sender, EventArgs e)
         {
