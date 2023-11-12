@@ -395,7 +395,7 @@
             lblMessageBar.Name = "lblMessageBar";
             lblMessageBar.Size = new Size(906, 60);
             lblMessageBar.TabIndex = 2;
-            lblMessageBar.Text = "Click START to begin the game.";
+            lblMessageBar.Text = "Let's tour Eretz Yisrael!\r\nClick START to begin the game.";
             lblMessageBar.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // tblMap
