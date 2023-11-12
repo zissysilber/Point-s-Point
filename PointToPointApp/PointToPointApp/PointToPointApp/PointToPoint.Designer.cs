@@ -736,6 +736,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1373, 828);
             Controls.Add(tblMain);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "frmPointToPoint";
             Text = "PointToPoint";
             tblMain.ResumeLayout(false);

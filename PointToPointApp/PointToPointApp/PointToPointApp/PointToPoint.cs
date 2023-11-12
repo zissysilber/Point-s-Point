@@ -228,7 +228,8 @@ namespace PointToPointApp
             btn2.Image = Image.FromFile(path + "Blankname.jpg");
 
         }
-        private void ResetValues() {
+        private void ResetValues()
+        {
             imagecardflipped = false;
             namecardflipped = false;
             btn1 = null;
