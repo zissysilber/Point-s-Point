@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PointToPointMaui.PointToPoint"
+             Title="Point To Point">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="CenturyGothic"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="4"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="CornerRadius" Value="2"/>
+                <Setter Property="Margin" Value="10"/>
+
+                <Setter Property="FontFamily" Value="CenturyGothic"/>
+            </Style>
+            <Style TargetType="Button" x:Key="btnImage" CanCascade="True">
+                <Setter Property="BackgroundColor" Value="LightSkyBlue"/>
+                <Setter Property="WidthRequest" Value="200"/>
+                <Setter Property="HeightRequest" Value="200"/>
+            </Style>
+            <Style TargetType="Button" x:Key="btnName" CanCascade="True">
+                <Setter Property="BackgroundColor" Value="SteelBlue"/>
+                <Setter Property="WidthRequest" Value="200"/>
+                <Setter Property="HeightRequest" Value="200"/>
+            </Style>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid 
+        ColumnDefinitions="2.5*,*" 
+        RowDefinitions="Auto,Auto, *" 
+        Margin="30,10,10,10">
+        
+        <Grid ColumnDefinitions="200,*,200" 
+              RowDefinitions="*,*">
+                <Label 
+                    x:Name="lblMessageMain"
+                    Grid.Column="1" Grid.Row="0"
+                    Text="Let's Explore Eretz Yisrael!"
+                    FontSize="24"
+                    FontAttributes="Bold"
+                    VerticalOptions="Center" 
+                    Padding="10"/>
+            
+                <Label
+                    x:Name="lblMessageRow2"
+                    Grid.Column="1" Grid.Row="1"
+                    Margin="2,2,10,2"
+                    Text="Click START to begin the game."
+                    FontSize="20"/>
+            
+                <Button x:Name="btnStart" 
+                        Grid.Column="2" 
+                        Text="Start!" 
+                        FontSize="Small"/>
+        </Grid>
+        
+        <Grid ColumnDefinitions="*,*,*,*,*,*" 
+              RowDefinitions="*,*,*,*" 
+              Grid.Column="0" 
+              Grid.Row="2">
+            
+                <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
+                <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
+                <Button Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
+                <Button Grid.Column="4" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
+                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
+                <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
+                <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
+                <Button Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
+
+                <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
+                <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
+                <Button Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
+                <Button Grid.Column="4" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
+                <Button Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
+                <Button Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
+                <Button Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
+                <Button Grid.Column="4" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
+        </Grid>
+
+        <Grid ColumnDefinitions ="*" 
+              RowDefinitions="*" 
+              Grid.Column="1" 
+              Grid.Row="0" 
+              Grid.RowSpan="3">
+                <Image Source="coloredmapofisrael.jpg" 
+                       Aspect="AspectFit"/>
+                
+                <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" 
+                      RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
+
+                    <Image x:Name="picRabiShimon"  
+                            Source="locationpin.tif" 
+                            Grid.Row="4"
+                            Grid.Column="18" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblRabiShimon"
+                            Text="Rabi Shimon Bar Yochai"
+                            FontSize="10"
+                            Grid.Row="5"
+                            Grid.Column="16"
+                            Grid.ColumnSpan="8"/>
+
+                    <Image x:Name="picAriHakadosh"  
+                            Source="locationpin.tif" 
+                            Grid.Row="6"
+                            Grid.Column="20" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblAriHakadosh"
+                            Text="Ari Hakadosh"
+                            FontSize="10"
+                            Grid.Row="6"
+                            Grid.Column="18"
+                            Grid.ColumnSpan="10"/>
+
+                    <Image x:Name="picRabbiMeirBalHaness"  
+                            Source="locationpin.tif" 
+                            Grid.Row="7"
+                            Grid.Column="18" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblRabbiMeirBalHaness"
+                            Text="Rabbi Meir Bal Haness"
+                            FontSize="10"
+                            Grid.Row="7"
+                            Grid.Column="17"
+                            Grid.ColumnSpan="10"/>
+
+                    <Image x:Name="picKosel"  
+                            Source="locationpin.tif" 
+                            Grid.Row="17"
+                            Grid.Column="16" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblKosel"
+                            Text="Kosel"
+                            FontSize="10"
+                            Grid.Row="17"
+                            Grid.Column="15"
+                            Grid.ColumnSpan="5"/>
+
+                    <Image x:Name="picChurva"  
+                            Source="locationpin.tif" 
+                            Grid.Row="18"
+                            Grid.Column="16" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblChurva"
+                            Text="Churva"
+                            FontSize="10"
+                            Grid.Row="18"
+                            Grid.Column="15"
+                            Grid.ColumnSpan="5"/>
+
+                    <Image x:Name="picYamHamelech"  
+                            Source="locationpin.tif" 
+                            Grid.Row="18"
+                            Grid.Column="20" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblYamHamelech"
+                            Text="Yam Hamelech"
+                            FontSize="10"
+                            Grid.Row="18"
+                            Grid.Column="19" 
+                            Grid.ColumnSpan="8"/>
+
+                    <Image x:Name="picKeverRochel"  
+                            Source="locationpin.tif" 
+                            Grid.Row="19"
+                            Grid.Column="15" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblKeverRochel"
+                            Text="Kever Rochel"
+                            FontSize="10"
+                            Grid.Row="19"
+                            Grid.Column="14" 
+                            Grid.ColumnSpan="5"/>
+
+                    <Image x:Name="picMearasHamachpela"  
+                            Source="locationpin.tif" 
+                            Grid.Row="20"
+                            Grid.Column="16" 
+                            Aspect="AspectFit"/>
+                    <Label x:Name="lblMearasHamachpela"
+                            Text="Mearas Hamachpela"
+                            FontSize="10"
+                            Grid.Row="20"
+                            Grid.Column="15" 
+                            Grid.ColumnSpan="8"/>
+
+
+            </Grid>
+        </Grid>
+
+
+
+    </Grid>
+
+</ContentPage>

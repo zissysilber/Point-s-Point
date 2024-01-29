@@ -13,8 +13,6 @@
     <None Remove="Images\Ari Hakadoshwith name.jpg" />
     <None Remove="Images\Blankname.jpg" />
     <None Remove="Images\blankpoint.jpg" />
-    <None Remove="Images\Churva.jpg" />
-    <None Remove="Images\Churvawithname.jpg" />
     <None Remove="Images\Colored Map of Israel.jpg" />
     <None Remove="Images\Kever Rochel with name.jpg" />
     <None Remove="Images\Kever Rochel.jpg" />
@@ -42,12 +40,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\blankpoint.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Churva.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\Churvawithname.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Colored Map of Israel.jpg">
