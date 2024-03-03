@@ -29,57 +29,110 @@
 
         </ResourceDictionary>
     </ContentPage.Resources>
-    <Grid 
+    <Grid
+        x:Name="MainGrid"
         ColumnDefinitions="2.5*,*" 
         RowDefinitions="Auto,Auto, *" 
         Margin="30,10,10,10">
-        
-        <Grid ColumnDefinitions="200,*,200" 
-              RowDefinitions="*,*">
-                <Label 
-                    x:Name="lblMessageMain"
+
+        <Image x:Name="blankname" Source="blankname.jpg" IsVisible="false"/>
+        <Image x:Name="blankpoint" Source="blankpoint.jpg" IsVisible="false"/>
+
+        <Grid x:Name="TopRowGrid"
+            ColumnDefinitions="230,*,225"
+              ColumnSpan="2"
+              RowDefinitions="*">
+
+            <Grid
+                Grid.Column="0"
+                RowDefinitions="*,*"> 
+            <Button x:Name="btnStart" 
+                    Grid.Row="0" 
+                    Text="{Binding StartButtonDescription}" 
+                    FontSize="Small"
+                    Clicked="btnStart_Clicked" />
+            
+              <Button x:Name="btnNewTurn" 
+                     
+                    Grid.Row="1"
+                    Text="New Turn" 
+                    FontSize="Small"
+                    Clicked="btnNewTurn_Clicked" />  
+          </Grid>   
+                    <Label
+                    x:Name="lblMessage"
                     Grid.Column="1" Grid.Row="0"
-                    Text="Let's Explore Eretz Yisrael!"
-                    FontSize="24"
-                    FontAttributes="Bold"
-                    VerticalOptions="Center" 
-                    Padding="10"/>
-            
-                <Label
-                    x:Name="lblMessageRow2"
-                    Grid.Column="1" Grid.Row="1"
                     Margin="2,2,10,2"
-                    Text="Click START to begin the game."
-                    FontSize="20"/>
-            
-                <Button x:Name="btnStart" 
-                        Grid.Column="2" 
-                        Text="Start!" 
-                        FontSize="Small"/>
+                    Text="{Binding GameMessageDescription}"
+                    FontAttributes="Bold"
+                    FontSize="24"
+                    HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"/>
+
         </Grid>
-        
+
         <Grid ColumnDefinitions="*,*,*,*,*,*" 
               RowDefinitions="*,*,*,*" 
               Grid.Column="0" 
-              Grid.Row="2">
-            
-                <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
-                <Button Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
-                <Button Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
-                <Button Grid.Column="4" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
-                <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
-                <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
-                <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}"/>
-                <Button Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}"/>
+              Grid.Row="2"
+              ColumnSpacing="15"
+              RowSpacing="60">
 
-                <Button Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
-                <Button Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
-                <Button Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
-                <Button Grid.Column="4" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
-                <Button Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
-                <Button Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
-                <Button Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=btnName}"/>
-                <Button Grid.Column="4" Grid.Row="2" Style="{StaticResource Key=btnName}"/>
+
+
+            <Image x:Name="arihakadosh" Source="arihakadosh.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="churva" Source="churva.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="keverrochel" Source="keverrochel.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="kosel" Source="kosel.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="mearashamechpela" Source="mearashamechpela.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="rabbimeirbalhaness" Source="rabbimeirbalhaness.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="rabishimonbaryochai" Source="rabishimonbaryochai.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="yamhamelech" Source="yamhamelech.jpg" Aspect="AspectFit" IsVisible="false"/>
+
+            <Button x:Name="btnGameImage1" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0" />
+            <Button x:Name="btnGameImage2" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
+            <Button x:Name="btnGameImage3" Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
+            <Button x:Name="btnGameImage4" Grid.Column="4" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
+            <Button x:Name="btnGameImage5" Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
+            <Button x:Name="btnGameImage6" Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
+            <Button x:Name="btnGameImage7" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
+            <Button x:Name="btnGameImage8" Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
+
+            <Button x:Name="btnImage1" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage2" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage3" Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage4" Grid.Column="4" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage5" Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage6" Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage7" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage8" Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+
+            <Image x:Name="arihakadoshwithname" Source="arihakadoshwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="churvawithname" Source="churvawithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="keverrochelwithname" Source="keverrochelwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="koselwithname" Source="koselwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="mearashamechpelawithname" Source="mearashamechpelawithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="rabbimeirbalhanesswithname" Source="rabbimeirbalhanesswithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="rabishimonbaryochaiwithname" Source="rabishimonbaryochaiwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+            <Image x:Name="yamhamelechwithname" Source="yamhamelechwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+
+            <Button x:Name="btnGameName9" Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnName}"  ZIndex="0"/>
+            <Button x:Name="btnGameName10" Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnName}" ZIndex="0"/>
+            <Button x:Name="btnGameName11" Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=btnName}" ZIndex="0"/>
+            <Button x:Name="btnGameName12" Grid.Column="4" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
+            <Button x:Name="btnGameName13" Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
+            <Button x:Name="btnGameName14" Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
+            <Button x:Name="btnGameName15" Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
+            <Button x:Name="btnGameName16" Grid.Column="4" Grid.Row="2" Style="{StaticResource Key=btnName}" ZIndex="0"/>
+
+            <Button x:Name="btnName9" Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnName}"  Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
+            <Button x:Name="btnName10" Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
+            <Button x:Name="btnName11" Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
+            <Button x:Name="btnName12" Grid.Column="4" Grid.Row="3" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
+            <Button x:Name="btnName13" Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
+            <Button x:Name="btnName14" Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
+            <Button x:Name="btnName15" Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
+            <Button x:Name="btnName16" Grid.Column="4" Grid.Row="2" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
         </Grid>
 
         <Grid ColumnDefinitions ="*" 
@@ -87,108 +140,35 @@
               Grid.Column="1" 
               Grid.Row="0" 
               Grid.RowSpan="3">
-                <Image Source="coloredmapofisrael.jpg" 
+            <Image Source="coloredmapofisrael.jpg" 
                        Aspect="AspectFit"/>
-                
-                <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" 
+
+            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*" 
                       RowDefinitions="*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*">
 
-                    <Image x:Name="picRabiShimon"  
-                            Source="locationpin.tif" 
-                            Grid.Row="4"
-                            Grid.Column="18" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblRabiShimon"
-                            Text="Rabi Shimon Bar Yochai"
-                            FontSize="10"
-                            Grid.Row="5"
-                            Grid.Column="16"
-                            Grid.ColumnSpan="8"/>
+                <Image x:Name="picrabishimonbaryochai" Source="locationpin.png" Grid.Row="4" Grid.Column="18" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblrabishimonbaryochai" Text="Rabi Shimon Bar Yochai" FontSize="10" Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="8" IsVisible="false"/>
 
-                    <Image x:Name="picAriHakadosh"  
-                            Source="locationpin.tif" 
-                            Grid.Row="6"
-                            Grid.Column="20" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblAriHakadosh"
-                            Text="Ari Hakadosh"
-                            FontSize="10"
-                            Grid.Row="6"
-                            Grid.Column="18"
-                            Grid.ColumnSpan="10"/>
+                <Image x:Name="picarihakadosh" Source="locationpin.png" Grid.Row="6" Grid.Column="20" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblarihakadosh" Text="Ari Hakadosh" FontSize="10" Grid.Row="6" Grid.Column="18" Grid.ColumnSpan="10" IsVisible="false"/>
 
-                    <Image x:Name="picRabbiMeirBalHaness"  
-                            Source="locationpin.tif" 
-                            Grid.Row="7"
-                            Grid.Column="18" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblRabbiMeirBalHaness"
-                            Text="Rabbi Meir Bal Haness"
-                            FontSize="10"
-                            Grid.Row="7"
-                            Grid.Column="17"
-                            Grid.ColumnSpan="10"/>
+                <Image x:Name="picrabbimeirbalhaness" Source="locationpin.png" Grid.Row="7" Grid.Column="18" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblrabbimeirbalhaness" Text="Rabbi Meir Bal Haness" FontSize="10" Grid.Row="7" Grid.Column="17" Grid.ColumnSpan="10" IsVisible="false"/>
 
-                    <Image x:Name="picKosel"  
-                            Source="locationpin.tif" 
-                            Grid.Row="17"
-                            Grid.Column="16" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblKosel"
-                            Text="Kosel"
-                            FontSize="10"
-                            Grid.Row="17"
-                            Grid.Column="15"
-                            Grid.ColumnSpan="5"/>
+                <Image x:Name="pickosel" Source="locationpin.png" Grid.Row="17" Grid.Column="16" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblkosel" Text="Kosel" FontSize="10" Grid.Row="17" Grid.Column="15" Grid.ColumnSpan="5" IsVisible="false"/>
 
-                    <Image x:Name="picChurva"  
-                            Source="locationpin.tif" 
-                            Grid.Row="18"
-                            Grid.Column="16" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblChurva"
-                            Text="Churva"
-                            FontSize="10"
-                            Grid.Row="18"
-                            Grid.Column="15"
-                            Grid.ColumnSpan="5"/>
+                <Image x:Name="picchurva" Source="locationpin.png" Grid.Row="18" Grid.Column="16" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblchurva" Text="Churva" FontSize="10" Grid.Row="18" Grid.Column="15" Grid.ColumnSpan="5" IsVisible="false"/>
 
-                    <Image x:Name="picYamHamelech"  
-                            Source="locationpin.tif" 
-                            Grid.Row="18"
-                            Grid.Column="20" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblYamHamelech"
-                            Text="Yam Hamelech"
-                            FontSize="10"
-                            Grid.Row="18"
-                            Grid.Column="19" 
-                            Grid.ColumnSpan="8"/>
+                <Image x:Name="picyamhamelech" Source="locationpin.png" Grid.Row="18" Grid.Column="20" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblyamhamelech" Text="Yam Hamelech" FontSize="10" Grid.Row="18" Grid.Column="19" Grid.ColumnSpan="8" IsVisible="false"/>
 
-                    <Image x:Name="picKeverRochel"  
-                            Source="locationpin.tif" 
-                            Grid.Row="19"
-                            Grid.Column="15" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblKeverRochel"
-                            Text="Kever Rochel"
-                            FontSize="10"
-                            Grid.Row="19"
-                            Grid.Column="14" 
-                            Grid.ColumnSpan="5"/>
+                <Image x:Name="pickeverrochel" Source="locationpin.png" Grid.Row="19" Grid.Column="15" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblkeverrochel" Text="Kever Rochel"  FontSize="10" Grid.Row="19" Grid.Column="14" Grid.ColumnSpan="5" IsVisible="false"/>
 
-                    <Image x:Name="picMearasHamachpela"  
-                            Source="locationpin.tif" 
-                            Grid.Row="20"
-                            Grid.Column="16" 
-                            Aspect="AspectFit"/>
-                    <Label x:Name="lblMearasHamachpela"
-                            Text="Mearas Hamachpela"
-                            FontSize="10"
-                            Grid.Row="20"
-                            Grid.Column="15" 
-                            Grid.ColumnSpan="8"/>
-
+                <Image x:Name="picmearashamechpela" Source="locationpin.png" Grid.Row="20" Grid.Column="16" Aspect="AspectFit" IsVisible="false"/>
+                <Label x:Name="lblmearashamechpela" Text="Mearas Hamachpela" FontSize="10" Grid.Row="20" Grid.Column="15" Grid.ColumnSpan="8" IsVisible="false"/>
 
             </Grid>
         </Grid>

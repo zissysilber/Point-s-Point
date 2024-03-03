@@ -70,6 +70,7 @@
             lblRabiShimon = new Label();
             picRabiShimon = new PictureBox();
             btnReset = new Button();
+            btnNewTurn = new Button();
             tblMain.SuspendLayout();
             tblGameBoard.SuspendLayout();
             tblPointCards.SuspendLayout();
@@ -407,7 +408,8 @@
             tblMap.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tblMap.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
             tblMap.Controls.Add(pnlMapImage, 0, 1);
-            tblMap.Controls.Add(btnReset, 2, 0);
+            tblMap.Controls.Add(btnReset, 0, 0);
+            tblMap.Controls.Add(btnNewTurn, 2, 0);
             tblMap.Dock = DockStyle.Fill;
             tblMap.Location = new Point(921, 3);
             tblMap.Name = "tblMap";
@@ -724,12 +726,23 @@
             // 
             btnReset.Dock = DockStyle.Fill;
             btnReset.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            btnReset.Location = new Point(301, 3);
+            btnReset.Location = new Point(3, 3);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(145, 34);
+            btnReset.Size = new Size(143, 34);
             btnReset.TabIndex = 2;
             btnReset.Text = "START!";
             btnReset.UseVisualStyleBackColor = true;
+            // 
+            // btnNewTurn
+            // 
+            btnNewTurn.Dock = DockStyle.Fill;
+            btnNewTurn.Font = new Font("Century Gothic", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnNewTurn.Location = new Point(301, 3);
+            btnNewTurn.Name = "btnNewTurn";
+            btnNewTurn.Size = new Size(145, 34);
+            btnNewTurn.TabIndex = 3;
+            btnNewTurn.Text = "NEW TURN!";
+            btnNewTurn.UseVisualStyleBackColor = true;
             // 
             // frmPointToPoint
             // 
@@ -803,5 +816,6 @@
         private Label lblRabiShimon;
         private PictureBox picRabiShimon;
         private Button btnReset;
+        private Button btnNewTurn;
     }
 }

@@ -57,8 +57,6 @@
 	  <MauiImage Remove="Resources\Images\Kever Rochel with name.jpg" />
 	  <MauiImage Remove="Resources\Images\Kever Rochel.jpg" />
 	  <MauiImage Remove="Resources\Images\Kosel with name.jpg" />
-	  <MauiImage Remove="Resources\Images\kosel.jpg" />
-	  <MauiImage Remove="Resources\Images\locationpin.png" />
 	  <MauiImage Remove="Resources\Images\Mearas Hamechpela with name.jpg" />
 	  <MauiImage Remove="Resources\Images\Mearas Hamechpela.jpg" />
 	  <MauiImage Remove="Resources\Images\Rabbi Meir Bal Haness with name.jpg" />
@@ -82,9 +80,7 @@
 	  <None Remove="Resources\Images\Kever Rochel with name.jpg" />
 	  <None Remove="Resources\Images\Kever Rochel.jpg" />
 	  <None Remove="Resources\Images\Kosel with name.jpg" />
-	  <None Remove="Resources\Images\kosel.jpg" />
 	  <None Remove="Resources\Images\locationpin.png" />
-	  <None Remove="Resources\Images\locationpin.tif" />
 	  <None Remove="Resources\Images\Mearas Hamechpela with name.jpg" />
 	  <None Remove="Resources\Images\Mearas Hamechpela.jpg" />
 	  <None Remove="Resources\Images\Rabbi Meir Bal Haness with name.jpg" />
@@ -96,22 +92,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="Resources\Images\Blankname.jpg">
+	  <Content Include="Resources\Images\blankname.jpg">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Resources\Images\blankpoint.jpg">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Resources\Images\kosel.jpg">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <Content Include="Resources\Images\locationpin.png">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\PointToPointSystem\PointToPointSystem.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

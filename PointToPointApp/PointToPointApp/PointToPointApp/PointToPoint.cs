@@ -1,10 +1,13 @@
-﻿using System.Data;
+﻿using PointToPointSystem;
+using System.Data;
+using Image = System.Drawing.Image;
 
 namespace PointToPointApp
 {
     public partial class frmPointToPoint : Form
     {
-        String path = Application.StartupPath + @"\Images\";
+        string path = Application.StartupPath + @"\Images\";
+
         List<Button> lstimagebutton;
         List<Button> lstnamebutton;
         List<Image> lstname;
@@ -12,42 +15,23 @@ namespace PointToPointApp
         List<PictureBox> lstmappic;
         List<Label> lstmaplabel;
 
-        bool imagecardflipped = false;
-        bool namecardflipped = false;
-        bool matchedset = false;
-        int matchingset = 10;
         Random rnd = new();
 
-        Button? btn1 = null;
-        Button? btn2 = null;
-        enum GameStatusEnum { playing, notplaying, finishedplaying, namecardflipped, imagecardflipped }
-        GameStatusEnum status = GameStatusEnum.notplaying;
+        Button? btnimage = null;
+        Button? btnname = null;
 
+        Game game = new();
 
         public frmPointToPoint()
         {
             InitializeComponent();
-            btnImage1.Click += BtnPoint_Click;
-            btnImage2.Click += BtnPoint_Click;
-            btnImage3.Click += BtnPoint_Click;
-            btnImage4.Click += BtnPoint_Click;
-            btnImage5.Click += BtnPoint_Click;
-            btnImage6.Click += BtnPoint_Click;
-            btnImage7.Click += BtnPoint_Click;
-            btnImage8.Click += BtnPoint_Click;
-            btnName9.Click += BtnPoint_Click;
-            btnName10.Click += BtnPoint_Click;
-            btnName11.Click += BtnPoint_Click;
-            btnName12.Click += BtnPoint_Click;
-            btnName13.Click += BtnPoint_Click;
-            btnName14.Click += BtnPoint_Click;
-            btnName15.Click += BtnPoint_Click;
-            btnName16.Click += BtnPoint_Click;
-            btnReset.Click += BtnReset_Click;
-
 
             lstimagebutton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8 };
+            lstimagebutton.ForEach(b => b.Click += BtnPoint_Click);
+
             lstnamebutton = new() { btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
+            lstnamebutton.ForEach(b => b.Click += BtnPoint_Click);
+
             lstimage = new()
             {
                 Image.FromFile(path + "Ari Hakadosh.jpg"),
@@ -71,6 +55,9 @@ namespace PointToPointApp
                 Image.FromFile(path + "Rabi Shimon Bar Yochai with name.jpg"),
                 Image.FromFile(path + "Yam Hamelech with name.jpg")
             };
+
+            btnReset.Click += BtnReset_Click;
+            btnNewTurn.Click += BtnNewTurn_Click;
 
             lstmappic = new()
             {
@@ -96,9 +83,13 @@ namespace PointToPointApp
                 lblRabiShimon,
                 lblYamHamelech
             };
+            lblMessageBar.DataBindings.Add("Text", game, "GameMessageDescription");
+            btnReset.DataBindings.Add("Text", game, "StartButtonDescription");
         }
 
-        private void AssignValue()
+
+
+        private void AssignImage()
         {
             List<Image> usedlist = new();
             foreach (Button btn in lstimagebutton)
@@ -131,259 +122,122 @@ namespace PointToPointApp
             }
         }
 
-
-
         private void DoTurn(Button btn)
         {
-            string btnName = btn.Name;
-
-            lblMessageBar.Text = "";
-
-            if (imagecardflipped == false)
+            if (lstimagebutton.Exists(b => b == btn))
             {
-                if (btnName.Contains("Image"))
+                if (game.ImageCardStatus == Game.ImageCardStatusEnum.notflipped)
                 {
-                    imagecardflipped = true;
-                    status = GameStatusEnum.imagecardflipped;
+                    game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
+                    game.ImageCardStatus = Game.ImageCardStatusEnum.flipped;
+                    game.ImageCard.CardValue = lstimage.IndexOf(btn.BackgroundImage);
+                    btnimage = btn;
                     btn.Image = null;
-                    MessageBar();
                 }
+                else return;
             }
-            if (namecardflipped == false)
+            else if (lstnamebutton.Exists(b => b == btn))
             {
-                if (btnName.Contains("Name"))
+                if (game.NameCardStatus == Game.NameCardStatusEnum.notflipped)
                 {
-                    namecardflipped = true;
-                    status = GameStatusEnum.namecardflipped;
+                    game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
+                    game.NameCardStatus = Game.NameCardStatusEnum.flipped;
+                    game.NameCard.CardValue = lstname.IndexOf(btn.BackgroundImage);
+                    btnname = btn;
                     btn.Image = null;
-                    MessageBar();
                 }
+                else return;
             }
-            if (imagecardflipped == true && namecardflipped == true)
+
+            if (game.ImageCardStatus == Game.ImageCardStatusEnum.flipped && game.NameCardStatus == Game.NameCardStatusEnum.flipped)
             {
-                CheckSet();
+                game.DetectMatch();
+                UpdateMap();
             }
 
         }
-
-        private void CheckSet()
+        private void UpdateMap()
         {
-            if (btn1 != null && btn2 != null)
+            if (game.matchedset == true)
             {
-                Image image = btn1.BackgroundImage;
-                Image name = btn2.BackgroundImage;
-
-                int n1 = lstimage.IndexOf(image);
-                int n2 = lstname.IndexOf(name);
-
-                if (n1 == n2)
-                {
-                    matchedset = true;
-                    matchingset = n1;
-                    MessageBar();
-                    DelayTime(4);
-                    btn1.Visible = false;
-                    btn2.Visible = false;
-                    HidePictures();
-                    ResetValues();
-                    CheckEndGame();
-                    matchedset = false;
-                    MessageBar();
-
-
-                }
-                if (n1 != n2)
-                {
-                    DelayTime();
-                    MessageBar();
-                    HidePictures();
-                    ResetValues();
-                    MessageBar();
-                }
+                lstmaplabel[game.matchingset].Visible = true;
+                lstmappic[game.matchingset].Visible = true;
             }
         }
-
-        private void CheckEndGame()
-        {
-            if ((lstimagebutton.Count(i => i.Visible == false) == 8) && (lstnamebutton.Count(i => i.Visible == false) == 8))
-            {
-                lblMessageBar.Text = "";
-                status = GameStatusEnum.finishedplaying;
-                MessageBar();
-            }
-        }
-        private void DelayTime(int value = 2)
-        {
-            DateTime starttime = DateTime.Now;
-
-            while ((DateTime.Now - starttime).TotalSeconds <= value)
-            {
-                Application.DoEvents();
-            }
-        }
-
         private void HidePictures()
         {
-            btn1.Image = Image.FromFile(path + "blankpoint.jpg");
-            btn2.Image = Image.FromFile(path + "Blankname.jpg");
 
-        }
-        private void ResetValues()
-        {
-            imagecardflipped = false;
-            namecardflipped = false;
-            btn1 = null;
-            btn2 = null;
-        }
+            if (btnimage != null && btnname != null)
+            {
+                btnimage.Image = Image.FromFile(path + "blankpoint.jpg");
+                btnname.Image = Image.FromFile(path + "Blankname.jpg");
 
-        private void MessageBar()
-        {
-            String message = "";
-
-            if (status == GameStatusEnum.imagecardflipped && imagecardflipped == true)
-            {
-                message = "Can you find the name of this destination?";
-                status = GameStatusEnum.playing;
-            }
-            else if (status == GameStatusEnum.namecardflipped && namecardflipped == true)
-            {
-                message = "Can you find the picture of this destination?";
-                status = GameStatusEnum.playing;
-            }
-            if (matchedset == true)
-            {
-                if (matchingset == 0)
+                if (game.matchedset == true)
                 {
-                    message = "The Ari Hakadosh is buried in Tzfas.";
-                    lblAriHakadosh.Visible = true;
-                    picAriHakadosh.Visible = true;
-                }
-                else if (matchingset == 1)
-                {
-                    message = "The Churva is a shul in Yerushalayim.";
-                    lblChurva.Visible = true;
-                    picChurva.Visible = true;
-                }
-                else if (matchingset == 2)
-                {
-                    message = "Kever Rochel is in Beis Lechem.";
-                    lblKeverRochel.Visible = true;
-                    picKeverRochel.Visible = true;
-                }
-                else if (matchingset == 3)
-                {
-                    message = "The Kosel is in Yerushalayim.";
-                    lblKosel.Visible = true;
-                    picKosel.Visible = true;
-                }
-                else if (matchingset == 4)
-                {
-                    message = "Mearas Hamachpela is in Chevron.";
-                    lblMearasHamachpela.Visible = true;
-                    picMearasHamachpela.Visible = true;
-                }
-                else if (matchingset == 5)
-                {
-                    message = "The kever of Rabbi Meir Bal Haness is in Tiverya.";
-                    lblRabbiMeirBalHaness.Visible = true;
-                    picRabbiMeir.Visible = true;
-                }
-                else if (matchingset == 6)
-                {
-                    message = "The kever of Rabi Shimon Bar Yochai is in Meron.";
-                    lblRabiShimon.Visible = true;
-                    picRabiShimon.Visible = true;
-                }
-                else if (matchingset == 7)
-                {
-                    message = "The salt in Yam Hamelech makes everything float in the water.";
-                    lblYamHamelech.Visible = true;
-                    picYamHamelech.Visible = true;
+                    btnimage.Visible = false;
+                    btnname.Visible = false;
                 }
 
             }
-            if (imagecardflipped == true && namecardflipped == true && matchedset == false)
-            {
-                message = "";
-
-            }
-            if (imagecardflipped == false && namecardflipped == false && btn1 == null && btn2 == null)
-            {
-                message = "Where will we travel next?";
-            }
-
-            if (status == GameStatusEnum.finishedplaying)
-            {
-                message = "Congratulations!  You've matched all the pictures!";
-            }
-
-            lblMessageBar.Text = message;
         }
 
-        private void StartResetGame()
+        private void SetupButtonsAndImages()
         {
-            ResetValues();
-            status = GameStatusEnum.playing;
-            lblMessageBar.Text = "Click a Button!";
-            btnReset.Text = "Start Again!";
-
-            foreach (Button btn in lstimagebutton)
+            lstimagebutton.ForEach(btn =>
             {
                 btn.Image = Image.FromFile(path + "blankpoint.jpg");
                 btn.Visible = true;
                 btn.BackgroundImage = null;
-            }
+            });
 
-            foreach (Button b in lstnamebutton)
+            lstnamebutton.ForEach(b =>
             {
                 b.Image = Image.FromFile(path + "Blankname.jpg");
                 b.Visible = true;
                 b.BackgroundImage = null;
-            }
+            });
 
-            foreach (PictureBox pic in lstmappic)
-            {
-                pic.Visible = false;
-            }
-
-            foreach (Label lbl in lstmaplabel)
-            {
-                lbl.Visible = false;
-            }
-
-            AssignValue();
+            lstmappic.ForEach(i => i.Visible = false);
+            lstmaplabel.ForEach(i => i.Visible = false);
+            AssignImage();
         }
-
+        private void StartResetGame()
+        {
+            game.StartGame();
+            ResetButtons();
+            SetupButtonsAndImages();
+        }
+        private void ResetButtons()
+        {
+            btnimage = null;
+            btnname = null;
+        }
+        private void NewTurn()
+        {
+            HidePictures();
+            ResetButtons();
+            game.NewTurn();
+        }
         private void BtnPoint_Click(object? sender, EventArgs e)
         {
-
-            Button btn = (Button)sender;
-
-            if (status == GameStatusEnum.playing)
+            if (sender is Button btn)
             {
-                if (lstimagebutton.Exists(b => b == btn))
+                if (game.GameStatus == Game.GameStatusEnum.playing)
                 {
-                    if (btn1 == null)
-                    {
-                        btn1 = btn;
-                    }
-                    else return;
+                    DoTurn(btn);
                 }
-                else if (lstnamebutton.Exists(b => b == btn))
-                {
-                    if (btn2 == null)
-                    {
-                        btn2 = btn;
-                    }
-                    else return;
-                }
-                DoTurn(btn);
             }
         }
         private void BtnReset_Click(object? sender, EventArgs e)
         {
             StartResetGame();
         }
+
+        private void BtnNewTurn_Click(object? sender, EventArgs e)
+        {
+            NewTurn();
+        }
+
 
     }
 }
