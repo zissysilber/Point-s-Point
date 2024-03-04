@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PointToPointMaui.PointToPoint"
-             Title="Point To Point">
+             Title="Point To Point" >
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -16,10 +16,14 @@
 
                 <Setter Property="FontFamily" Value="CenturyGothic"/>
             </Style>
+
+
             <Style TargetType="Button" x:Key="btnImage" CanCascade="True">
                 <Setter Property="BackgroundColor" Value="LightSkyBlue"/>
                 <Setter Property="WidthRequest" Value="200"/>
                 <Setter Property="HeightRequest" Value="200"/>
+                <!--<Setter Property="MinimumWidthRequest" Value="{Binding ActualHeight}" />
+                <Setter Property="MinimumHeightRequest" Value="{Binding ActualWidth}" />-->
             </Style>
             <Style TargetType="Button" x:Key="btnName" CanCascade="True">
                 <Setter Property="BackgroundColor" Value="SteelBlue"/>
@@ -30,23 +34,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid
-        x:Name="MainGrid"
-        ColumnDefinitions="2.5*,*" 
-        RowDefinitions="Auto,Auto, *" 
-        Margin="30,10,10,10">
-
+        x:Name="MainGrid" ColumnDefinitions="2.5*,*" RowDefinitions="Auto,Auto, *"  Margin="30,10,10,10">
         <Image x:Name="blankname" Source="blankname.jpg" IsVisible="false"/>
         <Image x:Name="blankpoint" Source="blankpoint.jpg" IsVisible="false"/>
+       
+        <Grid x:Name="TopRowGrid" ColumnDefinitions="230,*,225" ColumnSpan="1" RowDefinitions="*,*">
 
-        <Grid x:Name="TopRowGrid"
-            ColumnDefinitions="230,*,225"
-              ColumnSpan="2"
-              RowDefinitions="*">
-
-            <Grid
-                Grid.Column="0"
-                RowDefinitions="*,*"> 
-            <Button x:Name="btnStart" 
+            <Button x:Name="btnStart"
+                    
                     Grid.Row="0" 
                     Text="{Binding StartButtonDescription}" 
                     FontSize="Small"
@@ -58,7 +53,7 @@
                     Text="New Turn" 
                     FontSize="Small"
                     Clicked="btnNewTurn_Clicked" />  
-          </Grid>   
+  
                     <Label
                     x:Name="lblMessage"
                     Grid.Column="1" Grid.Row="0"
@@ -76,7 +71,7 @@
               Grid.Column="0" 
               Grid.Row="2"
               ColumnSpacing="15"
-              RowSpacing="60">
+              RowSpacing="60" >
 
 
 
@@ -98,14 +93,14 @@
             <Button x:Name="btnGameImage7" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
             <Button x:Name="btnGameImage8" Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
 
-            <Button x:Name="btnImage1" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
-            <Button x:Name="btnImage2" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
-            <Button x:Name="btnImage3" Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
-            <Button x:Name="btnImage4" Grid.Column="4" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
-            <Button x:Name="btnImage5" Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
-            <Button x:Name="btnImage6" Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
-            <Button x:Name="btnImage7" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
-            <Button x:Name="btnImage8" Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1"/>
+            <Button x:Name="btnImage1" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
+            <Button x:Name="btnImage2" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
+            <Button x:Name="btnImage3" Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
+            <Button x:Name="btnImage4" Grid.Column="4" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
+            <Button x:Name="btnImage5" Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
+            <Button x:Name="btnImage6" Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
+            <Button x:Name="btnImage7" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
+            <Button x:Name="btnImage8" Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
 
             <Image x:Name="arihakadoshwithname" Source="arihakadoshwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
             <Image x:Name="churvawithname" Source="churvawithname.jpg" Aspect="AspectFit" IsVisible="false"/>

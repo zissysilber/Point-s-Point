@@ -25,6 +25,7 @@ public partial class PointToPoint : ContentPage
     Button? btngamename = null;
 
     Game game = new();
+
     public PointToPoint()
     {
         InitializeComponent();
@@ -178,8 +179,8 @@ public partial class PointToPoint : ContentPage
     {
         if (game.matchedset == true)
         {
-            lstmaplabel[game.matchingset].IsVisible = true;
-            lstmappic[game.matchingset].IsVisible = true;
+            lstmaplabel[game.matchingsetnum].IsVisible = true;
+            lstmappic[game.matchingsetnum].IsVisible = true;
         }
     }
 
@@ -229,9 +230,8 @@ public partial class PointToPoint : ContentPage
         lstgamename.ForEach(btn => btn.IsVisible = true);
         btnimage = null;
         btnname = null;
-        game.newturn = false;
-        btnNewTurn.TextColor = Colors.White;
-        btnNewTurn.BorderWidth = 0;
+        btnStart.TextColor = Colors.White;
+        btnStart.BorderWidth = 0;
         lstmaplabel.ForEach(lbl => lbl.IsVisible = false);
         lstmappic.ForEach(pic => pic.IsVisible = false);
         ResetNewTurnButton();

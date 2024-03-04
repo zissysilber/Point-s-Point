@@ -126,10 +126,11 @@ namespace PointToPointApp
         {
             if (lstimagebutton.Exists(b => b == btn))
             {
-                if (game.ImageCardStatus == Game.ImageCardStatusEnum.notflipped)
+                if(game.ImageCard.CardStatus == CardStatusEnum.notflipped)
                 {
                     game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
-                    game.ImageCardStatus = Game.ImageCardStatusEnum.flipped;
+                    game.ImageCard.CardStatus = CardStatusEnum.flipped;
+                    
                     game.ImageCard.CardValue = lstimage.IndexOf(btn.BackgroundImage);
                     btnimage = btn;
                     btn.Image = null;
@@ -160,8 +161,8 @@ namespace PointToPointApp
         {
             if (game.matchedset == true)
             {
-                lstmaplabel[game.matchingset].Visible = true;
-                lstmappic[game.matchingset].Visible = true;
+                lstmaplabel[game.matchingsetnum].Visible = true;
+                lstmappic[game.matchingsetnum].Visible = true;
             }
         }
         private void HidePictures()

@@ -20,8 +20,7 @@ namespace PointToPointSystem
                 this.InvokePropertyChanged();
             }
         }
-        public bool newturn { get; set; } = false;
-        public int matchingset
+        public int matchingsetnum
         {
             get => _matchingset; set
             {
@@ -48,6 +47,8 @@ namespace PointToPointSystem
 
         public Game()
         {
+            ImageCard = new();
+            NameCard = new(); 
             lstmatchingsetmessage = new()
             {
                 "The Ari Hakadosh is buried in Tzfas.",
@@ -59,11 +60,16 @@ namespace PointToPointSystem
                 "The kever of Rabi Shimon Bar Yochai is in Meron.",
                 "The salt in Yam Hamelech makes everything float in the water."
             };
-
-
-            ImageCard = new();
-            NameCard = new();
-
+        }
+        public GameStatusEnum GameStatus
+        {
+            get => _gamestatus;
+            set
+            {
+                _gamestatus = value;
+                this.InvokePropertyChanged();
+                this.InvokePropertyChanged("GameMessageDescription");
+            }
         }
         public Card ImageCard
         {
@@ -85,16 +91,7 @@ namespace PointToPointSystem
         }
 
 
-        public GameStatusEnum GameStatus
-        {
-            get => _gamestatus;
-            set
-            {
-                _gamestatus = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged("GameMessageDescription");
-            }
-        }
+
         public ImageCardStatusEnum ImageCardStatus
         {
             get => _imagecardstatus;
@@ -158,12 +155,12 @@ namespace PointToPointSystem
                     }
                     else if (ImageCardStatus == ImageCardStatusEnum.flipped && NameCardStatus == NameCardStatusEnum.flipped && matchedset == true && numberofsetsmatched < 8)
                     {
-                        message = lstmatchingsetmessage[matchingset] + "\r\n Click NEW TURN to discover more!";
+                        message = lstmatchingsetmessage[matchingsetnum] + "\r\n Click NEW TURN to discover more!";
 
                     }
                     else if (ImageCardStatus == ImageCardStatusEnum.flipped && NameCardStatus == NameCardStatusEnum.flipped && matchedset == true && numberofsetsmatched == 8)
                     {
-                        message = lstmatchingsetmessage[matchingset] + "\r\n Congratulations!  You've matched all the pictures!";
+                        message = lstmatchingsetmessage[matchingsetnum] + "\r\n Congratulations!  You've matched all the pictures!";
 
                     }
                     else if (ImageCardStatus == ImageCardStatusEnum.flipped && NameCardStatus == NameCardStatusEnum.flipped && matchedset == false)
@@ -175,7 +172,6 @@ namespace PointToPointSystem
                     {
                         message = "Where will we travel next?";
                     }
-                    
                 }
                 else if (this.GameStatus == GameStatusEnum.finishedplaying)
                 {
@@ -188,10 +184,7 @@ namespace PointToPointSystem
                 }
                 return message;
             }
-
         }
-
-
 
         public string StartButtonDescription
         {
@@ -220,8 +213,7 @@ namespace PointToPointSystem
             {
                 matchedset = true;
                 numberofsetsmatched++;
-                matchingset = ImageCard.CardValue;
-                
+                matchingsetnum = ImageCard.CardValue;
             }
         }
 
@@ -253,7 +245,5 @@ namespace PointToPointSystem
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
-
     }
-
 }
