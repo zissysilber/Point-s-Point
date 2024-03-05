@@ -103,6 +103,7 @@ namespace PointToPointApp
                         usedlist.Add(newimage);
                         btn.BackgroundImage = newimage;
                         btn.BackgroundImageLayout = ImageLayout.Zoom;
+
                     }
                 }
             }
@@ -130,7 +131,6 @@ namespace PointToPointApp
                 {
                     game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
                     game.ImageCard.CardStatus = CardStatusEnum.flipped;
-                    
                     game.ImageCard.CardValue = lstimage.IndexOf(btn.BackgroundImage);
                     btnimage = btn;
                     btn.Image = null;
@@ -139,18 +139,17 @@ namespace PointToPointApp
             }
             else if (lstnamebutton.Exists(b => b == btn))
             {
-                if (game.NameCardStatus == Game.NameCardStatusEnum.notflipped)
+                if (game.NameCard.CardStatus == CardStatusEnum.notflipped)
                 {
                     game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
-                    game.NameCardStatus = Game.NameCardStatusEnum.flipped;
+                    game.NameCard.CardStatus = CardStatusEnum.flipped;
                     game.NameCard.CardValue = lstname.IndexOf(btn.BackgroundImage);
                     btnname = btn;
                     btn.Image = null;
                 }
                 else return;
             }
-
-            if (game.ImageCardStatus == Game.ImageCardStatusEnum.flipped && game.NameCardStatus == Game.NameCardStatusEnum.flipped)
+            if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped)
             {
                 game.DetectMatch();
                 UpdateMap();

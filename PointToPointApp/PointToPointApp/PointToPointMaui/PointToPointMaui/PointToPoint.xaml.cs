@@ -5,8 +5,6 @@ namespace PointToPointMaui;
 
 public partial class PointToPoint : ContentPage
 {
-
-
     List<Button> lstimagebutton;
     List<Button> lstnamebutton;
     List<Button> lstgameimage;
@@ -48,7 +46,6 @@ public partial class PointToPoint : ContentPage
         lstname = new() { arihakadoshwithname, churvawithname, keverrochelwithname, koselwithname, mearashamechpelawithname, rabbimeirbalhanesswithname, rabishimonbaryochaiwithname, yamhamelechwithname };
         lstmappic = new() { picarihakadosh, picchurva, pickeverrochel, pickosel, picmearashamechpela, picrabbimeirbalhaness, picrabishimonbaryochai, picyamhamelech };
         lstmaplabel = new() { lblarihakadosh, lblchurva, lblkeverrochel, lblkosel, lblmearashamechpela, lblrabbimeirbalhaness, lblrabishimonbaryochai, lblyamhamelech };
-
     }
     private void StartResetGame()
     {
@@ -127,10 +124,10 @@ public partial class PointToPoint : ContentPage
     {
         if (lstimagebutton.Exists(b => b == btn))
         {
-            if (game.ImageCardStatus == Game.ImageCardStatusEnum.notflipped)
+            if(game.ImageCard.CardStatus == CardStatusEnum.notflipped)
             {
                 game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
-                game.ImageCardStatus = Game.ImageCardStatusEnum.flipped;
+                game.ImageCard.CardStatus = CardStatusEnum.flipped;
                 game.ImageCard.CardValue = FindImageValue(btn);
                 btnimage = btn;
                 btn.IsVisible = false;
@@ -139,10 +136,10 @@ public partial class PointToPoint : ContentPage
         }
         else if (lstnamebutton.Exists(b => b == btn))
         {
-            if (game.NameCardStatus == Game.NameCardStatusEnum.notflipped)
+            if (game.NameCard.CardStatus == CardStatusEnum.notflipped)
             {
                 game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
-                game.NameCardStatus = Game.NameCardStatusEnum.flipped;
+                game.NameCard.CardStatus = CardStatusEnum.flipped;
                 game.NameCard.CardValue = FindImageValue(btn);
                 btnname = btn;
                 btn.IsVisible = false;
@@ -151,18 +148,18 @@ public partial class PointToPoint : ContentPage
             else return;
         }
 
-        if (game.ImageCardStatus == Game.ImageCardStatusEnum.flipped && game.NameCardStatus == Game.NameCardStatusEnum.flipped)
+        if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped)
         {
             game.DetectMatch();
 
             //Format Button NewTurn
-            if (game.ImageCardStatus == Game.ImageCardStatusEnum.flipped && game.NameCardStatus == Game.NameCardStatusEnum.flipped && game.numberofsetsmatched < 8)
+            if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped && game.numberofsetsmatched < 8)
             {
                 btnNewTurn.BorderColor = Colors.Crimson;
                 btnNewTurn.BorderWidth = 5;
                 btnNewTurn.TextColor = Colors.LightSkyBlue;
             }
-            if (game.ImageCardStatus == Game.ImageCardStatusEnum.flipped && game.NameCardStatus == Game.NameCardStatusEnum.flipped && game.numberofsetsmatched == 8)
+            if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped && game.numberofsetsmatched == 8)
             {
                 btnStart.BorderColor = Colors.Crimson;
                 btnStart.BorderWidth = 5;
@@ -191,8 +188,7 @@ public partial class PointToPoint : ContentPage
     }
     private void NewTurn()
     {
-
-        if ((game.ImageCardStatus == Game.ImageCardStatusEnum.flipped && game.NameCardStatus == Game.NameCardStatusEnum.flipped && game.matchedset == false) || game.matchedset == true)
+        if ((game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped && game.matchedset == false) || game.matchedset == true)
         {
             ResetNewTurnButton();
             HidePictures();

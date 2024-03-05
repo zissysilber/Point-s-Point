@@ -7,8 +7,7 @@ namespace PointToPointSystem
     public class Game : INotifyPropertyChanged
     {
         public enum GameStatusEnum { playing, beginplaying, notplaying, finishedplaying }
-        public enum ImageCardStatusEnum { flipped, notflipped }
-        public enum NameCardStatusEnum { flipped, notflipped }
+
         public enum CurrentCardPlayingEnum { none, imagecard, namecard }
         public enum StartButtonStatusEnum { start, reset }
 
@@ -18,6 +17,7 @@ namespace PointToPointSystem
             {
                 _matchedset = value;
                 this.InvokePropertyChanged();
+
             }
         }
         public int matchingsetnum
@@ -32,8 +32,7 @@ namespace PointToPointSystem
 
         List<string> lstmatchingsetmessage;
 
-        ImageCardStatusEnum _imagecardstatus = ImageCardStatusEnum.notflipped;
-        NameCardStatusEnum _namecardstatus = NameCardStatusEnum.notflipped;
+
         GameStatusEnum _gamestatus = GameStatusEnum.notplaying;
         StartButtonStatusEnum _startbuttonstatus = StartButtonStatusEnum.start;
         CurrentCardPlayingEnum _currentcard = CurrentCardPlayingEnum.none;
@@ -42,13 +41,14 @@ namespace PointToPointSystem
         private bool _matchedset;
         private int _matchingset;
         public int numberofsetsmatched = 0;
-       
 
+
+        Card card = new();
 
         public Game()
         {
             ImageCard = new();
-            NameCard = new(); 
+            NameCard = new();
             lstmatchingsetmessage = new()
             {
                 "The Ari Hakadosh is buried in Tzfas.",
@@ -73,7 +73,8 @@ namespace PointToPointSystem
         }
         public Card ImageCard
         {
-            get => _imagecard; set
+            get => _imagecard;
+            set
             {
                 _imagecard = value;
                 this.InvokePropertyChanged();
@@ -91,27 +92,15 @@ namespace PointToPointSystem
         }
 
 
+        public CardStatusEnum FlippedCardStatus
+        {
+            get => card.cardstatus;
+            set { card.cardstatus = value;
+                this.InvokePropertyChanged();
+                this.InvokePropertyChanged("GameMessageDescription");
+            }
+        }
 
-        public ImageCardStatusEnum ImageCardStatus
-        {
-            get => _imagecardstatus;
-            set
-            {
-                _imagecardstatus = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged("GameMessageDescription");
-            }
-        }
-        public NameCardStatusEnum NameCardStatus
-        {
-            get => _namecardstatus;
-            set
-            {
-                _namecardstatus = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged("GameMessageDescription");
-            }
-        }
 
         public CurrentCardPlayingEnum CurrentCard
         {
@@ -145,30 +134,30 @@ namespace PointToPointSystem
                 }
                 else if (this.GameStatus == GameStatusEnum.playing)
                 {
-                    if (CurrentCard == CurrentCardPlayingEnum.imagecard && NameCardStatus == NameCardStatusEnum.notflipped)
+                    if (CurrentCard == CurrentCardPlayingEnum.imagecard && NameCard.CardStatus == CardStatusEnum.notflipped)
                     {
                         message = "Can you find the name of this destination?";
                     }
-                    else if (CurrentCard == CurrentCardPlayingEnum.namecard && ImageCardStatus == ImageCardStatusEnum.notflipped)
+                    else if (CurrentCard == CurrentCardPlayingEnum.namecard && ImageCard.CardStatus == CardStatusEnum.notflipped)
                     {
                         message = "Can you find the picture of this destination?";
                     }
-                    else if (ImageCardStatus == ImageCardStatusEnum.flipped && NameCardStatus == NameCardStatusEnum.flipped && matchedset == true && numberofsetsmatched < 8)
+                    else if(ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus==CardStatusEnum.flipped && matchedset == true && numberofsetsmatched < 8)
                     {
                         message = lstmatchingsetmessage[matchingsetnum] + "\r\n Click NEW TURN to discover more!";
 
                     }
-                    else if (ImageCardStatus == ImageCardStatusEnum.flipped && NameCardStatus == NameCardStatusEnum.flipped && matchedset == true && numberofsetsmatched == 8)
+                    else if(ImageCard.CardStatus==CardStatusEnum.flipped && NameCard.CardStatus==CardStatusEnum.flipped && matchedset == true && numberofsetsmatched == 8)
                     {
                         message = lstmatchingsetmessage[matchingsetnum] + "\r\n Congratulations!  You've matched all the pictures!";
 
                     }
-                    else if (ImageCardStatus == ImageCardStatusEnum.flipped && NameCardStatus == NameCardStatusEnum.flipped && matchedset == false)
+                    else if (ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus == CardStatusEnum.flipped && matchedset == false)
                     {
                         message = "Oops!  Click NEW TURN for another chance.";
 
                     }
-                    else if (CurrentCard == CurrentCardPlayingEnum.none && NameCardStatus == NameCardStatusEnum.notflipped && ImageCardStatus == ImageCardStatusEnum.notflipped)
+                    else if (CurrentCard == CurrentCardPlayingEnum.none && NameCard.CardStatus == CardStatusEnum.notflipped && ImageCard.CardStatus == CardStatusEnum.notflipped)
                     {
                         message = "Where will we travel next?";
                     }
@@ -219,8 +208,8 @@ namespace PointToPointSystem
 
         public void EndTurn()
         {
-            ImageCardStatus = ImageCardStatusEnum.notflipped;
-            NameCardStatus = NameCardStatusEnum.notflipped;
+            ImageCard.CardStatus = CardStatusEnum.notflipped;
+            NameCard.CardStatus = CardStatusEnum.notflipped;
             CurrentCard = CurrentCardPlayingEnum.none;
             matchedset = false;
 
@@ -233,15 +222,15 @@ namespace PointToPointSystem
         private void ResetValues()
         {
             GameStatus = GameStatusEnum.notplaying;
-            ImageCardStatus = ImageCardStatusEnum.notflipped;
-            NameCardStatus = NameCardStatusEnum.notflipped;
+            ImageCard.CardStatus = CardStatusEnum.notflipped;
+            NameCard.CardStatus = CardStatusEnum.notflipped;
             CurrentCard = CurrentCardPlayingEnum.none;
             numberofsetsmatched = 0;
         }
 
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        private void InvokePropertyChanged([CallerMemberName] string propertyname = "")
+        public void InvokePropertyChanged([CallerMemberName] string propertyname = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
