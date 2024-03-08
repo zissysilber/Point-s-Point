@@ -34,26 +34,26 @@ namespace PointToPointApp
 
             lstimage = new()
             {
-                Image.FromFile(path + "Ari Hakadosh.jpg"),
-                Image.FromFile(path + "Churva.jpg"),
-                Image.FromFile(path + "Kever Rochel.jpg"),
+                Image.FromFile(path + "arihakadosh.jpg"),
+                Image.FromFile(path + "churva.jpg"),
+                Image.FromFile(path + "keverrochel.jpg"),
                 Image.FromFile(path + "kosel.jpg"),
-                Image.FromFile(path + "Mearas Hamechpela.jpg"),
-                Image.FromFile(path + "Rabbi Meir Bal Haness.jpg"),
-                Image.FromFile(path + "Rabi Shimon Bar Yochai.jpg"),
-                Image.FromFile(path + "Yam Hamelech.jpg")
+                Image.FromFile(path + "mearashamechpela.jpg"),
+                Image.FromFile(path + "rabbimeirbalhaness.jpg"),
+                Image.FromFile(path + "rabishimonbaryochai.jpg"),
+                Image.FromFile(path + "yamhamelech.jpg")
             };
 
             lstname = new()
             {
-                Image.FromFile(path + "Ari Hakadoshwith name.jpg"),
-                Image.FromFile(path + "Churvawithname.jpg"),
-                Image.FromFile(path + "Kever Rochel with name.jpg"),
-                Image.FromFile(path + "Kosel with name.jpg"),
-                Image.FromFile(path + "Mearas Hamechpela with name.jpg"),
-                Image.FromFile(path + "Rabbi Meir Bal Haness with name.jpg"),
-                Image.FromFile(path + "Rabi Shimon Bar Yochai with name.jpg"),
-                Image.FromFile(path + "Yam Hamelech with name.jpg")
+                Image.FromFile(path + "arihakadoshwithname.jpg"),
+                Image.FromFile(path + "churvawithname.jpg"),
+                Image.FromFile(path + "keverrochelwithname.jpg"),
+                Image.FromFile(path + "koselwithname.jpg"),
+                Image.FromFile(path + "mearashamechpelawithname.jpg"),
+                Image.FromFile(path + "rabbimeirbalhanesswithname.jpg"),
+                Image.FromFile(path + "rabishimonbaryochaiwithname.jpg"),
+                Image.FromFile(path + "yamhamelechwithname.jpg")
             };
 
             btnReset.Click += BtnReset_Click;

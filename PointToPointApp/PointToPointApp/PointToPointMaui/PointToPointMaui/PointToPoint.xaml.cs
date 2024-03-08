@@ -52,7 +52,7 @@ public partial class PointToPoint : ContentPage
 
         ResetButtons();
         game.StartGame();
-        SetupImages();
+        //SetupImages();
     }
 
     private void SetupImages()
@@ -92,85 +92,35 @@ public partial class PointToPoint : ContentPage
         }
     }
 
-    private int FindImageValue(Button btn)
-    {
-        //ZS: Is there a cleaner way to do this code?
+    //private int FindImageValue(Button btn)
+    //{
+    //    //ZS: Is there a cleaner way to do this code?
 
-        //Find button underneath clicked button
-        string btnclickedname = btn.StyleId;
-        string value = Regex.Match(btnclickedname, @"\d+").Value;
-        string gamenamebtn = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? "btnGameImage" + value : gamenamebtn = "btnGameName" + value;
-        Button imagebtn = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? lstgameimage.First(b => b.StyleId == gamenamebtn) : lstgamename.First(b => b.StyleId == gamenamebtn);
-        if (gamenamebtn.Contains("Image"))
-        {
-            btngameimage = imagebtn;
-        }
-        else
-        {
-            btngamename = imagebtn;
-        }
+    //    //Find button underneath clicked button
+    //    string btnclickedname = btn.StyleId;
+    //    string value = Regex.Match(btnclickedname, @"\d+").Value;
+    //    string gamenamebtn = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? "btnGameImage" + value : gamenamebtn = "btnGameName" + value;
+    //    Button imagebtn = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? lstgameimage.First(b => b.StyleId == gamenamebtn) : lstgamename.First(b => b.StyleId == gamenamebtn);
+    //    if (gamenamebtn.Contains("Image"))
+    //    {
+    //        btngameimage = imagebtn;
+    //    }
+    //    else
+    //    {
+    //        btngamename = imagebtn;
+    //    }
 
-        //Find image assigned to button underneath
-        string imagename = imagebtn.ImageSource.ToString();
-        string removefile = "File : ";
-        string jpg = ".jpg";
-        string parsedimagename = imagename.Substring(imagename.IndexOf(removefile) + removefile.Length);
-        parsedimagename = parsedimagename.Substring(0, parsedimagename.Length - jpg.Length);
-        Image gameimage = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? lstimage.First(b => b.StyleId.ToString() == parsedimagename) : lstname.First(b => b.StyleId.ToString() == parsedimagename);
-        int index = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? lstimage.IndexOf(gameimage) : lstname.IndexOf(gameimage);
-        return index;
-    }
-    private void DoTurn(Button btn)
-    {
-        if (lstimagebutton.Exists(b => b == btn))
-        {
-            if(game.ImageCard.CardStatus == CardStatusEnum.notflipped)
-            {
-                game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
-                game.ImageCard.CardStatus = CardStatusEnum.flipped;
-                game.ImageCard.CardValue = FindImageValue(btn);
-                btnimage = btn;
-                btn.IsVisible = false;
-            }
-            else return;
-        }
-        else if (lstnamebutton.Exists(b => b == btn))
-        {
-            if (game.NameCard.CardStatus == CardStatusEnum.notflipped)
-            {
-                game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
-                game.NameCard.CardStatus = CardStatusEnum.flipped;
-                game.NameCard.CardValue = FindImageValue(btn);
-                btnname = btn;
-                btn.IsVisible = false;
+    //    //Find image assigned to button underneath
+    //    string imagename = imagebtn.ImageSource.ToString();
+    //    string removefile = "File : ";
+    //    string jpg = ".jpg";
+    //    string parsedimagename = imagename.Substring(imagename.IndexOf(removefile) + removefile.Length);
+    //    parsedimagename = parsedimagename.Substring(0, parsedimagename.Length - jpg.Length);
+    //    Image gameimage = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? lstimage.First(b => b.StyleId.ToString() == parsedimagename) : lstname.First(b => b.StyleId.ToString() == parsedimagename);
+    //    int index = game.CurrentCard == Game.CurrentCardPlayingEnum.imagecard ? lstimage.IndexOf(gameimage) : lstname.IndexOf(gameimage);
+    //    return index;
+    //}
 
-            }
-            else return;
-        }
-
-        if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped)
-        {
-            game.DetectMatch();
-
-            //Format Button NewTurn
-            if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped && game.numberofsetsmatched < 8)
-            {
-                btnNewTurn.BorderColor = Colors.Crimson;
-                btnNewTurn.BorderWidth = 5;
-                btnNewTurn.TextColor = Colors.LightSkyBlue;
-            }
-            if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped && game.numberofsetsmatched == 8)
-            {
-                btnStart.BorderColor = Colors.Crimson;
-                btnStart.BorderWidth = 5;
-                btnStart.TextColor = Colors.LightSkyBlue;
-            }
-
-            UpdateMap();
-        }
-
-
-    }
 
     private void UpdateMap()
     {
@@ -233,15 +183,91 @@ public partial class PointToPoint : ContentPage
         ResetNewTurnButton();
     }
 
-    private void BtnPoint_Click(object? sender, EventArgs e)
+    private void DoTurn(Button btn)
     {
-        if (sender is Button btn)
+        //if (lstimagebutton.Exists(b => b == btn))
+        //{
+        //    if (game.ImageCard.CardStatus == CardStatusEnum.notflipped)
+        //    {
+        //        game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
+        //        game.ImageCard.CardStatus = CardStatusEnum.flipped;
+        //        game.ImageCard.CardValue = FindImageValue(btn);
+        //        btnimage = btn;
+        //        btn.IsVisible = false;
+        //    }
+        //    else return;
+        //}
+        //else if (lstnamebutton.Exists(b => b == btn))
+        //{
+        //    if (game.NameCard.CardStatus == CardStatusEnum.notflipped)
+        //    {
+        //        game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
+        //        game.NameCard.CardStatus = CardStatusEnum.flipped;
+        //        game.NameCard.CardValue = FindImageValue(btn);
+        //        btnname = btn;
+        //        btn.IsVisible = false;
+
+        //    }
+        //    else return;
+        //}
+
+        if (game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped)
+        {
+            game.DetectMatch();
+
+            //Format Button NewTurn
+            if (game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped && game.numberofsetsmatched < 8)
+            {
+                btnNewTurn.BorderColor = Colors.Crimson;
+                btnNewTurn.BorderWidth = 5;
+                btnNewTurn.TextColor = Colors.LightSkyBlue;
+            }
+            if (game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped && game.numberofsetsmatched == 8)
+            {
+                btnStart.BorderColor = Colors.Crimson;
+                btnStart.BorderWidth = 5;
+                btnStart.TextColor = Colors.LightSkyBlue;
+            }
+
+            UpdateMap();
+        }
+
+
+    }
+    private int GetImageValue()
+    {
+        int n = 0;
+        return n;
+    }
+    private void DoTurn1(Button btn)
+    {
         {
             if (game.GameStatus == Game.GameStatusEnum.playing)
             {
-                DoTurn(btn);
+                if (lstimagebutton.Exists(b => b == btn))
+                {
+                    game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
+                    game.Turn(lstimagebutton.IndexOf(btn));
+                    if (game.revealimage == true)
+                    {
+                        Image newimage = lstimage[game.ImageCard.CardValue];
+                        btn.ImageSource = newimage.Source;
+                        game.revealimage = false;
+                    }
+                }
+                else if (lstnamebutton.Exists(b => b == btn))
+                {
+                    game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
+                    game.Turn(lstnamebutton.IndexOf(btn));
+                    Image newimage = lstimage[game.NameCard.CardValue];
+                    btn.ImageSource = newimage.Source;
+                }
             }
         }
+    }
+    private void BtnPoint_Click(object? sender, EventArgs e)
+    {
+        DoTurn1((Button)sender);
     }
 
 

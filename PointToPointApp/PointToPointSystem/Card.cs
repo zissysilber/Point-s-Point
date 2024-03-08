@@ -5,11 +5,20 @@ namespace PointToPointSystem
 {
 
     public enum CardStatusEnum { flipped, notflipped }
+    public enum CardTypeEnum { image, name }
     public class Card : INotifyPropertyChanged
     {
+
         private int _cardvalue;
-         public CardStatusEnum cardstatus;
-        public int CardValue { get => _cardvalue; set { _cardvalue = value; } }
+        public CardStatusEnum cardstatus;
+        public int CardValue
+        {
+            get => _cardvalue;
+            set
+            {
+                _cardvalue = value;
+            }
+        }
 
         public CardStatusEnum CardStatus
         {
@@ -19,6 +28,9 @@ namespace PointToPointSystem
                 cardstatus = value;
             }
         }
+        public CardTypeEnum CardType { get; set; }
+
+        public string ImageName { get; set; } = "";
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
