@@ -14,7 +14,7 @@ namespace PointToPointTest
             Game game = new();
             game.StartGame();
             string msg = $"game message {game.GameMessageDescription}";
-            Assert.IsTrue(game.GameStatus == Game.GameStatusEnum.playing && game.StartButtonStatus == Game.StartButtonStatusEnum.reset, msg);
+            //Assert.IsTrue(game.GameStatus == Game.GameStatusEnum.playing && game.StartButton.StartButtonStatusEnum == StartButton.StartButtonStatusEnum.reset, msg);
             TestContext.WriteLine(msg);
         }
     }

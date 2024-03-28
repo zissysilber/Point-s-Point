@@ -10,7 +10,7 @@ namespace PointToPointSystem
     {
 
         private int _cardvalue;
-        public CardStatusEnum cardstatus;
+        public CardStatusEnum CardStatus { get; set; }
         public int CardValue
         {
             get => _cardvalue;
@@ -20,17 +20,9 @@ namespace PointToPointSystem
             }
         }
 
-        public CardStatusEnum CardStatus
-        {
-            get => cardstatus;
-            set
-            {
-                cardstatus = value;
-            }
-        }
-        public CardTypeEnum CardType { get; set; }
-
         public string ImageName { get; set; } = "";
+
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

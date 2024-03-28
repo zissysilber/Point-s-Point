@@ -37,25 +37,24 @@
         x:Name="MainGrid" ColumnDefinitions="2.5*,*" RowDefinitions="Auto,Auto, *"  Margin="30,10,10,10">
         <Image x:Name="blankname" Source="blankname.jpg" IsVisible="false"/>
         <Image x:Name="blankpoint" Source="blankpoint.jpg" IsVisible="false"/>
-       
+
         <Grid x:Name="TopRowGrid" ColumnDefinitions="230,*,225" ColumnSpan="1" RowDefinitions="*,*">
 
             <Button x:Name="btnStart"
-                    
                     Grid.Row="0" 
                     Text="{Binding StartButtonDescription}" 
                     FontSize="Small"
-                    Clicked="btnStart_Clicked" />
-            
-              <Button x:Name="btnNewTurn" 
-                     
+                    TextColor="White"
+                    Clicked="btnStart_Clicked" 
+                    BorderColor="{Binding BorderColorMaui}"/>
+
+            <Button x:Name="btnNewTurn" 
                     Grid.Row="1"
                     Text="New Turn" 
                     FontSize="Small"
-                    Clicked="btnNewTurn_Clicked" />  
-  
-                    <Label
-                    x:Name="lblMessage"
+                    Clicked="btnNewTurn_Clicked" />
+
+            <Label  x:Name="lblMessage"
                     Grid.Column="1" Grid.Row="0"
                     Margin="2,2,10,2"
                     Text="{Binding GameMessageDescription}"
@@ -84,14 +83,6 @@
             <Image x:Name="rabishimonbaryochai" Source="rabishimonbaryochai.jpg" Aspect="AspectFit" IsVisible="false"/>
             <Image x:Name="yamhamelech" Source="yamhamelech.jpg" Aspect="AspectFit" IsVisible="false"/>
 
-            <Button x:Name="btnGameImage1" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0" />
-            <Button x:Name="btnGameImage2" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
-            <Button x:Name="btnGameImage3" Grid.Column="3" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
-            <Button x:Name="btnGameImage4" Grid.Column="4" Grid.Row="0" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
-            <Button x:Name="btnGameImage5" Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
-            <Button x:Name="btnGameImage6" Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
-            <Button x:Name="btnGameImage7" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
-            <Button x:Name="btnGameImage8" Grid.Column="4" Grid.Row="1" Style="{StaticResource Key=btnImage}" ZIndex="0"/>
 
             <Button x:Name="btnImage1" Grid.Column="1" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
             <Button x:Name="btnImage2" Grid.Column="2" Grid.Row="0" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg" ZIndex="1" />
@@ -111,14 +102,6 @@
             <Image x:Name="rabishimonbaryochaiwithname" Source="rabishimonbaryochaiwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
             <Image x:Name="yamhamelechwithname" Source="yamhamelechwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
 
-            <Button x:Name="btnGameName9" Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnName}"  ZIndex="0"/>
-            <Button x:Name="btnGameName10" Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnName}" ZIndex="0"/>
-            <Button x:Name="btnGameName11" Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=btnName}" ZIndex="0"/>
-            <Button x:Name="btnGameName12" Grid.Column="4" Grid.Row="2" Style="{StaticResource Key=btnName}" ZIndex="0"/>
-            <Button x:Name="btnGameName13" Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
-            <Button x:Name="btnGameName14" Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
-            <Button x:Name="btnGameName15" Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
-            <Button x:Name="btnGameName16" Grid.Column="4" Grid.Row="3" Style="{StaticResource Key=btnName}" ZIndex="0"/>
 
             <Button x:Name="btnName9" Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnName}"  Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>
             <Button x:Name="btnName10" Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg"/>

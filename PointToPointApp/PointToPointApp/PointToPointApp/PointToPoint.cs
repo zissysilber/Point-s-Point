@@ -1,4 +1,5 @@
-﻿using PointToPointSystem;
+﻿using Microsoft.Maui.Graphics;
+using PointToPointSystem;
 using System.Data;
 using Image = System.Drawing.Image;
 
@@ -85,9 +86,8 @@ namespace PointToPointApp
             };
             lblMessageBar.DataBindings.Add("Text", game, "GameMessageDescription");
             btnReset.DataBindings.Add("Text", game, "StartButtonDescription");
+
         }
-
-
 
         private void AssignImage()
         {
@@ -123,37 +123,86 @@ namespace PointToPointApp
             }
         }
 
-        private void DoTurn(Button btn)
-        {
-            if (lstimagebutton.Exists(b => b == btn))
-            {
-                if(game.ImageCard.CardStatus == CardStatusEnum.notflipped)
-                {
-                    game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
-                    game.ImageCard.CardStatus = CardStatusEnum.flipped;
-                    game.ImageCard.CardValue = lstimage.IndexOf(btn.BackgroundImage);
-                    btnimage = btn;
-                    btn.Image = null;
-                }
-                else return;
-            }
-            else if (lstnamebutton.Exists(b => b == btn))
-            {
-                if (game.NameCard.CardStatus == CardStatusEnum.notflipped)
-                {
-                    game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
-                    game.NameCard.CardStatus = CardStatusEnum.flipped;
-                    game.NameCard.CardValue = lstname.IndexOf(btn.BackgroundImage);
-                    btnname = btn;
-                    btn.Image = null;
-                }
-                else return;
-            }
-            if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped)
-            {
-                game.DetectMatch();
-                UpdateMap();
-            }
+        //private void DoTurn(Button btn)
+        //{
+        //    if (game.GameStatus == Game.GameStatusEnum.playing)
+        //    {
+        //        if (lstimagebutton.Exists(b => b == btn))
+        //        {
+        //            game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
+        //            game.Turn(lstimagebutton.IndexOf(btn));
+        //            if (game.revealimage == true)
+        //            {
+        //                Image newimage = lstimage[game.ImageCard.CardValue];
+        //                btn.BackgroundImage = newimage;
+        //                game.revealimage = false;
+        //                btnimage = btn;
+        //            }
+        //        }
+        //        else if (lstnamebutton.Exists(b => b == btn))
+        //        {
+        //            game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
+        //            game.Turn(lstnamebutton.IndexOf(btn));
+        //            if (game.revealimage == true)
+        //            {
+        //                Image newimage = lstname[game.NameCard.CardValue];
+        //                btn.ImageSource = newimage.Source;
+        //                game.revealimage = false;
+        //                btnname = btn;
+        //            }
+        //            if (game.GameStatus == Game.GameStatusEnum.finishedplaying)
+        //            {
+        //                btnNewTurn.IsEnabled = false;
+        //            }
+        //        }
+        //    }
+
+        //    //Format Button NewTurn
+        //    if (game.imagecardflipped == true && game.namecardflipped == true && game.numberofsetsmatched < 8)
+        //    {
+        //        btnNewTurn.BorderColor = Colors.Crimson;
+        //        btnNewTurn.BorderWidth = 5;
+        //    }
+        //    if (game.imagecardflipped == true && game.namecardflipped == true && game.numberofsetsmatched == 8)
+        //    {
+        //        //btnStart.BorderColor = Colors.Crimson;
+        //        btnStart.BorderWidth = 5;
+        //    }
+
+        //    if (game.matchedset == true)
+        //    {
+        //        UpdateMap();
+        //    }
+
+            //if (lstimagebutton.Exists(b => b == btn))
+            //{
+            //    if(game.ImageCard.CardStatus == CardStatusEnum.notflipped)
+            //    {
+            //        game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
+            //        game.ImageCard.CardStatus = CardStatusEnum.flipped;
+            //        game.ImageCard.CardValue = lstimage.IndexOf(btn.BackgroundImage);
+            //        btnimage = btn;
+            //        btn.Image = null;
+            //    }
+            //    else return;
+            //}
+            //else if (lstnamebutton.Exists(b => b == btn))
+            //{
+            //    if (game.NameCard.CardStatus == CardStatusEnum.notflipped)
+            //    {
+            //        game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
+            //        game.NameCard.CardStatus = CardStatusEnum.flipped;
+            //        game.NameCard.CardValue = lstname.IndexOf(btn.BackgroundImage);
+            //        btnname = btn;
+            //        btn.Image = null;
+            //    }
+            //    else return;
+            //}
+            //if(game.ImageCard.CardStatus == CardStatusEnum.flipped && game.NameCard.CardStatus == CardStatusEnum.flipped)
+            //{
+            //    game.DetectMatch();
+            //    UpdateMap();
+            //}
 
         }
         private void UpdateMap()
@@ -220,13 +269,14 @@ namespace PointToPointApp
         }
         private void BtnPoint_Click(object? sender, EventArgs e)
         {
-            if (sender is Button btn)
-            {
-                if (game.GameStatus == Game.GameStatusEnum.playing)
-                {
-                    DoTurn(btn);
-                }
-            }
+            DoTurn((Button)sender);
+            //if (sender is Button btn)
+            //{
+            //    if (game.GameStatus == Game.GameStatusEnum.playing)
+            //    {
+            //        DoTurn(btn);
+            //    }
+            //}
         }
         private void BtnReset_Click(object? sender, EventArgs e)
         {

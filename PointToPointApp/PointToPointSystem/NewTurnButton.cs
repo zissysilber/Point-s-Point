@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace PointToPointSystem
 {
-    public class Image
+    public class NewTurnButton
     {
+
     }
 }

@@ -1,59 +1,30 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 using System.Runtime.CompilerServices;
-using static PointToPointSystem.Card;
 
 namespace PointToPointSystem
 {
     public class Game : INotifyPropertyChanged
     {
         public enum GameStatusEnum { playing, beginplaying, notplaying, finishedplaying }
-
         public enum CurrentCardPlayingEnum { none, imagecard, namecard }
-        public enum StartButtonStatusEnum { start, reset }
-
-        public bool revealimage { get; set; } = false;
-
-        public bool matchedset
-        {
-            get => _matchedset; set
-            {
-                _matchedset = value;
-                this.InvokePropertyChanged();
-
-            }
-        }
-        public int matchingsetnum
-        {
-            get => _matchingset; set
-            {
-                _matchingset = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged("GameMessageDescription");
-            }
-        }
-
         List<string> lstmatchingsetmessage;
         List<string> lstimagecardimagename;
         List<string> lstnamecardimagename;
-
-
+        List<List<Card>> lstallcards;
         GameStatusEnum _gamestatus = GameStatusEnum.notplaying;
-        StartButtonStatusEnum _startbuttonstatus = StartButtonStatusEnum.start;
         CurrentCardPlayingEnum _currentcard = CurrentCardPlayingEnum.none;
         private Card _imagecard;
         private Card _namecard;
         private bool _matchedset;
         private int _matchingset;
         public int numberofsetsmatched = 0;
-
-
-        Card card = new();
+        System.Drawing.Color _bordercolor;
 
         public Game()
         {
             ImageCard = new();
             NameCard = new();
+            StartButton = new();
             lstmatchingsetmessage = new()
             {
                 "The Ari Hakadosh is buried in Tzfas.",
@@ -65,7 +36,7 @@ namespace PointToPointSystem
                 "The kever of Rabi Shimon Bar Yochai is in Meron.",
                 "The salt in Yam Hamelech makes everything float in the water."
             };
-            lstimagecardimagename = new() 
+            lstimagecardimagename = new()
             {
                 "arihakadosh.jpg",
                 "churva.jpg",
@@ -97,8 +68,8 @@ namespace PointToPointSystem
             {
                 this.NameCardList.Add(new Card());
             }
+            lstallcards = new() { ImageCardList, NameCardList };
         }
-
 
         public GameStatusEnum GameStatus
         {
@@ -111,6 +82,21 @@ namespace PointToPointSystem
             }
         }
 
+        public bool imagecardflipped { get; set; }
+        public bool namecardflipped { get; set; }
+        public bool revealimage { get; set; }
+
+        public int matchingsetnum
+        {
+            get => _matchingset;
+            set
+            {
+                _matchingset = value;
+                this.InvokePropertyChanged();
+                this.InvokePropertyChanged("GameMessageDescription");
+            }
+        }
+        public StartButton StartButton { get; set; }
         public List<Card> NameCardList { get; private set; } = new();
         public List<Card> ImageCardList { get; private set; } = new();
         public Card ImageCard
@@ -121,8 +107,8 @@ namespace PointToPointSystem
                 _imagecard = value;
                 this.InvokePropertyChanged();
             }
-        }        
-        
+        }
+
         public Card NameCard
         {
             get => _namecard;
@@ -133,17 +119,16 @@ namespace PointToPointSystem
             }
         }
 
-        public CardStatusEnum FlippedCardStatus
+        public bool matchedset
         {
-            get => card.cardstatus;
+            get => _matchedset;
             set
             {
-                card.cardstatus = value;
+                _matchedset = value;
                 this.InvokePropertyChanged();
                 this.InvokePropertyChanged("GameMessageDescription");
             }
         }
-
 
         public CurrentCardPlayingEnum CurrentCard
         {
@@ -156,16 +141,6 @@ namespace PointToPointSystem
             }
         }
 
-        public StartButtonStatusEnum StartButtonStatus
-        {
-            get => _startbuttonstatus;
-            set
-            {
-                _startbuttonstatus = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged("StartButtonDescription");
-            }
-        }
         public string GameMessageDescription
         {
             get
@@ -177,30 +152,30 @@ namespace PointToPointSystem
                 }
                 else if (this.GameStatus == GameStatusEnum.playing)
                 {
-                    if (CurrentCard == CurrentCardPlayingEnum.imagecard && NameCard.CardStatus == CardStatusEnum.notflipped)
+                    if (this.CurrentCard == CurrentCardPlayingEnum.imagecard && namecardflipped == false)
                     {
                         message = "Can you find the name of this destination?";
                     }
-                    else if (CurrentCard == CurrentCardPlayingEnum.namecard && ImageCard.CardStatus == CardStatusEnum.notflipped)
+                    else if (this.CurrentCard == CurrentCardPlayingEnum.namecard && imagecardflipped == false)
                     {
                         message = "Can you find the picture of this destination?";
                     }
-                    else if (ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus == CardStatusEnum.flipped && matchedset == true && numberofsetsmatched < 8)
+                    else if (imagecardflipped == true && namecardflipped == true && matchedset == true && numberofsetsmatched < 8)
                     {
                         message = lstmatchingsetmessage[matchingsetnum] + "\r\n Click NEW TURN to discover more!";
 
                     }
-                    else if (ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus == CardStatusEnum.flipped && matchedset == true && numberofsetsmatched == 8)
+                    else if (imagecardflipped == true && namecardflipped == true && matchedset == true && numberofsetsmatched == 8)
                     {
                         message = lstmatchingsetmessage[matchingsetnum] + "\r\n Congratulations!  You've matched all the pictures!";
 
                     }
-                    else if (ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus == CardStatusEnum.flipped && matchedset == false)
+                    else if (imagecardflipped == true && namecardflipped == true && matchedset == false)
                     {
                         message = "Oops!  Click NEW TURN for another chance.";
 
                     }
-                    else if (CurrentCard == CurrentCardPlayingEnum.none && NameCard.CardStatus == CardStatusEnum.notflipped && ImageCard.CardStatus == CardStatusEnum.notflipped)
+                    else if (this.CurrentCard == CurrentCardPlayingEnum.none && namecardflipped == false && imagecardflipped == false)
                     {
                         message = "Where will we travel next?";
                     }
@@ -218,23 +193,12 @@ namespace PointToPointSystem
             }
         }
 
-        public string StartButtonDescription
-        {
-            get
-            {
-                string message = "START!";
-                if (StartButtonStatus == StartButtonStatusEnum.reset)
-                {
-                    message = "Start Again!";
-                }
-                return message;
-            }
-            set { }
-        }
+
         public void StartGame()
         {
             ResetValues();
-            this.StartButtonStatus = StartButtonStatusEnum.reset;
+            
+            StartButton.StartButtonStatus = StartButton.StartButtonStatusEnum.reset;
             this.GameStatus = GameStatusEnum.beginplaying;
             SetupImages();
         }
@@ -243,67 +207,60 @@ namespace PointToPointSystem
         {
             if (CurrentCard == CurrentCardPlayingEnum.imagecard)
             {
-                if (ImageCard.CardStatus == CardStatusEnum.notflipped)
+                if (imagecardflipped == false)
                 {
                     Card card = this.ImageCardList[cardspot];
                     ImageCard = card;
-                    ImageCard.CardStatus = CardStatusEnum.flipped;
+                    imagecardflipped = true;
                     revealimage = true;
                 }
             }
 
-             else if (CurrentCard == CurrentCardPlayingEnum.namecard)
+            else if (CurrentCard == CurrentCardPlayingEnum.namecard)
             {
-                if (NameCard.CardStatus == CardStatusEnum.notflipped)
+                if (namecardflipped == false)
                 {
                     Card card = this.NameCardList[cardspot];
                     NameCard = card;
-                    NameCard.CardStatus = CardStatusEnum.flipped;
+                    namecardflipped = true;
                     revealimage = true;
                 }
             }
-           
 
-            if (ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus == CardStatusEnum.flipped)
+            if (imagecardflipped == true && namecardflipped == true)
             {
                 DetectMatch();
-                
-                ////Format Button NewTurn
-                //if (ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus == CardStatusEnum.flipped && numberofsetsmatched < 8)
-                //{
-                //    btnNewTurn.BorderColor = Colors.Crimson;
-                //    btnNewTurn.BorderWidth = 5;
-                //    btnNewTurn.TextColor = Colors.LightSkyBlue;
-                //}
-                //if (ImageCard.CardStatus == CardStatusEnum.flipped && NameCard.CardStatus == CardStatusEnum.flipped && numberofsetsmatched == 8)
-                //{
-                //    btnStart.BorderColor = Colors.Crimson;
-                //    btnStart.BorderWidth = 5;
-                //    btnStart.TextColor = Colors.LightSkyBlue;
-                //}
-
-                //UpdateMap();
             }
 
+            if (imagecardflipped == true && namecardflipped == true && numberofsetsmatched < 8)
+            {
+                //btnNewTurn.BorderColor = Colors.Crimson;
+                //btnNewTurn.BorderWidth = 5;
+            }
+            if (imagecardflipped == true && namecardflipped == true && numberofsetsmatched == 1)
+            {
+                StartButton.BorderColor = StartButton.ButtonHighlightColor;
+                //StartButton.BorderWidth = 5;
+            }
         }
 
         private void SetupImages()
-        { 
-            List<string> usedimagelist = new();List<string> usednamelist = new();
+        {
+            List<string> usedimagelist = new();
+            List<string> usednamelist = new();
             Random rnd = new();
-           
+
             foreach (Card c in ImageCardList)
             {
                 while (c.ImageName == "")
                 {
                     string newimage = lstimagecardimagename[rnd.Next(0, lstimagecardimagename.Count())];
-                   
+
                     if (usedimagelist.Where(i => i == newimage).Count() == 0)
                     {
                         usedimagelist.Add(newimage);
                         c.ImageName = newimage;
                         c.CardValue = lstimagecardimagename.IndexOf(newimage);
-                        c.CardStatus = CardStatusEnum.notflipped;
                     }
                 }
             }
@@ -311,16 +268,12 @@ namespace PointToPointSystem
             {
                 while (c.ImageName == "")
                 {
-                    
                     string newimage = lstnamecardimagename[rnd.Next(0, lstnamecardimagename.Count())];
-                    
                     if (usednamelist.Where(i => i == newimage).Count() == 0)
                     {
                         usednamelist.Add(newimage);
                         c.ImageName = newimage;
-                        c.CardType = CardTypeEnum.name;
                         c.CardValue = lstnamecardimagename.IndexOf(newimage);
-                        c.CardStatus = CardStatusEnum.notflipped;
                     }
                 }
             }
@@ -330,18 +283,25 @@ namespace PointToPointSystem
         {
             if (ImageCard.CardValue == NameCard.CardValue)
             {
-                matchedset = true;
                 numberofsetsmatched++;
+                matchedset = true;
                 matchingsetnum = ImageCard.CardValue;
+                if (numberofsetsmatched == 8)
+                {
+                    GameStatus = GameStatusEnum.finishedplaying;
+                }
             }
+            else matchedset = false;
         }
 
         public void EndTurn()
         {
-            ImageCard.CardStatus = CardStatusEnum.notflipped;
-            NameCard.CardStatus = CardStatusEnum.notflipped;
+            imagecardflipped = false;
+            namecardflipped = false;
             CurrentCard = CurrentCardPlayingEnum.none;
             matchedset = false;
+            imagecardflipped = false;
+            namecardflipped = false;
 
         }
 
@@ -352,10 +312,11 @@ namespace PointToPointSystem
         private void ResetValues()
         {
             GameStatus = GameStatusEnum.notplaying;
-            ImageCard.CardStatus = CardStatusEnum.notflipped;
-            NameCard.CardStatus = CardStatusEnum.notflipped;
+            imagecardflipped = false;
+            namecardflipped = false;
             CurrentCard = CurrentCardPlayingEnum.none;
             numberofsetsmatched = 0;
+            lstallcards.ForEach(lst => lst.ForEach(crd => crd.ImageName = ""));
         }
 
 
@@ -364,5 +325,8 @@ namespace PointToPointSystem
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
+
+
+
     }
 }
