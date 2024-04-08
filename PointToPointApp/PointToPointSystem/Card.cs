@@ -8,9 +8,10 @@ namespace PointToPointSystem
     public enum CardTypeEnum { image, name }
     public class Card : INotifyPropertyChanged
     {
+        private bool _isvisible = false;
+        private int _cardvalue  ;
+        private string _imagename = "";
 
-        private int _cardvalue;
-        public CardStatusEnum CardStatus { get; set; }
         public int CardValue
         {
             get => _cardvalue;
@@ -20,9 +21,25 @@ namespace PointToPointSystem
             }
         }
 
-        public string ImageName { get; set; } = "";
+        public string ImageName
+        {
+            get => _imagename;
+            set
+            {
+                _imagename = value;
+                InvokePropertyChanged();
+            }
+        }
 
-
+        public bool IsVisible
+        {
+            get => _isvisible;
+            set
+            {
+                _isvisible = value;
+                InvokePropertyChanged();
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -30,8 +47,5 @@ namespace PointToPointSystem
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
-
-
-
     }
 }

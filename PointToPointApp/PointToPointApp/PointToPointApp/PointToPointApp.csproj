@@ -9,45 +9,95 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Ari Hakadosh.jpg" />
-    <None Remove="Images\Ari Hakadoshwith name.jpg" />
-    <None Remove="Images\Blankname.jpg" />
+    <None Remove="Images\arihakadosh.jpg" />
+    <None Remove="Images\arihakadoshwithname.jpg" />
+    <None Remove="Images\blankname.jpg" />
     <None Remove="Images\blankpoint.jpg" />
-    <None Remove="Images\Churva.jpg" />
+    <None Remove="Images\churva.jpg" />
     <None Remove="Images\Churvawithname.jpg" />
-    <None Remove="Images\Colored Map of Israel.jpg" />
-    <None Remove="Images\Kever Rochel with name.jpg" />
-    <None Remove="Images\Kever Rochel.jpg" />
-    <None Remove="Images\Kosel with name.jpg" />
+    <None Remove="Images\coloredmapofisrael.jpg" />
+    <None Remove="Images\keverrochel.jpg" />
+    <None Remove="Images\keverrochelwithname.jpg" />
     <None Remove="Images\kosel.jpg" />
+    <None Remove="Images\koselwithname.jpg" />
     <None Remove="Images\location_pin_navigation_destination_maps_icon_131239.png" />
-    <None Remove="Images\Mearas Hamechpela with name.jpg" />
-    <None Remove="Images\Mearas Hamechpela.jpg" />
-    <None Remove="Images\Rabbi Meir Bal Haness with name.jpg" />
-    <None Remove="Images\Rabbi Meir Bal Haness.jpg" />
-    <None Remove="Images\Rabi Shimon Bar Yochai with name.jpg" />
-    <None Remove="Images\Rabi Shimon Bar Yochai.jpg" />
-    <None Remove="Images\Yam Hamelech with name.jpg" />
-    <None Remove="Images\Yam Hamelech.jpg" />
+    <None Remove="Images\mearas hamechpelawith name.jpg" />
+    <None Remove="Images\mearas hamechpelawithname.jpg" />
+    <None Remove="Images\mearashamechpela.jpg" />
+    <None Remove="Images\mearashamechpelawithname.jpg" />
+    <None Remove="Images\rabbimeirbal hanesswith name.jpg" />
+    <None Remove="Images\rabbimeirbalhaness.jpg" />
+    <None Remove="Images\rabbimeirbalhanesswith name.jpg" />
+    <None Remove="Images\rabbimeirbalhanesswithname.jpg" />
+    <None Remove="Images\rabishimonbaryochai.jpg" />
+    <None Remove="Images\rabishimonbaryochaiwithname.jpg" />
+    <None Remove="Images\yamhamelech withname.jpg" />
+    <None Remove="Images\yamhamelech.jpg" />
+    <None Remove="Images\yamhamelechwithname.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\Blankname.jpg">
+    <Content Include="Images\blankname.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\arihakadosh.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\arihakadoshwithname.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\blankpoint.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Images\Churva.jpg">
+    <Content Include="Images\churva.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\Churvawithname.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\coloredmapofisrael.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\keverrochel.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\keverrochelwithname.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\kosel.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\koselwithname.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Images\location_pin_navigation_destination_maps_icon_131239.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\mearashamechpela.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\mearashamechpelawithname.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\rabbimeirbalhaness.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\rabbimeirbalhanesswithname.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\rabishimonbaryochai.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\rabishimonbaryochaiwithname.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\yamhamelech.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\yamhamelechwithname.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

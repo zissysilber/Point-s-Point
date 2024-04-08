@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 namespace PointToPointSystem
 {
 
-
     public class StartButton : INotifyPropertyChanged
     {
 
@@ -54,14 +53,6 @@ namespace PointToPointSystem
             get => this.ConvertToMauiColor(this.BorderColor);
         }
 
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void InvokePropertyChanged([CallerMemberName] string propertyname = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
-        }
-
-
         private Microsoft.Maui.Graphics.Color ConvertToMauiColor(System.Drawing.Color systemColor)
         {
             float red = systemColor.R / 255f;
@@ -70,6 +61,12 @@ namespace PointToPointSystem
             float alpha = systemColor.A / 255f;
 
             return new Microsoft.Maui.Graphics.Color(red, green, blue, alpha);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        private void InvokePropertyChanged([CallerMemberName] string propertyname = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
     }
 }

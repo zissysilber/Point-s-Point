@@ -63,16 +63,6 @@ namespace PointToPointApp.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Ari_Hakadosh {
-            get {
-                object obj = ResourceManager.GetObject("Ari Hakadosh", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Blankname {
             get {
                 object obj = ResourceManager.GetObject("Blankname", resourceCulture);
