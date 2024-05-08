@@ -5,7 +5,7 @@ namespace PointToPointSystem
 {
     public class MapPin : INotifyPropertyChanged
     {
-        private bool _isvisible = false;
+        private bool _isvisible = true;
         public bool IsVisible
         {
             get => _isvisible;

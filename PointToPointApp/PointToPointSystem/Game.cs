@@ -5,21 +5,22 @@ namespace PointToPointSystem
 {
     public class Game : INotifyPropertyChanged
     {
-        public enum GameStatusEnum { playing, beginplaying, notplaying, finishedplaying }
+        public enum GameStatusEnum { playing, notplaying, finishedplaying }
         public enum CurrentCardPlayingEnum { none, imagecard, namecard }
         List<string> lstmatchingsetmessage;
         List<string> lstimages;
         List<List<Card>> lstallcards;
-        
+
         GameStatusEnum _gamestatus = GameStatusEnum.notplaying;
         CurrentCardPlayingEnum _currentcard = CurrentCardPlayingEnum.none;
+
         private Card _imagecard;
         private Card _namecard;
         private bool _matchedset;
         private int _matchingset;
         public int numberofsetsmatched = 0;
 
-    public Game()
+        public Game()
         {
             ImageCard = new();
             NameCard = new();
@@ -64,10 +65,10 @@ namespace PointToPointSystem
         public StartButton StartButton { get; set; }
         public NewTurnButton NewTurnButton { get; set; }
 
-        public List<Card> NameCardList { get;  set; } = new();
-        public List<Card> ImageCardList { get; private set; } = new();
-        public List<MapPin> MapPinList { get; private set; } = new();
-        public List<MapPin> MapPinLabelList { get; private set; } = new();
+        public List<Card> NameCardList { get; set; } = new();
+        public List<Card> ImageCardList { get; set; } = new();
+        public List<MapPin> MapPinList { get; set; } = new();
+        public List<MapPin> MapPinLabelList { get; set; } = new();
         public Card ImageCard
         {
             get => _imagecard;
@@ -87,36 +88,17 @@ namespace PointToPointSystem
                 this.InvokePropertyChanged();
             }
         }
-        public bool matchedset
-        {
-            get => _matchedset;
-            set
-            {
-                _matchedset = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged("GameMessageDescription");
-            }
-        }
+
         public bool imagecardflipped { get; set; }
         public bool namecardflipped { get; set; }
         public bool revealimage { get; set; }
+
         public GameStatusEnum GameStatus
         {
             get => _gamestatus;
             set
             {
                 _gamestatus = value;
-                this.InvokePropertyChanged();
-                this.InvokePropertyChanged("GameMessageDescription");
-            }
-        }
-
-        public int matchingsetnum
-        {
-            get => _matchingset;
-            set
-            {
-                _matchingset = value;
                 this.InvokePropertyChanged();
                 this.InvokePropertyChanged("GameMessageDescription");
             }
@@ -131,7 +113,28 @@ namespace PointToPointSystem
                 this.InvokePropertyChanged("GameMessageDescription");
             }
         }
-        
+        public bool matchedset
+        {
+            get => _matchedset;
+            set
+            {
+                _matchedset = value;
+                this.InvokePropertyChanged();
+                this.InvokePropertyChanged("GameMessageDescription");
+            }
+        }
+        public int matchingsetnum
+        {
+            get => _matchingset;
+            set
+            {
+                _matchingset = value;
+                this.InvokePropertyChanged();
+                this.InvokePropertyChanged("GameMessageDescription");
+            }
+        }
+
+
         public string GameMessageDescription
         {
             get
@@ -140,6 +143,10 @@ namespace PointToPointSystem
                 if (this.GameStatus == GameStatusEnum.notplaying)
                 {
                     message = "Let's Explore Eretz Yisrael!\r\nClick START to begin the game.";
+                }
+                else if (this.GameStatus == GameStatusEnum.playing && this.CurrentCard == CurrentCardPlayingEnum.none)
+                {
+                    message = "Click a Button!";
                 }
                 else if (this.GameStatus == GameStatusEnum.playing)
                 {
@@ -170,11 +177,6 @@ namespace PointToPointSystem
                 {
                     message = lstmatchingsetmessage[matchingsetnum] + "\r\n Congratulations!  You've matched all the pictures!";
                 }
-                else if (this.GameStatus == GameStatusEnum.beginplaying)
-                {
-                    message = "Click a Button!";
-                    this.GameStatus = GameStatusEnum.playing;
-                }
                 return message;
             }
         }
@@ -187,11 +189,11 @@ namespace PointToPointSystem
 
             StartButton.StartButtonStatus = StartButton.StartButtonStatusEnum.reset;
             NewTurnButton.IsEnabled = true;
-            this.GameStatus = GameStatusEnum.beginplaying;
+            this.GameStatus = GameStatusEnum.playing;
             SetupImages();
         }
 
-        private void SetupImages()
+        public void SetupImages()
         {
             List<string> usedimagelist = new();
             List<string> usednamelist = new();
@@ -293,7 +295,7 @@ namespace PointToPointSystem
         {
             if (imagecardflipped == true && namecardflipped == true)
             {
-                if(this.matchedset == true)
+                if (this.matchedset == true)
                 {
                     NameCard.IsVisible = false;
                     ImageCard.IsVisible = false;

@@ -8,7 +8,7 @@ namespace PointToPointSystem
     public enum CardTypeEnum { image, name }
     public class Card : INotifyPropertyChanged
     {
-        private bool _isvisible = false;
+        private bool _isvisible = true;
         private int _cardvalue  ;
         private string _imagename = "";
 

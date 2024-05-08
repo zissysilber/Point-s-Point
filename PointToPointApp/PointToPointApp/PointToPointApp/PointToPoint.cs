@@ -24,12 +24,29 @@ namespace PointToPointApp
         public frmPointToPoint()
         {
             InitializeComponent();
+            StartButton startbutton = game.StartButton;
+            NewTurnButton newturnbutton = game.NewTurnButton;
+
+            lblMessageBar.DataBindings.Add("Text", game, "GameMessageDescription");
+            btnReset.DataBindings.Add("Text", startbutton, "StartButtonDescription");
+            btnNewTurn.DataBindings.Add("Enabled", newturnbutton, "IsEnabled");
+
 
             lstimagebutton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8 };
-            lstimagebutton.ForEach(b => b.Click += BtnPoint_Click);
+            lstimagebutton.ForEach(b =>
+            {
+                b.Click += BtnPoint_Click;
+                Card card = game.ImageCardList[lstimagebutton.IndexOf(b)];
+                b.DataBindings.Add("Visible", card, "IsVisible");
+            });
 
             lstnamebutton = new() { btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
-            lstnamebutton.ForEach(b => b.Click += BtnPoint_Click);
+            lstnamebutton.ForEach(b =>
+            {
+                b.Click += BtnPoint_Click;
+                Card card = game.NameCardList[lstnamebutton.IndexOf(b)];
+                b.DataBindings.Add("Visible", card, "IsVisible");
+            });
 
             lstimage = new()
             {
@@ -69,21 +86,12 @@ namespace PointToPointApp
 
             lstmaplabel = new()
             {
-                lblAriHakadosh,
-                lblChurva,
-                lblKeverRochel,
-                lblKosel,
-                lblMearasHamachpela,
-                lblRabbiMeirBalHaness,
-                lblRabiShimon,
-                lblYamHamelech
-            };
-            lblMessageBar.DataBindings.Add("Text", game, "GameMessageDescription");
-            StartButton startbutton = new();
-            btnReset.DataBindings.Add("Text", startbutton, "StartButtonDescription");
-            NewTurnButton newturnbutton = new();
-            btnNewTurn.DataBindings.Add("Enabled", newturnbutton, "IsEnabled");
-
+                lblAriHakadosh,lblChurva, lblKeverRochel, lblKosel, lblMearasHamachpela, lblRabbiMeirBalHaness, lblRabiShimon, lblYamHamelech};
+            lstmaplabel.ForEach(l =>
+            {
+                MapPin maplabel = game.MapPinLabelList[lstmaplabel.IndexOf(l)];
+                l.DataBindings.Add("Visible", maplabel, "IsVisible");
+            });
         }
 
         private void DoTurn(Button btn)
@@ -97,8 +105,9 @@ namespace PointToPointApp
                     if (game.revealimage == true)
                     {
                         Image newimage = lstimage[game.ImageCard.CardValue];
-                        btn.Image = newimage;
-                        
+                        btn.BackgroundImage = newimage;
+                        btn.BackgroundImageLayout = ImageLayout.Zoom;
+                        btn.Image = null;
                         game.revealimage = false;
                         btnimage = btn;
                     }
@@ -110,35 +119,17 @@ namespace PointToPointApp
                     if (game.revealimage == true)
                     {
                         Image newimage = lstname[game.NameCard.CardValue];
-                        btn.Image = newimage;
+                        btn.BackgroundImage = newimage;
+                        btn.BackgroundImageLayout = ImageLayout.Zoom;
+                        btn.Image = null;
                         game.revealimage = false;
                         btnname = btn;
                     }
-                    //if (game.GameStatus == Game.GameStatusEnum.finishedplaying)
-                    //{
-                    //    btnNewTurn.Enabled = false;
-                    //}
                 }
             }
-
-
-            //    if (game.matchedset == true)
-            //    {
-            //        UpdateMap();
-            //    }
-
-            //}
-            //private void UpdateMap()
-            //{
-            //    if (game.matchedset == true)
-            //    {
-            //        lstmaplabel[game.matchingsetnum].Visible = true;
-            //        lstmappic[game.matchingsetnum].Visible = true;
-            //    }
         }
         private void NewTurn()
         {
-
             if (game.imagecardflipped == true && game.namecardflipped == true)
             {
                 if (game.matchedset == false)
@@ -158,32 +149,16 @@ namespace PointToPointApp
                 game.NewTurn();
             }
         }
-        private void SetupButtonsAndImages()
-        {
-            lstimagebutton.ForEach(btn =>
-            {
-                btn.Image = Image.FromFile(path + "blankpoint.jpg");
-                btn.Visible = true;
-            });
 
-            lstnamebutton.ForEach(b =>
-            {
-                b.Image = Image.FromFile(path + "Blankname.jpg");
-                b.Visible = true;
-            });
-
-            //lstmappic.ForEach(i => i.Visible = false);
-            //lstmaplabel.ForEach(i => i.Visible = false);
-
-        }
         private void StartResetGame()
         {
             btnimage = null;
             btnname = null;
 
-            game.StartGame();
+            lstimagebutton.ForEach(btn => btn.Image = Image.FromFile(path + "blankpoint.jpg"));
+            lstnamebutton.ForEach(b => b.Image = Image.FromFile(path + "Blankname.jpg"));
 
-            SetupButtonsAndImages();
+            game.StartGame();
         }
         private void BtnPoint_Click(object? sender, EventArgs e)
         {
