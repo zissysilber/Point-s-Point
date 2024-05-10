@@ -22,7 +22,6 @@ namespace PointToPointSystem
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
         }
 
-        public string PinName { get; set; } = "";
 
     }
 }

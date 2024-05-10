@@ -13,7 +13,6 @@
             <Style TargetType="Button">
                 <Setter Property="CornerRadius" Value="2"/>
                 <Setter Property="Margin" Value="10"/>
-
                 <Setter Property="FontFamily" Value="CenturyGothic"/>
             </Style>
 
@@ -33,32 +32,38 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid
-        x:Name="MainGrid" ColumnDefinitions="2.5*,*" RowDefinitions="Auto,Auto, *"  Margin="30,10,10,10">
-        <Image x:Name="blankname" Source="blankname.jpg" IsVisible="false"/>
-        <Image x:Name="blankpoint" Source="blankpoint.jpg" IsVisible="false"/>
+        x:Name="MainGrid" ColumnDefinitions="2.5*,*" RowDefinitions="Auto, *"  Margin="30,10,10,10">
+        <!--<Image x:Name="blankname" Source="blankname.jpg" IsVisible="false"/>
+        <Image x:Name="blankpoint" Source="blankpoint.jpg" IsVisible="false"/>-->
 
-        <Grid x:Name="TopRowGrid" ColumnDefinitions="230,*,225" ColumnSpan="1" RowDefinitions="*,*">
+        <Grid x:Name="TopRowGrid" ColumnDefinitions="230,*,230" RowDefinitions="*">
+            <Grid Grid.Column="0" Grid.Row="0" ColumnDefinitions="*" RowDefinitions="*,*,*,*,*" >
+                <Label Text="Pathfinder!" FontSize="Subtitle" HorizontalOptions="Start" Grid.Row="0"/>
+                <Label Text="Pick Your Game" HorizontalOptions="Start"  />
 
-            <Button x:Name="btnStart"
-                    Grid.Row="0" 
+            </Grid>
+
+            <VerticalStackLayout Grid.Column="2" VerticalOptions="Start">
+                <Button x:Name="btnStart"
                     Text="{Binding StartButtonDescription}" 
                     FontSize="Small"
                     TextColor="White"
+                    Margin="1,0"
                     Clicked="btnStart_Clicked" 
                     BindingContext="{Binding StartButton}"
                     BorderColor="{Binding BorderColorMaui}"
                     BorderWidth="5"/>
-            
 
-            <Button x:Name="btnNewTurn" 
-                    Grid.Row="1"
+                <Button x:Name="btnNewTurn" 
                     Text="New Turn" 
                     FontSize="Small"
+                    Margin="1,0"
                     BindingContext="{Binding NewTurnButton}"
                     BorderColor="{Binding BorderColorMaui}"
                     BorderWidth="5"                    
                     IsEnabled="{Binding IsEnabled}"
                     Clicked="btnNewTurn_Clicked" />
+            </VerticalStackLayout>
 
             <Label  x:Name="lblMessage"
                     Grid.Column="1" Grid.Row="0"
@@ -67,16 +72,23 @@
                     FontAttributes="Bold"
                     FontSize="24"
                     HorizontalTextAlignment="Center"
-                        VerticalTextAlignment="Center"/>
-
+                    VerticalTextAlignment="Start" FontAutoScalingEnabled="True"/>
         </Grid>
 
         <Grid ColumnDefinitions="*,*,*,*,*,*" 
               RowDefinitions="*,*,*,*" 
               Grid.Column="0" 
-              Grid.Row="2"
+              Grid.Row="1"
               ColumnSpacing="15"
-              RowSpacing="60" >
+              RowSpacing="60" 
+              Margin="0,0,0,0" >
+
+            <VerticalStackLayout Grid.Column="0" Grid.Row="0" Margin="0" >
+                <RadioButton x:Name="GameNorth" Content="North" Margin="0"  />
+                <RadioButton x:Name="GameSouth" Content="South" />
+                <RadioButton x:Name="GameEast" Content="East"  />
+                <RadioButton x:Name="GameWest" Content="West" />
+            </VerticalStackLayout>
 
             <Image x:Name="arihakadosh" Source="arihakadosh.jpg" Aspect="AspectFit" IsVisible="false"/>
             <Image x:Name="churva" Source="churva.jpg" Aspect="AspectFit" IsVisible="false"/>
@@ -132,7 +144,6 @@
                 <Image x:Name="pickosel" Source="locationpin.png" Grid.Row="17" Grid.Column="16" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[3]}"/>
                 <Image x:Name="picmearashamechpela" Source="locationpin.png" Grid.Row="20" Grid.Column="16" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[4]}"/>
                 <Image x:Name="picrabbimeirbalhaness" Source="locationpin.png" Grid.Row="7" Grid.Column="18" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[6]}"/>
-
                 <Image x:Name="picrabishimonbaryochai" Source="locationpin.png" Grid.Row="4" Grid.Column="18" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[5]}"/>
                 <Image x:Name="picyamhamelech" Source="locationpin.png" Grid.Row="18" Grid.Column="20" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[7]}"/>
 
@@ -142,8 +153,8 @@
                 <Label x:Name="lblkeverrochel" Text="Kever Rochel"  FontSize="10" Grid.Row="19" Grid.Column="14" Grid.ColumnSpan="5" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[2]}"/>
                 <Label x:Name="lblkosel" Text="Kosel" FontSize="10" Grid.Row="17" Grid.Column="15" Grid.ColumnSpan="5" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[3]}"/>
                 <Label x:Name="lblmearashamechpela" Text="Mearas Hamachpela" FontSize="10" Grid.Row="20" Grid.Column="15" Grid.ColumnSpan="8" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[4]}"/>
-                <Label x:Name="lblrabbimeirbalhaness" Text="Rabbi Meir Bal Haness" FontSize="10" Grid.Row="7" Grid.Column="17" Grid.ColumnSpan="10" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[6]}"/>
-                <Label x:Name="lblrabishimonbaryochai" Text="Rabi Shimon Bar Yochai" FontSize="10" Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="8" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[5]}"/>
+                <Label x:Name="lblrabbimeirbalhaness" Text="Rabbi Meir Bal Haness" FontSize="10" Grid.Row="7" Grid.Column="17" Grid.ColumnSpan="10" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[5]}"/>
+                <Label x:Name="lblrabishimonbaryochai" Text="Rabi Shimon Bar Yochai" FontSize="10" Grid.Row="5" Grid.Column="16" Grid.ColumnSpan="8" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[6]}"/>
                 <Label x:Name="lblyamhamelech" Text="Yam Hamelech" FontSize="10" Grid.Row="18" Grid.Column="19" Grid.ColumnSpan="8" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinLabelList[7]}"/>
 
             </Grid>
