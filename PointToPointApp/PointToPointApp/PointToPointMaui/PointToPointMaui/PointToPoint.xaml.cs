@@ -4,6 +4,8 @@ namespace PointToPointMaui;
 
 public partial class PointToPoint : ContentPage
 {
+    
+    
     List<Button> lstimagebutton;
     List<Button> lstnamebutton;
     List<Image> lstimage;
@@ -15,49 +17,63 @@ public partial class PointToPoint : ContentPage
     Button? btnimage = null;
     Button? btnname = null;
 
-    Game game = new();
+   
 
+    Game GameNorth = new();
+    Game GameSouth = new();
+    Game GameEast = new();
+    Game GameWest = new();
+
+    Game activegame;
     public PointToPoint()
     {
         InitializeComponent();
-        this.BindingContext = game;
 
+
+        GameNorthRb.BindingContext = GameNorth;
+        GameSouthRb.BindingContext = GameSouth;
+        GameEastRb.BindingContext = GameEast;
+        GameWestRb.BindingContext = GameWest;
+        activegame = GameNorth;
+        this.BindingContext = activegame;
         lstimagebutton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8 };
         lstnamebutton = new() { btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
         lstimage = new() { arihakadosh, churva, keverrochel, kosel, mearashamechpela, rabbimeirbalhaness, rabishimonbaryochai, yamhamelech };
         lstname = new() { arihakadoshwithname, churvawithname, keverrochelwithname, koselwithname, mearashamechpelawithname, rabbimeirbalhanesswithname, rabishimonbaryochaiwithname, yamhamelechwithname };
         lstallbuttons = new() { lstimagebutton, lstnamebutton };
+
+        
     }
     private void DoTurn(Button btn)
     {
-        if (game.GameStatus == Game.GameStatusEnum.playing)
+        if (activegame.GameStatus == Game.GameStatusEnum.playing)
         {
             if (lstimagebutton.Exists(b => b == btn))
             {
-                game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
-                game.Turn(lstimagebutton.IndexOf(btn));
+                activegame.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
+                activegame.Turn(lstimagebutton.IndexOf(btn));
 
-                if (game.revealimage == true)
+                if (activegame.revealimage == true)
                 {
                     btnimage = btn;
-                    btnimage.BindingContext = game.ImageCard;
-                    Image newimage = lstimage[game.ImageCard.CardValue];
+                    btnimage.BindingContext = activegame.ImageCard;
+                    Image newimage = lstimage[activegame.ImageCard.CardValue];
                     btnimage.ImageSource = newimage.Source;
-                    game.revealimage = false;
+                    activegame.revealimage = false;
                 }
             }
             else if (lstnamebutton.Exists(b => b == btn))
             {
-                game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
-                game.Turn(lstnamebutton.IndexOf(btn));
+                activegame.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
+                activegame.Turn(lstnamebutton.IndexOf(btn));
 
-                if (game.revealimage == true)
+                if (activegame.revealimage == true)
                 {
                     btnname = btn;
-                    btnname.BindingContext = game.NameCard;
-                    Image newimage = lstname[game.NameCard.CardValue];
+                    btnname.BindingContext = activegame.NameCard;
+                    Image newimage = lstname[activegame.NameCard.CardValue];
                     btn.ImageSource = newimage.Source;
-                    game.revealimage = false;
+                    activegame.revealimage = false;
                 }
             }
         }
@@ -65,21 +81,21 @@ public partial class PointToPoint : ContentPage
 
     private void NewTurn()
     {
-        if ((game.imagecardflipped == true && game.namecardflipped == true && game.matchedset == false) || game.matchedset == true)
+        if ((activegame.imagecardflipped == true && activegame.namecardflipped == true && activegame.matchedset == false) || activegame.matchedset == true)
         {
-            if (game.matchedset == false)
+            if (activegame.matchedset == false)
             {
                 btnname.ImageSource = null;
                 btnimage.ImageSource = null;
             }
-            game.NewTurn();
+            activegame.NewTurn();
         }
     }
 
     private void StartGame()
     {
         lstallbuttons.ForEach(lst => lst.ForEach(crd => crd.ImageSource = null));
-        game.StartGame();
+        activegame.StartGame();
     }
 
     private void BtnPoint_Click(object? sender, EventArgs e)
@@ -97,5 +113,20 @@ public partial class PointToPoint : ContentPage
         NewTurn();
     }
 
-
+    private void Game_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        RadioButton rb = (RadioButton)sender;
+        if (rb.IsChecked && rb.BindingContext != null)
+        {
+            activegame = (Game)rb.BindingContext;
+            this.BindingContext = activegame;
+            if (activegame.NewGame == true)
+            {
+                lstimagebutton.ForEach(btn => btn.IsVisible = true);
+                lstnamebutton.ForEach(btn => btn.IsVisible = true);
+                
+                activegame.NewGame = false;
+            }
+        }
+    }
 }

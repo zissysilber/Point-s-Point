@@ -61,7 +61,7 @@ namespace PointToPointSystem
             lstallcards = new() { ImageCardList, NameCardList };
         }
 
-
+        public bool NewGame { get; set; } = true;
         public StartButton StartButton { get; set; }
         public NewTurnButton NewTurnButton { get; set; }
 
@@ -181,7 +181,10 @@ namespace PointToPointSystem
             }
         }
 
-
+        public void AllCardsVisible()
+        {
+            
+        }
         public void StartGame()
         {
             ResetButtons();
@@ -331,8 +334,10 @@ namespace PointToPointSystem
 
         public void ResetButtons()
         {
+
             NameCardList.ForEach(c => c.IsVisible = true);
             ImageCardList.ForEach(c => c.IsVisible = true);
+
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
