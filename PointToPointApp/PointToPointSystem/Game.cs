@@ -5,25 +5,22 @@ namespace PointToPointSystem
 {
     public class Game : INotifyPropertyChanged
     {
+        public event EventHandler? ScoreChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public enum GameStatusEnum { playing, notplaying, finishedplaying }
         public enum CurrentCardPlayingEnum { none, imagecard, namecard }
         List<string> lstmatchingsetmessage;
-        List<string> lstimages;
-        List<List<Card>> lstallcards;
 
         GameStatusEnum _gamestatus = GameStatusEnum.notplaying;
         CurrentCardPlayingEnum _currentcard = CurrentCardPlayingEnum.none;
-
-        private Card _imagecard;
-        private Card _namecard;
         private bool _matchedset;
         private int _matchingset;
         public int numberofsetsmatched = 0;
 
+        public static int gameswon = 0;
+
         public Game()
         {
-            ImageCard = new();
-            NameCard = new();
             StartButton = new();
             NewTurnButton = new();
 
@@ -38,60 +35,34 @@ namespace PointToPointSystem
                 "The kever of Rabi Shimon Bar Yochai is in Meron.",
                 "The salt in Yam Hamelech makes everything float in the water."
             };
-            lstimages = new()
-            {
-                "arihakadosh",
-                "churva",
-                "keverrochel",
-                "kosel",
-                "mearashamechpela",
-                "rabbimeirbalhaness",
-                "rabishimonbaryochai",
-                "yamhamelech"
-            };
 
             for (int i = 0; i < 8; i++)
             {
                 this.ImageCardList.Add(new Card());
                 this.NameCardList.Add(new Card());
+
                 this.MapPinList.Add(new MapPin());
                 this.MapPinLabelList.Add(new MapPin());
-            }
 
-            lstallcards = new() { ImageCardList, NameCardList };
+                this.PictureImageCardList.Add(new Picture());
+                this.PictureNameCardList.Add(new Picture());
+            }
         }
 
         public bool NewGame { get; set; } = true;
+
         public StartButton StartButton { get; set; }
         public NewTurnButton NewTurnButton { get; set; }
 
         public List<Card> NameCardList { get; set; } = new();
         public List<Card> ImageCardList { get; set; } = new();
+        public List<Picture> PictureImageCardList { get; set; } = new();
+        public List<Picture> PictureNameCardList { get; set; } = new();
         public List<MapPin> MapPinList { get; set; } = new();
         public List<MapPin> MapPinLabelList { get; set; } = new();
-        public Card ImageCard
-        {
-            get => _imagecard;
-            set
-            {
-                _imagecard = value;
-                this.InvokePropertyChanged();
-            }
-        }
-
-        public Card NameCard
-        {
-            get => _namecard;
-            set
-            {
-                _namecard = value;
-                this.InvokePropertyChanged();
-            }
-        }
-
-        public bool imagecardflipped { get; set; }
-        public bool namecardflipped { get; set; }
-        public bool revealimage { get; set; }
+        public bool ImageCardFlipped { get; set; }
+        public bool NameCardFlipped { get; set; }
+        public bool RevealImage { get; set; }
 
         public GameStatusEnum GameStatus
         {
@@ -113,7 +84,7 @@ namespace PointToPointSystem
                 this.InvokePropertyChanged("GameMessageDescription");
             }
         }
-        public bool matchedset
+        public bool MatchedSet
         {
             get => _matchedset;
             set
@@ -123,17 +94,21 @@ namespace PointToPointSystem
                 this.InvokePropertyChanged("GameMessageDescription");
             }
         }
-        public int matchingsetnum
+        public int? MatchingSetNum
         {
             get => _matchingset;
             set
             {
-                _matchingset = value;
+                _matchingset = (int)value;
                 this.InvokePropertyChanged();
                 this.InvokePropertyChanged("GameMessageDescription");
             }
         }
 
+        public int ButtonImageCard { get; set; }
+        public int ButtonNameCard { get; set; }
+        public int PicImageCard { get; set; }
+        public int PicNameCard{ get; set; }
 
         public string GameMessageDescription
         {
@@ -146,45 +121,41 @@ namespace PointToPointSystem
                 }
                 else if (this.GameStatus == GameStatusEnum.playing && this.CurrentCard == CurrentCardPlayingEnum.none)
                 {
-                    message = "Click a Button!";
+                    message = "Click a Button!\r\n";
                 }
-                else if (this.GameStatus == GameStatusEnum.playing)
+                else if (this.GameStatus == GameStatusEnum.playing && MatchingSetNum != null)
                 {
-                    if (this.CurrentCard == CurrentCardPlayingEnum.imagecard && namecardflipped == false)
+                    if (this.CurrentCard == CurrentCardPlayingEnum.imagecard && NameCardFlipped == false)
                     {
-                        message = "Can you find the name of this destination?";
+                        message = "Can you find the name of this destination?\r\n";
                     }
-                    else if (this.CurrentCard == CurrentCardPlayingEnum.namecard && imagecardflipped == false)
+                    else if (this.CurrentCard == CurrentCardPlayingEnum.namecard && ImageCardFlipped == false)
                     {
-                        message = "Can you find the picture of this destination?";
+                        message = "Can you find the picture of this destination?\r\n";
                     }
-                    else if (imagecardflipped == true && namecardflipped == true && matchedset == true && numberofsetsmatched < 8)
+                    else if (ImageCardFlipped == true && NameCardFlipped == true && MatchedSet == true && numberofsetsmatched < 8)
                     {
-                        message = lstmatchingsetmessage[matchingsetnum] + "\r\n Click NEW TURN to discover more!";
+                        message = lstmatchingsetmessage[(int)MatchingSetNum] + "\r\n Click NEW TURN to discover more!";
 
                     }
-                    else if (imagecardflipped == true && namecardflipped == true && matchedset == false)
+                    else if (ImageCardFlipped == true && NameCardFlipped == true && MatchedSet == false)
                     {
-                        message = "Oops!  Click NEW TURN for another chance.";
+                        message = "Oops!  Click NEW TURN for another chance.\r\n";
 
                     }
-                    else if (this.CurrentCard == CurrentCardPlayingEnum.none && namecardflipped == false && imagecardflipped == false)
+                    else if (this.CurrentCard == CurrentCardPlayingEnum.none && NameCardFlipped == false && ImageCardFlipped == false)
                     {
-                        message = "Where will we travel next?";
+                        message = "Where will we travel next?\r\n";
                     }
                 }
-                else if (this.GameStatus == GameStatusEnum.finishedplaying)
+                else if (this.GameStatus == GameStatusEnum.finishedplaying && MatchingSetNum != null)
                 {
-                    message = lstmatchingsetmessage[matchingsetnum] + "\r\n Congratulations!  You've matched all the pictures!";
+                    message = lstmatchingsetmessage[(int)MatchingSetNum] + "\r\n Congratulations!  You've matched all the pictures!";
                 }
                 return message;
             }
         }
 
-        public void AllCardsVisible()
-        {
-            
-        }
         public void StartGame()
         {
             ResetButtons();
@@ -198,34 +169,34 @@ namespace PointToPointSystem
 
         public void SetupImages()
         {
-            List<string> usedimagelist = new();
-            List<string> usednamelist = new();
+            List<int> usedimagelist = new();
+            List<int> usednamelist = new();
             Random rnd = new();
 
             foreach (Card c in ImageCardList)
             {
-                while (c.ImageName == "")
+                while (c.CardValue == null)
                 {
-                    string newimage = lstimages[rnd.Next(0, lstimages.Count())];
-
-                    if (usedimagelist.Where(i => i == newimage).Count() == 0)
+                    Picture newimage = PictureImageCardList[rnd.Next(0, PictureImageCardList.Count())];
+                    int picnum = PictureImageCardList.IndexOf(newimage);
+                    if (usedimagelist.Where(i => i == picnum).Count() == 0)
                     {
-                        usedimagelist.Add(newimage);
-                        c.ImageName = newimage;
-                        c.CardValue = lstimages.IndexOf(newimage);
+                        usedimagelist.Add(picnum);
+                        c.CardValue = picnum;
                     }
                 }
             }
+
             foreach (Card c in NameCardList)
             {
-                while (c.ImageName == "")
+                while (c.CardValue == null)
                 {
-                    string newimage = lstimages[rnd.Next(0, lstimages.Count())];
-                    if (usednamelist.Where(i => i == newimage).Count() == 0)
+                    Picture newimage = PictureNameCardList[rnd.Next(0, PictureNameCardList.Count())];
+                    int picnum = PictureNameCardList.IndexOf(newimage);
+                    if (usednamelist.Where(i => i == picnum).Count() == 0)
                     {
-                        usednamelist.Add(newimage);
-                        c.ImageName = newimage;
-                        c.CardValue = lstimages.IndexOf(newimage);
+                        usednamelist.Add(picnum);
+                        c.CardValue = picnum;
                     }
                 }
             }
@@ -234,82 +205,87 @@ namespace PointToPointSystem
         {
             if (CurrentCard == CurrentCardPlayingEnum.imagecard)
             {
-                if (imagecardflipped == false)
+                if (ImageCardFlipped == false)
                 {
                     Card card = this.ImageCardList[cardspot];
-                    ImageCard = card;
-                    imagecardflipped = true;
-                    revealimage = true;
+                    PicImageCard = card.CardValue.Value;
+                    ImageCardFlipped = true;
+                    RevealImage = true;
                 }
             }
             else if (CurrentCard == CurrentCardPlayingEnum.namecard)
             {
-                if (namecardflipped == false)
+                if (NameCardFlipped == false)
                 {
                     Card card = this.NameCardList[cardspot];
-                    NameCard = card;
-                    namecardflipped = true;
-                    revealimage = true;
+                    PicNameCard = card.CardValue.Value;
+                    NameCardFlipped = true;
+                    RevealImage = true;
                 }
             }
 
-            if (imagecardflipped == true && namecardflipped == true)
+            if (ImageCardFlipped == true && NameCardFlipped == true)
             {
                 DetectMatch();
                 UpdateMap();
             }
 
-            if (imagecardflipped == true && namecardflipped == true && numberofsetsmatched < 8)
+            if (ImageCardFlipped == true && NameCardFlipped == true && numberofsetsmatched < 8)
             {
                 NewTurnButton.BorderColor = NewTurnButton.ButtonHighlightColor;
             }
-            if (imagecardflipped == true && namecardflipped == true && numberofsetsmatched == 8)
+            if (ImageCardFlipped == true && NameCardFlipped == true && numberofsetsmatched == 8)
             {
                 StartButton.BorderColor = StartButton.ButtonHighlightColor;
                 NewTurnButton.IsEnabled = false;
             }
-
         }
 
 
         public void DetectMatch()
         {
-            if (ImageCard.CardValue == NameCard.CardValue)
+            if (PicImageCard == PicNameCard)
             {
                 numberofsetsmatched++;
-                matchedset = true;
-                matchingsetnum = ImageCard.CardValue;
+                MatchedSet = true;
+                MatchingSetNum = PicImageCard;
                 if (numberofsetsmatched == 8)
                 {
                     GameStatus = GameStatusEnum.finishedplaying;
+                    gameswon++;
                 }
             }
-            else matchedset = false;
+            else MatchedSet = false;
+            ScoreChanged?.Invoke(this, new EventArgs());
         }
         public void UpdateMap()
         {
-            if (this.matchedset == true)
+            if (this.MatchedSet == true)
             {
-                MapPinList[this.matchingsetnum].IsVisible = true;
-                MapPinLabelList[this.matchingsetnum].IsVisible = true;
+                if (MatchingSetNum != null)
+                {
+                    MapPinList[(int)this.MatchingSetNum].IsVisible = true;
+                    MapPinLabelList[(int)this.MatchingSetNum].IsVisible = true;
+                }
+
             }
         }
         public void EndTurn()
         {
-            if (imagecardflipped == true && namecardflipped == true)
+            if (ImageCardFlipped == true && NameCardFlipped == true)
             {
-                if (this.matchedset == true)
+                if (this.MatchedSet == true)
                 {
-                    NameCard.IsVisible = false;
-                    ImageCard.IsVisible = false;
+                    ImageCardList[ButtonImageCard].SetMatched = true;
+                    NameCardList[ButtonNameCard].SetMatched = true;
                 }
             }
-            imagecardflipped = false;
-            namecardflipped = false;
+            ImageCardFlipped = false;
+            NameCardFlipped = false;
             CurrentCard = CurrentCardPlayingEnum.none;
-            matchedset = false;
-            imagecardflipped = false;
-            namecardflipped = false;
+            MatchedSet = false;
+            ImageCardFlipped = false;
+            NameCardFlipped = false;
             NewTurnButton.BorderColor = NewTurnButton.ButtonNoHightlight;
 
         }
@@ -321,11 +297,12 @@ namespace PointToPointSystem
         private void ResetValues()
         {
             GameStatus = GameStatusEnum.notplaying;
-            imagecardflipped = false;
-            namecardflipped = false;
+            ImageCardFlipped = false;
+            NameCardFlipped = false;
             CurrentCard = CurrentCardPlayingEnum.none;
             numberofsetsmatched = 0;
-            lstallcards.ForEach(lst => lst.ForEach(crd => crd.ImageName = ""));
+            ImageCardList.ForEach(c => c.CardValue = null);
+            NameCardList.ForEach(c => c.CardValue = null);
             MapPinList.ForEach(m => m.IsVisible = false);
             MapPinLabelList.ForEach(m => m.IsVisible = false);
             StartButton.BorderColor = StartButton.ButtonNoHightlight;
@@ -340,7 +317,7 @@ namespace PointToPointSystem
 
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        
         public void InvokePropertyChanged([CallerMemberName] string propertyname = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));

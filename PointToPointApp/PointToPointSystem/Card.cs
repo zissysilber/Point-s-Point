@@ -9,10 +9,10 @@ namespace PointToPointSystem
     public class Card : INotifyPropertyChanged
     {
         private bool _isvisible = true;
-        private int _cardvalue  ;
-        private string _imagename = "";
+        private int? _cardvalue;
+        private bool _setmatched;
 
-        public int CardValue
+        public int? CardValue
         {
             get => _cardvalue;
             set
@@ -20,26 +20,34 @@ namespace PointToPointSystem
                 _cardvalue = value;
             }
         }
-
-        public string ImageName
-        {
-            get => _imagename;
-            set
-            {
-                _imagename = value;
-                InvokePropertyChanged();
-            }
-        }
-
         public bool IsVisible
         {
-            get => _isvisible;
+            get
+            {
+                if (SetMatched == true)
+                {
+                    _isvisible = false;
+                }
+                return _isvisible;
+            }
             set
             {
                 _isvisible = value;
                 InvokePropertyChanged();
             }
         }
+
+        public bool SetMatched
+        {
+            get => _setmatched;
+            set
+            {
+                _setmatched = value;
+                InvokePropertyChanged();
+                InvokePropertyChanged("IsVisible");
+            }
+        }
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

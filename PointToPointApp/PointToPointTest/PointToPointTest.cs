@@ -25,15 +25,21 @@ namespace PointToPointTest
 
         [Test]
 
-        public void TestTurn()
+        public void TestEachCardHasDifferentImage()
         {
             Game game = new();
             game.StartGame();
             game.SetupImages();
             game.CurrentCard = CurrentCardPlayingEnum.imagecard;
+            game.Turn(0);
             game.Turn(1);
-            string msg = $"ImageName = {game.ImageCard.ImageName}";
-            Assert.IsTrue(game.ImageCard.ImageName != "", msg);
+            game.Turn(2);
+            game.Turn(3);
+            string msg = $"Image number for card 0 = {game.ImageCardList[0].CardValue}, " +
+                $"Image number for card 1 = {game.ImageCardList[1].CardValue}, " +
+                $"Image number for card 2 = {game.ImageCardList[2].CardValue}, " +
+                $"Image number for card 3 = {game.ImageCardList[3].CardValue}, ";
+            Assert.IsTrue(game.ImageCardList[1].CardValue != game.ImageCardList[2].CardValue, msg);
             TestContext.WriteLine(msg);
         }
 
@@ -42,18 +48,18 @@ namespace PointToPointTest
         {
             Game game = new();
             game.StartGame();
-            game.ImageCard.CardValue = 1;
-            game.NameCard.CardValue = 1;
+            game.PicImageCard = 1;
+            game.PicNameCard = 1;
             game.DetectMatch();
-            string msg = $"value of set matched = {game.matchingsetnum}";
-            Assert.IsTrue(game.matchingsetnum == game.ImageCard.CardValue, msg) ;
+            string msg = $"value of set matched = {game.MatchingSetNum}";
+            Assert.IsTrue(game.MatchingSetNum == game.PicImageCard, msg) ;
             TestContext.WriteLine(msg);
         }
         
         [Test]
         public void TestUpdateMap() {
             Game game = new();
-            game.matchingsetnum = 1;
+            game.MatchingSetNum = 1;
             Assert.IsTrue(game.MapPinList[1].IsVisible = true);
         }
 

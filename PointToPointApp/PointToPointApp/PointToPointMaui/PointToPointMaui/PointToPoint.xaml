@@ -56,7 +56,7 @@
                 <Label Text="Total" FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center"  Margin="0" Padding="0"/>
                 <Label Text="Games" FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0" Padding="0"/>
                 <Label Text="Won" FontSize="Small" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0" Padding="0"/>
-                <Label Text="{Binding TotalGamesWon}" Grid.Row="1"/>
+                <Label x:Name="ScoreLbl" Text="{Binding gameswon}" Grid.Row="1"/>
 
 
             </VerticalStackLayout>
@@ -86,7 +86,7 @@
             </VerticalStackLayout>
 
             <Grid ColumnDefinitions="*,*,*,*" 
-              RowDefinitions="Auto,*,*,*,*" 
+              RowDefinitions="Auto,*,*,*,*,*" 
               Grid.Column="1" 
               ColumnSpacing="5"
               RowSpacing="5" 
@@ -95,6 +95,7 @@
                 <Label  x:Name="lblMessage"
                     Grid.Row="0"
                     Grid.ColumnSpan="4"
+                    Grid.RowSpan="2"
                     Margin="2,2,10,2"
                     Text="{Binding GameMessageDescription}"
                     FontAttributes="Bold"
@@ -102,45 +103,42 @@
                     HorizontalTextAlignment="Center"
                     VerticalTextAlignment="Start" FontAutoScalingEnabled="True"/>
 
-                <Image x:Name="arihakadosh" Source="arihakadosh.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="churva" Source="churva.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="keverrochel" Source="keverrochel.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="kosel" Source="kosel.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="mearashamechpela" Source="mearashamechpela.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="rabbimeirbalhaness" Source="rabbimeirbalhaness.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="rabishimonbaryochai" Source="rabishimonbaryochai.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="yamhamelech" Source="yamhamelech.jpg" Aspect="AspectFit" IsVisible="false"/>
+                <Image x:Name="arihakadosh" Source="arihakadosh.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[0]}"/>
+                <Image x:Name="churva" Source="churva.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[1]}"/>
+                <Image x:Name="keverrochel" Source="keverrochel.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[2]}"/>
+                <Image x:Name="kosel" Source="kosel.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[3]}"/>
+                <Image x:Name="mearashamechpela" Source="mearashamechpela.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[4]}"/>
+                <Image x:Name="rabbimeirbalhaness" Source="rabbimeirbalhaness.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[5]}"/>
+                <Image x:Name="rabishimonbaryochai" Source="rabishimonbaryochai.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[6]}"/>
+                <Image x:Name="yamhamelech" Source="yamhamelech.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureImageCardList[7]}"/>
 
-                <Button x:Name="btnImage1" Grid.Column="0" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnImage2" Grid.Column="1" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnImage3" Grid.Column="2" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnImage4" Grid.Column="3" Grid.Row="1" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnImage5" Grid.Column="0" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnImage6" Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnImage7" Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnImage8" Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click" ImageSource = "blankpoint.jpg"  BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
+                <Image x:Name="arihakadoshwithname" Source="arihakadoshwithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[0]}"/>
+                <Image x:Name="churvawithname" Source="churvawithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[1]}"/>
+                <Image x:Name="keverrochelwithname" Source="keverrochelwithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[2]}"/>
+                <Image x:Name="koselwithname" Source="koselwithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[3]}"/>
+                <Image x:Name="mearashamechpelawithname" Source="mearashamechpelawithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[4]}"/>
+                <Image x:Name="rabbimeirbalhanesswithname" Source="rabbimeirbalhanesswithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[5]}"/>
+                <Image x:Name="rabishimonbaryochaiwithname" Source="rabishimonbaryochaiwithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[6]}"/>
+                <Image x:Name="yamhamelechwithname" Source="yamhamelechwithname.jpg" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding PictureNameCardList[7]}"/>
 
-                <Image x:Name="arihakadoshwithname" Source="arihakadoshwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="churvawithname" Source="churvawithname.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="keverrochelwithname" Source="keverrochelwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="koselwithname" Source="koselwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="mearashamechpelawithname" Source="mearashamechpelawithname.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="rabbimeirbalhanesswithname" Source="rabbimeirbalhanesswithname.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="rabishimonbaryochaiwithname" Source="rabishimonbaryochaiwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
-                <Image x:Name="yamhamelechwithname" Source="yamhamelechwithname.jpg" Aspect="AspectFit" IsVisible="false"/>
+                <Button x:Name="btnImage1" Grid.Column="0" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"  BindingContext="{Binding ImageCardList[0]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnImage2" Grid.Column="1" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"   BindingContext="{Binding ImageCardList[1]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnImage3" Grid.Column="2" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"   BindingContext="{Binding ImageCardList[2]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnImage4" Grid.Column="3" Grid.Row="2" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"   BindingContext="{Binding ImageCardList[3]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnImage5" Grid.Column="0" Grid.Row="3" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"   BindingContext="{Binding ImageCardList[4]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnImage6" Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"   BindingContext="{Binding ImageCardList[5]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnImage7" Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"   BindingContext="{Binding ImageCardList[6]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnImage8" Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=btnImage}" Clicked="BtnPoint_Click"   BindingContext="{Binding ImageCardList[7]}" IsVisible="{Binding IsVisible}" />
 
-                <Button x:Name="btnName9" Grid.Column="0"  Grid.Row="3" Style="{StaticResource Key=btnName}"  Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}" />
-                <Button x:Name="btnName10" Grid.Column="1" Grid.Row="3" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}"/>
-                <Button x:Name="btnName11" Grid.Column="2" Grid.Row="3" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}"/>
-                <Button x:Name="btnName12" Grid.Column="3" Grid.Row="3" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}"/>
-                <Button x:Name="btnName13" Grid.Column="0" Grid.Row="4" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}"/>
-                <Button x:Name="btnName14" Grid.Column="1" Grid.Row="4" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}"/>
-                <Button x:Name="btnName15" Grid.Column="2" Grid.Row="4" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}"/>
-                <Button x:Name="btnName16" Grid.Column="3" Grid.Row="4" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click" ImageSource="blankname.jpg" BindingContext="{Binding Card}" IsVisible="{Binding IsVisible}"/>
+                <Button x:Name="btnName9" Grid.Column="0"  Grid.Row="4" Style="{StaticResource Key=btnName}"  Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[0]}" IsVisible="{Binding IsVisible}" />
+                <Button x:Name="btnName10" Grid.Column="1" Grid.Row="4" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[1]}" IsVisible="{Binding IsVisible}"/>
+                <Button x:Name="btnName11" Grid.Column="2" Grid.Row="4" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[2]}" IsVisible="{Binding IsVisible}"/>
+                <Button x:Name="btnName12" Grid.Column="3" Grid.Row="4" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[3]}" IsVisible="{Binding IsVisible}"/>
+                <Button x:Name="btnName13" Grid.Column="0" Grid.Row="5" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[4]}" IsVisible="{Binding IsVisible}"/>
+                <Button x:Name="btnName14" Grid.Column="1" Grid.Row="5" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[5]}" IsVisible="{Binding IsVisible}"/>
+                <Button x:Name="btnName15" Grid.Column="2" Grid.Row="5" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[6]}" IsVisible="{Binding IsVisible}"/>
+                <Button x:Name="btnName16" Grid.Column="3" Grid.Row="5" Style="{StaticResource Key=btnName}" Clicked="BtnPoint_Click"  BindingContext="{Binding NameCardList[7]}" IsVisible="{Binding IsVisible}"/>
             </Grid>
-
-
-
 
         </Grid>
 
@@ -162,8 +160,8 @@
                 <Image x:Name="pickeverrochel" Source="locationpin.png" Grid.Row="19" Grid.Column="15" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[2]}"/>
                 <Image x:Name="pickosel" Source="locationpin.png" Grid.Row="17" Grid.Column="16" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[3]}"/>
                 <Image x:Name="picmearashamechpela" Source="locationpin.png" Grid.Row="20" Grid.Column="16" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[4]}"/>
-                <Image x:Name="picrabbimeirbalhaness" Source="locationpin.png" Grid.Row="7" Grid.Column="18" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[6]}"/>
-                <Image x:Name="picrabishimonbaryochai" Source="locationpin.png" Grid.Row="4" Grid.Column="18" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[5]}"/>
+                <Image x:Name="picrabbimeirbalhaness" Source="locationpin.png" Grid.Row="7" Grid.Column="18" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[5]}"/>
+                <Image x:Name="picrabishimonbaryochai" Source="locationpin.png" Grid.Row="4" Grid.Column="18" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[6]}"/>
                 <Image x:Name="picyamhamelech" Source="locationpin.png" Grid.Row="18" Grid.Column="20" Aspect="AspectFit" IsVisible="{Binding IsVisible}" BindingContext="{Binding MapPinList[7]}"/>
 
 

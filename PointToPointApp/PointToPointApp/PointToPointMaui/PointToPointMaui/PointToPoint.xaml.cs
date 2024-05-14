@@ -4,8 +4,8 @@ namespace PointToPointMaui;
 
 public partial class PointToPoint : ContentPage
 {
-    
-    
+
+
     List<Button> lstimagebutton;
     List<Button> lstnamebutton;
     List<Image> lstimage;
@@ -17,18 +17,24 @@ public partial class PointToPoint : ContentPage
     Button? btnimage = null;
     Button? btnname = null;
 
-   
 
     Game GameNorth = new();
     Game GameSouth = new();
     Game GameEast = new();
     Game GameWest = new();
 
+    List<Game> lstgame = new();
+    
+
+
     Game activegame;
     public PointToPoint()
     {
         InitializeComponent();
 
+        lstgame = new () {GameNorth, GameSouth, GameEast, GameWest };
+        lstgame.ForEach(g => g.ScoreChanged += G_ScoreChanged);
+        
 
         GameNorthRb.BindingContext = GameNorth;
         GameSouthRb.BindingContext = GameSouth;
@@ -42,38 +48,45 @@ public partial class PointToPoint : ContentPage
         lstname = new() { arihakadoshwithname, churvawithname, keverrochelwithname, koselwithname, mearashamechpelawithname, rabbimeirbalhanesswithname, rabishimonbaryochaiwithname, yamhamelechwithname };
         lstallbuttons = new() { lstimagebutton, lstnamebutton };
 
-        
+
+
     }
+
+    private void G_ScoreChanged(object sender, EventArgs e)
+    {
+        ScoreLbl.Text = Game.gameswon.ToString();
+    }
+
     private void DoTurn(Button btn)
     {
         if (activegame.GameStatus == Game.GameStatusEnum.playing)
         {
             if (lstimagebutton.Exists(b => b == btn))
             {
+                activegame.ButtonImageCard = lstimagebutton.IndexOf(btn);
                 activegame.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
                 activegame.Turn(lstimagebutton.IndexOf(btn));
 
-                if (activegame.revealimage == true)
+                if (activegame.RevealImage == true)
                 {
+                    Image newimage = lstimage[activegame.PicImageCard];
+                    btn.ImageSource = newimage.Source;
                     btnimage = btn;
-                    btnimage.BindingContext = activegame.ImageCard;
-                    Image newimage = lstimage[activegame.ImageCard.CardValue];
-                    btnimage.ImageSource = newimage.Source;
-                    activegame.revealimage = false;
+                    activegame.RevealImage = false;
                 }
             }
             else if (lstnamebutton.Exists(b => b == btn))
             {
+                activegame.ButtonNameCard = lstnamebutton.IndexOf(btn);
                 activegame.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
                 activegame.Turn(lstnamebutton.IndexOf(btn));
 
-                if (activegame.revealimage == true)
+                if (activegame.RevealImage == true)
                 {
-                    btnname = btn;
-                    btnname.BindingContext = activegame.NameCard;
-                    Image newimage = lstname[activegame.NameCard.CardValue];
+                    Image newimage = lstname[activegame.PicNameCard];
                     btn.ImageSource = newimage.Source;
-                    activegame.revealimage = false;
+                    btnname = btn;
+                    activegame.RevealImage = false;
                 }
             }
         }
@@ -81,12 +94,12 @@ public partial class PointToPoint : ContentPage
 
     private void NewTurn()
     {
-        if ((activegame.imagecardflipped == true && activegame.namecardflipped == true && activegame.matchedset == false) || activegame.matchedset == true)
+        if ((activegame.ImageCardFlipped == true && activegame.NameCardFlipped == true && activegame.MatchedSet == false) || activegame.MatchedSet == true)
         {
-            if (activegame.matchedset == false)
+            if (activegame.MatchedSet == false)
             {
-                btnname.ImageSource = null;
-                btnimage.ImageSource = null;
+                btnname.ImageSource = "blankpoint.jpg";
+                btnimage.ImageSource = "blankpoint.jpg";
             }
             activegame.NewTurn();
         }
@@ -100,6 +113,7 @@ public partial class PointToPoint : ContentPage
 
     private void BtnPoint_Click(object? sender, EventArgs e)
     {
+
         DoTurn((Button)sender);
     }
 
@@ -122,11 +136,11 @@ public partial class PointToPoint : ContentPage
             this.BindingContext = activegame;
             if (activegame.NewGame == true)
             {
-                lstimagebutton.ForEach(btn => btn.IsVisible = true);
-                lstnamebutton.ForEach(btn => btn.IsVisible = true);
-                
-                activegame.NewGame = false;
+                lstimagebutton.ForEach(btn => btn.ImageSource = null);
+                lstnamebutton.ForEach(btn => btn.ImageSource = null);
+
             }
         }
     }
 }
+    

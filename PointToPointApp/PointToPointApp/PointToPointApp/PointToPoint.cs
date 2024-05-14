@@ -102,13 +102,13 @@ namespace PointToPointApp
                 {
                     game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
                     game.Turn(lstimagebutton.IndexOf(btn));
-                    if (game.revealimage == true)
+                    if (game.RevealImage == true)
                     {
-                        Image newimage = lstimage[game.ImageCard.CardValue];
+                        Image newimage = lstimage[game.PicImageCard];
                         btn.BackgroundImage = newimage;
                         btn.BackgroundImageLayout = ImageLayout.Zoom;
                         btn.Image = null;
-                        game.revealimage = false;
+                        game.RevealImage = false;
                         btnimage = btn;
                     }
                 }
@@ -116,13 +116,13 @@ namespace PointToPointApp
                 {
                     game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
                     game.Turn(lstnamebutton.IndexOf(btn));
-                    if (game.revealimage == true)
+                    if (game.RevealImage == true)
                     {
-                        Image newimage = lstname[game.NameCard.CardValue];
+                        Image newimage = lstname[game.PicNameCard];
                         btn.BackgroundImage = newimage;
                         btn.BackgroundImageLayout = ImageLayout.Zoom;
                         btn.Image = null;
-                        game.revealimage = false;
+                        game.RevealImage = false;
                         btnname = btn;
                     }
                 }
@@ -130,9 +130,9 @@ namespace PointToPointApp
         }
         private void NewTurn()
         {
-            if (game.imagecardflipped == true && game.namecardflipped == true)
+            if (game.ImageCardFlipped == true && game.NameCardFlipped == true)
             {
-                if (game.matchedset == false)
+                if (game.MatchedSet == false)
                 {
                     btnimage.Image = Image.FromFile(path + "blankpoint.jpg");
                     btnname.Image = Image.FromFile(path + "Blankname.jpg");
