@@ -9,10 +9,15 @@ namespace PointToPointSystem
         public event PropertyChangedEventHandler? PropertyChanged;
         public enum GameStatusEnum { playing, notplaying, finishedplaying }
         public enum CurrentCardPlayingEnum { none, imagecard, namecard }
+
         List<string> lstmatchingsetmessage;
+        private List<List<Card>> lstallcards = new();
+        private List<List<MapPin>> lstpins = new();
+
 
         GameStatusEnum _gamestatus = GameStatusEnum.notplaying;
         CurrentCardPlayingEnum _currentcard = CurrentCardPlayingEnum.none;
+
         private bool _matchedset;
         private int _matchingset;
         public int numberofsetsmatched = 0;
@@ -46,6 +51,9 @@ namespace PointToPointSystem
 
                 this.PictureImageCardList.Add(new Picture());
                 this.PictureNameCardList.Add(new Picture());
+
+                lstallcards = new() { ImageCardList, NameCardList };
+                lstpins = new() { MapPinList, MapPinLabelList };
             }
         }
 
@@ -56,7 +64,7 @@ namespace PointToPointSystem
 
         public List<Card> NameCardList { get; set; } = new();
         public List<Card> ImageCardList { get; set; } = new();
-        public List<List<Card>> AllCardsList { get; set; } = new();
+
         public List<Picture> PictureImageCardList { get; set; } = new();
         public List<Picture> PictureNameCardList { get; set; } = new();
         public List<MapPin> MapPinList { get; set; } = new();
@@ -109,7 +117,7 @@ namespace PointToPointSystem
         public int ButtonImageCard { get; set; }
         public int ButtonNameCard { get; set; }
         public int PicImageCard { get; set; }
-        public int PicNameCard{ get; set; }
+        public int PicNameCard { get; set; }
 
         public string GameMessageDescription
         {
@@ -161,7 +169,6 @@ namespace PointToPointSystem
         {
             ResetValues();
             ResetButtons();
-            
 
             StartButton.StartButtonStatus = StartButton.StartButtonStatusEnum.reset;
             NewTurnButton.IsEnabled = true;
@@ -269,7 +276,6 @@ namespace PointToPointSystem
                     MapPinList[(int)this.MatchingSetNum].IsVisible = true;
                     MapPinLabelList[(int)this.MatchingSetNum].IsVisible = true;
                 }
-
             }
         }
         public void EndTurn()
@@ -282,14 +288,11 @@ namespace PointToPointSystem
                     NameCardList[ButtonNameCard].SetMatched = true;
                 }
             }
-            ImageCardFlipped = false;
-            NameCardFlipped = false;
             CurrentCard = CurrentCardPlayingEnum.none;
             MatchedSet = false;
             ImageCardFlipped = false;
             NameCardFlipped = false;
             NewTurnButton.BorderColor = NewTurnButton.ButtonNoHightlight;
-
         }
 
         public void NewTurn()
@@ -303,25 +306,26 @@ namespace PointToPointSystem
             NameCardFlipped = false;
             CurrentCard = CurrentCardPlayingEnum.none;
             numberofsetsmatched = 0;
-            ImageCardList.ForEach(c => c.SetMatched = false);
-            NameCardList.ForEach(c => c.SetMatched = false);
-            ImageCardList.ForEach(c => c.CardValue = null);
-            NameCardList.ForEach(c => c.CardValue = null);
-            MapPinList.ForEach(m => m.IsVisible = false);
-            MapPinLabelList.ForEach(m => m.IsVisible = false);
+            lstallcards.ForEach(lst => lst.ForEach(c =>
+            {
+                c.SetMatched = false;
+                c.CardValue = null;
+            }));
+            lstpins.ForEach(lst => lst.ForEach(p => p.IsVisible = false));
             StartButton.BorderColor = StartButton.ButtonNoHightlight;
             NewTurnButton.BorderColor = NewTurnButton.ButtonNoHightlight;
         }
 
         public void ResetButtons()
         {
-
-            NameCardList.ForEach(c => c.IsVisible = true);
-            ImageCardList.ForEach(c => c.IsVisible = true);
-
+            lstallcards.ForEach(lst => lst.ForEach(c =>
+            {
+                c.IsVisible = true;
+                
+            }));
         }
 
-        
+
         public void InvokePropertyChanged([CallerMemberName] string propertyname = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyname));
