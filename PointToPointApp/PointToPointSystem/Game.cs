@@ -56,6 +56,7 @@ namespace PointToPointSystem
 
         public List<Card> NameCardList { get; set; } = new();
         public List<Card> ImageCardList { get; set; } = new();
+        public List<List<Card>> AllCardsList { get; set; } = new();
         public List<Picture> PictureImageCardList { get; set; } = new();
         public List<Picture> PictureNameCardList { get; set; } = new();
         public List<MapPin> MapPinList { get; set; } = new();
@@ -158,8 +159,9 @@ namespace PointToPointSystem
 
         public void StartGame()
         {
-            ResetButtons();
             ResetValues();
+            ResetButtons();
+            
 
             StartButton.StartButtonStatus = StartButton.StartButtonStatusEnum.reset;
             NewTurnButton.IsEnabled = true;
@@ -301,6 +303,8 @@ namespace PointToPointSystem
             NameCardFlipped = false;
             CurrentCard = CurrentCardPlayingEnum.none;
             numberofsetsmatched = 0;
+            ImageCardList.ForEach(c => c.SetMatched = false);
+            NameCardList.ForEach(c => c.SetMatched = false);
             ImageCardList.ForEach(c => c.CardValue = null);
             NameCardList.ForEach(c => c.CardValue = null);
             MapPinList.ForEach(m => m.IsVisible = false);
