@@ -16,6 +16,16 @@ namespace PointToPointSystem
             }
         }
 
+        public string ImageSourceMaui
+        {
+            get
+            {
+                string path = "C:\\Users\\zissy\\source\\repos\\Point-to-Point\\PointToPointApp\\PointToPointApp\\PointToPointMaui\\PointToPointMaui\\Resources\\Images\\";
+
+                return path;
+            }
+        }
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void InvokePropertyChanged([CallerMemberName] string propertyname = "")

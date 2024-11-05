@@ -7,6 +7,7 @@ namespace PointToPointApp
     {
         string path = Application.StartupPath + @"\Images\";
 
+        List<Button> lstButton;
         List<Button> lstimagebutton;
         List<Button> lstnamebutton;
         List<Image> lstname;
@@ -31,7 +32,7 @@ namespace PointToPointApp
             btnReset.DataBindings.Add("Text", startbutton, "StartButtonDescription");
             btnNewTurn.DataBindings.Add("Enabled", newturnbutton, "IsEnabled");
 
-
+            lstButton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8, btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
             lstimagebutton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8 };
             lstimagebutton.ForEach(b =>
             {
@@ -100,8 +101,8 @@ namespace PointToPointApp
             {
                 if (lstimagebutton.Exists(b => b == btn))
                 {
-                    game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
-                    game.Turn(lstimagebutton.IndexOf(btn));
+                    //game.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
+                    //game.Turn(lstimagebutton.IndexOf(btn));
                     if (game.RevealImage == true)
                     {
                         Image newimage = lstimage[game.PicImageCard];
@@ -114,8 +115,8 @@ namespace PointToPointApp
                 }
                 else if (lstnamebutton.Exists(b => b == btn))
                 {
-                    game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
-                    game.Turn(lstnamebutton.IndexOf(btn));
+                    //game.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
+                    //game.Turn(lstnamebutton.IndexOf(btn));
                     if (game.RevealImage == true)
                     {
                         Image newimage = lstname[game.PicNameCard];
@@ -162,6 +163,7 @@ namespace PointToPointApp
         }
         private void BtnPoint_Click(object? sender, EventArgs e)
         {
+            game.Turn(lstButton.IndexOf((Button)sender));
             DoTurn((Button)sender);
         }
         private void BtnReset_Click(object? sender, EventArgs e)

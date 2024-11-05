@@ -5,7 +5,7 @@ namespace PointToPointMaui;
 public partial class PointToPoint : ContentPage
 {
 
-
+    List<Button> lstButton;
     List<Button> lstimagebutton;
     List<Button> lstnamebutton;
     List<Image> lstimage;
@@ -24,7 +24,7 @@ public partial class PointToPoint : ContentPage
     Game GameWest = new();
 
     List<Game> lstgame = new();
-    
+
 
 
     Game activegame;
@@ -32,9 +32,9 @@ public partial class PointToPoint : ContentPage
     {
         InitializeComponent();
 
-        lstgame = new () {GameNorth, GameSouth, GameEast, GameWest };
+        lstgame = new() { GameNorth, GameSouth, GameEast, GameWest };
         lstgame.ForEach(g => g.ScoreChanged += G_ScoreChanged);
-        
+
 
         GameNorthRb.BindingContext = GameNorth;
         GameSouthRb.BindingContext = GameSouth;
@@ -43,11 +43,15 @@ public partial class PointToPoint : ContentPage
         activegame = GameNorth;
         this.BindingContext = activegame;
 
+        lstButton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8, btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
+
         lstimagebutton = new() { btnImage1, btnImage2, btnImage3, btnImage4, btnImage5, btnImage6, btnImage7, btnImage8 };
         lstnamebutton = new() { btnName9, btnName10, btnName11, btnName12, btnName13, btnName14, btnName15, btnName16 };
         lstimage = new() { arihakadosh, churva, keverrochel, kosel, mearashamechpela, rabbimeirbalhaness, rabishimonbaryochai, yamhamelech };
         lstname = new() { arihakadoshwithname, churvawithname, keverrochelwithname, koselwithname, mearashamechpelawithname, rabbimeirbalhanesswithname, rabishimonbaryochaiwithname, yamhamelechwithname };
         lstallbuttons = new() { lstimagebutton, lstnamebutton };
+
+
     }
 
     private void G_ScoreChanged(object sender, EventArgs e)
@@ -61,36 +65,23 @@ public partial class PointToPoint : ContentPage
         {
             if (lstimagebutton.Exists(b => b == btn))
             {
-                if (activegame.ImageCardFlipped == false)
+                if (activegame.RevealImage == true)
                 {
-                    activegame.ButtonImageCard = lstimagebutton.IndexOf(btn);
-                    activegame.CurrentCard = Game.CurrentCardPlayingEnum.imagecard;
-                    activegame.Turn(lstimagebutton.IndexOf(btn));
-
-                    if (activegame.RevealImage == true)
-                    {
-                        Image newimage = lstimage[activegame.PicImageCard];
-                        btn.ImageSource = newimage.Source;
-                        btnimage = btn;
-                        activegame.RevealImage = false;
-                    }
+                    Image newimage = lstimage[activegame.PicImageCard];
+                    btn.ImageSource = newimage.Source;
+                    btnimage = btn;
+                    activegame.RevealImage = false;
                 }
             }
+
             else if (lstnamebutton.Exists(b => b == btn))
             {
-                if (activegame.NameCardFlipped == false)
+                if (activegame.RevealImage == true)
                 {
-                    activegame.ButtonNameCard = lstnamebutton.IndexOf(btn);
-                    activegame.CurrentCard = Game.CurrentCardPlayingEnum.namecard;
-                    activegame.Turn(lstnamebutton.IndexOf(btn));
-
-                    if (activegame.RevealImage == true)
-                    {
-                        Image newimage = lstname[activegame.PicNameCard];
-                        btn.ImageSource = newimage.Source;
-                        btnname = btn;
-                        activegame.RevealImage = false;
-                    }
+                    Image newimage = lstname[activegame.PicNameCard];
+                    btn.ImageSource = newimage.Source;
+                    btnname = btn;
+                    activegame.RevealImage = false;
                 }
             }
         }
@@ -118,6 +109,7 @@ public partial class PointToPoint : ContentPage
     private void BtnPoint_Click(object? sender, EventArgs e)
     {
 
+        activegame.Turn(lstButton.IndexOf((Button)sender));
         DoTurn((Button)sender);
     }
 
@@ -147,4 +139,4 @@ public partial class PointToPoint : ContentPage
         }
     }
 }
-    
+

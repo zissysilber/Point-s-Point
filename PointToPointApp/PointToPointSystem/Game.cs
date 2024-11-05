@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PointToPointSystem
 {
@@ -210,43 +211,96 @@ namespace PointToPointSystem
                 }
             }
         }
+
+        private void DetermineCard(int cardspot)
+        {
+            switch (cardspot)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                    CurrentCard = CurrentCardPlayingEnum.imagecard;
+                    break;
+                case 8:
+                    ButtonNameCard = 0;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+                case 9:
+                    ButtonNameCard = 1;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+                case 10:
+                    ButtonNameCard = 2;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+                case 11:
+                    ButtonNameCard = 3;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+                case 12:
+                    ButtonNameCard = 4;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+                case 13:
+                    ButtonNameCard = 5;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+                case 14:
+                    ButtonNameCard = 6;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+                case 15:
+                    ButtonNameCard = 7;
+                    CurrentCard = CurrentCardPlayingEnum.namecard;
+                    break;
+            }
+        }
+
         public void Turn(int cardspot)
         {
-            if (CurrentCard == CurrentCardPlayingEnum.imagecard)
+            if (GameStatus == GameStatusEnum.playing)
             {
-                if (ImageCardFlipped == false)
+                DetermineCard(cardspot);
+                if (CurrentCard == CurrentCardPlayingEnum.imagecard)
                 {
-                    Card card = this.ImageCardList[cardspot];
-                    PicImageCard = card.CardValue.Value;
-                    ImageCardFlipped = true;
-                    RevealImage = true;
+                    if (ImageCardFlipped == false)
+                    {
+                        ButtonImageCard = cardspot;
+                        PicImageCard = this.ImageCardList[cardspot].CardValue.Value;
+                        ImageCardFlipped = true;
+                        RevealImage = true;
+                    }
                 }
-            }
-            else if (CurrentCard == CurrentCardPlayingEnum.namecard)
-            {
-                if (NameCardFlipped == false)
+                else if (CurrentCard == CurrentCardPlayingEnum.namecard)
                 {
-                    Card card = this.NameCardList[cardspot];
-                    PicNameCard = card.CardValue.Value;
-                    NameCardFlipped = true;
-                    RevealImage = true;
+                    if (NameCardFlipped == false)
+                    {
+                        PicNameCard = NameCardList[ButtonNameCard].CardValue.Value;
+                        NameCardFlipped = true;
+                        RevealImage = true;
+                    }
                 }
-            }
 
-            if (ImageCardFlipped == true && NameCardFlipped == true)
-            {
-                DetectMatch();
-                UpdateMap();
-            }
+                if (ImageCardFlipped == true && NameCardFlipped == true)
+                {
+                    DetectMatch();
+                    UpdateMap();
+                }
 
-            if (ImageCardFlipped == true && NameCardFlipped == true && numberofsetsmatched < 8)
-            {
-                NewTurnButton.BorderColor = NewTurnButton.ButtonHighlightColor;
-            }
-            if (ImageCardFlipped == true && NameCardFlipped == true && numberofsetsmatched == 8)
-            {
-                StartButton.BorderColor = StartButton.ButtonHighlightColor;
-                NewTurnButton.IsEnabled = false;
+                if (ImageCardFlipped == true && NameCardFlipped == true && numberofsetsmatched < 8)
+                {
+                    NewTurnButton.BorderColor = NewTurnButton.ButtonHighlightColor;
+                }
+                if (ImageCardFlipped == true && NameCardFlipped == true && numberofsetsmatched == 8)
+                {
+                    StartButton.BorderColor = StartButton.ButtonHighlightColor;
+                    NewTurnButton.IsEnabled = false;
+                }
             }
         }
 
@@ -321,7 +375,7 @@ namespace PointToPointSystem
             lstallcards.ForEach(lst => lst.ForEach(c =>
             {
                 c.IsVisible = true;
-                
+
             }));
         }
 

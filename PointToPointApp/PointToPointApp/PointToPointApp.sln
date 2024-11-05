@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PointToPointApp", "PointToP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PointToPointMaui", "PointToPointMaui\PointToPointMaui\PointToPointMaui.csproj", "{1CAF3776-D734-46DD-8F5E-684831BF2D35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointToPointSystem", "..\PointToPointSystem\PointToPointSystem.csproj", "{12072A44-3E9F-4789-BA89-EF8D5D62379B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PointToPointSystem", "..\PointToPointSystem\PointToPointSystem.csproj", "{12072A44-3E9F-4789-BA89-EF8D5D62379B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointToPointTest", "..\PointToPointTest\PointToPointTest.csproj", "{DD00A024-9ECC-4858-85F1-80182BF091F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PointToPointTest", "..\PointToPointTest\PointToPointTest.csproj", "{DD00A024-9ECC-4858-85F1-80182BF091F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointToPointWeb", "PointToPointWeb\PointToPointWeb.csproj", "{52E623A2-77AD-472C-A057-0FEE21FD27DA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +37,10 @@ Global
 		{DD00A024-9ECC-4858-85F1-80182BF091F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD00A024-9ECC-4858-85F1-80182BF091F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD00A024-9ECC-4858-85F1-80182BF091F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52E623A2-77AD-472C-A057-0FEE21FD27DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52E623A2-77AD-472C-A057-0FEE21FD27DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52E623A2-77AD-472C-A057-0FEE21FD27DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52E623A2-77AD-472C-A057-0FEE21FD27DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
