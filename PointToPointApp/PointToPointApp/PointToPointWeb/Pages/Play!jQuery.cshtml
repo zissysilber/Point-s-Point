@@ -1,0 +1,229 @@
+﻿@page
+@model PointToPointWeb.Pages.Play_jQueryModel
+@{
+}
+
+<div class="container-fluid text-center">
+    <div class="row justify-content-center">
+        <div class="col-9">
+            <div class="row">
+                <div class="col-12">
+                    <div id="msg" class="alert alert-success mb-3">
+                        <h3 id="msgText"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="col card imagebutton color" id="imgcrd1"></button>
+                <button class="col card imagebutton color" id="imgcrd2"></button>
+                <button class="col card imagebutton color" id="imgcrd3"></button>
+                <button class="col card imagebutton color" id="imgcrd4"></button>
+            </div>
+            <div class="row">
+                <button class="col card imagebutton color" id="imgcrd5"></button>
+                <button class="col card imagebutton color" id="imgcrd6"></button>
+                <button class="col card imagebutton color" id="imgcrd7"></button>
+                <button class="col card imagebutton color" id="imgcrd8"></button>
+            </div>
+            <div class="row">
+                <button class="col card namebutton color" id="namecrd1"></button>
+                <button class="col card namebutton color" id="namecrd2"></button>
+                <button class="col card namebutton color" id="namecrd3"></button>
+                <button class="col card namebutton color" id="namecrd4"></button>
+            </div>
+            <div class="row">
+                <button class="col card namebutton color" id="namecrd5"></button>
+                <button class="col card namebutton color" id="namecrd6"></button>
+                <button class="col card namebutton color" id="namecrd7"></button>
+                <button class="col card namebutton color" id="namecrd8"></button>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="d-flex flex-column align-items-center">
+                <button id="btn-reset" class="btn btn-primary btn-lg w-100 mb-2">Start!</button>
+                <button id="btn-newturn" disabled class="btn btn-warning btn-lg inactive-button w-100">New Turn!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        let imgcard = { name: "imagecard", value: 0 };
+        let nmecard = { name: "namecard", value: 0 };
+        let currentcard = null;
+        let matchedset = false;
+        let numberofsetsmatched = 0;
+        let imgcardflipped = false;
+        let nmecardflipped = false;
+        let newTurnButton;
+        let imgButtons;
+        let nameButtons;
+        const picimglist = [];
+        const picnmelist = [];
+        let allcardlist; 
+        const extractNumberFromUrl = url => parseInt((url.match(/\d+/) || [])[0], 10);
+        
+
+        $(document).ready(function () {
+            newTurnButton = $("#btn-newturn");
+            allcardlist = $(".card");
+            imgButtons = $(".imagebutton");
+            nameButtons = $(".namebutton");
+            newTurnButton.click(newTurn);            
+            $("#btn-reset").click(startGame);
+            updateMessage();
+        });
+
+        function fillPicArray() {
+            picimglist.length = 0;
+            picnmelist.length = 0;
+            for (let i = 1; i <= 8; i++) {
+                picimglist.push(`/images/p${i}p.jpg`);
+                picnmelist.push(`/images/n${i}n.jpg`);
+            }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function setButtonState(button, isActive) {
+            isActive ? button.prop("disabled", false).removeClass("inactive-button"): button.prop("disabled", true).addClass("inactive-button");
+        }
+
+        function assignImagesToButtons(imageList, buttons) {
+            shuffleArray(imageList);
+            buttons.each(function (index) {
+                const button = $(this);
+                const imageUrl = imageList[index];
+                const img = $("<img>").attr("src", imageUrl);
+                button.append(img);
+                button.data("cardValue", extractNumberFromUrl(imageUrl));
+                button.click(handleClick);
+                console.log(`Assigned image to button ${index}: ${imageUrl}`);
+            });
+        }
+
+        function startGame() {
+            resetValues();
+            numberofsetsmatched = 0;
+            allcardlist.removeClass("show-img endgame").addClass("color").prop('disabled', false);
+            msgnum.value = 9;
+            fillPicArray();
+            assignImagesToButtons(picimglist, imgButtons);
+            assignImagesToButtons(picnmelist, nameButtons);
+            newTurnButton.removeClass("btn-info").text("New Turn!").addClass("btn-warning");
+        }
+
+        function resetValues() {
+            imgcard.value = 0;
+            nmecard.value = 0;
+            currentcard = null;
+            matchedset = false;
+            imgcardflipped = false;
+            nmecardflipped = false;
+        }
+
+        function handleClick(e) {
+            const button = $(this);
+            let cardValue = button.data('cardValue'); 
+            currentcard = button.hasClass("imagebutton") ? imgcard : nmecard;
+
+            if (currentcard === imgcard && !imgcardflipped) {
+                imgcard.value = cardValue;
+                imgcardflipped = true;
+                button.addClass("show-img");
+            }
+            else if (currentcard === nmecard && !nmecardflipped) {
+                nmecard.value = cardValue;
+                nmecardflipped = true;
+                button.addClass("show-img");
+            }
+
+            if (imgcardflipped && nmecardflipped) {
+                detectMatch();
+                setButtonState(newTurnButton, true);
+            }
+            else {
+                msgnum.value = currentcard === imgcard ? 10 : 11;
+            }
+        }
+
+        function detectMatch() {
+            if (imgcard.value == nmecard.value) {
+                numberofsetsmatched++;
+                matchedset = true;
+                msgnum.value = imgcard.value;
+            }
+            else {
+                matchedset = false;
+                msgnum.value = 12;
+            }
+
+            if (numberofsetsmatched === 8) {
+                newTurnButton.text("End Game!").removeClass("btn-warning").addClass("btn-info");
+            }
+        }
+
+        function endGame() {
+            msgnum.value = 14
+            setButtonState(newTurnButton, true);
+            allcardlist.addClass("endgame");
+        }
+
+        function newTurn() {
+            msgnum.value = 13;
+            if (matchedset) {
+                $("button.show-img").removeClass("color show-img").prop("disabled", true);
+                if (numberofsetsmatched === 8) {
+                    endGame();
+                }
+            }
+            else {
+                allcardlist.removeClass("show-img");
+            }
+            resetValues();
+            setButtonState(newTurnButton, false);
+        }
+
+        let msgnum = {
+            _value: 0,
+            get value() {
+                return this._value;
+            },
+            set value(newValue) {
+                this._value = newValue;
+                updateMessage();
+            }
+        };
+
+
+        function updateMessage() {
+            const msg = [
+                "Let's Explore Eretz Yisrael! <br/> Click START to begin the game.",
+                "The Ari Hakadosh is buried in Tzfas.",
+                "The Churva is a shul in Yerushalayim.",
+                "Kever Rochel is in Beis Lechem.",
+                "The Kosel is in Yerushalayim.",
+                "Mearas Hamachpela is in Chevron.",
+                "The kever of Rabbi Meir Bal Haness is in Tiverya.",
+                "The kever of Rabi Shimon Bar Yochai is in Meron.",
+                "The salt in Yam Hamelech makes everything float in the water.",
+                "Click a Button!",
+                "Can you find the name of this destination?",
+                "Can you find the picture of this destination?",
+                "Oops!  Click NEW TURN for another chance.",
+                "Where will we travel next?",
+                "Congratulations!  You've matched all the pictures!"
+            ];
+            $("#msgText").html(msg[msgnum.value]);
+        }
+
+
+
+    </script>
+}
