@@ -124,6 +124,7 @@
         toggleButton(newTurnButton, false);
 
         allcardlist.forEach(card => (card.classList.add("endgame")));
+
     }
 
     function newTurn() {
