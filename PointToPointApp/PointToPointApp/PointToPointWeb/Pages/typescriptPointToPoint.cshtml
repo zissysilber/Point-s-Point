@@ -1,0 +1,50 @@
+﻿@page
+@model PointToPointWeb.Pages.typescriptPointToPointModel
+@{
+}
+       
+<div class="container-fluid text-center">
+    <div class="row justify-content-center">
+        <div class="col-9">
+            <div class="row">
+                <div class="col-12">
+                    <div id="msg" class="alert alert-success mb-3">
+                        <h3 id="msgText"></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <button class="col card imagebutton color" id="imgcrd1"></button>
+                <button class="col card imagebutton color" id="imgcrd2"></button>
+                <button class="col card imagebutton color" id="imgcrd3"></button>
+                <button class="col card imagebutton color" id="imgcrd4"></button>
+            </div>
+            <div class="row">
+                <button class="col card imagebutton color" id="imgcrd5"></button>
+                <button class="col card imagebutton color" id="imgcrd6"></button>
+                <button class="col card imagebutton color" id="imgcrd7"></button>
+                <button class="col card imagebutton color" id="imgcrd8"></button>
+            </div>
+            <div class="row">
+                <button class="col card namebutton color" id="namecrd1"></button>
+                <button class="col card namebutton color" id="namecrd2"></button>
+                <button class="col card namebutton color" id="namecrd3"></button>
+                <button class="col card namebutton color" id="namecrd4"></button>
+            </div>
+            <div class="row">
+                <button class="col card namebutton color" id="namecrd5"></button>
+                <button class="col card namebutton color" id="namecrd6"></button>
+                <button class="col card namebutton color" id="namecrd7"></button>
+                <button class="col card namebutton color" id="namecrd8"></button>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="d-flex flex-column align-items-center">
+                <button id="btn-reset" class="btn btn-primary btn-lg w-100 mb-2">Start!</button>
+                <button id="btn-newturn" disabled class="btn btn-warning btn-lg inactive-button w-100">New Turn!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="/js/typescriptPointToPoint.js"></script>
